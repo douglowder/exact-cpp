@@ -1,0 +1,24 @@
+[package]
+name = "level-tests"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.97"
+description = "Host tests of apps/level/app.contract on the real runner"
+publish = false
+
+[dependencies]
+
+[dev-dependencies]
+contract = { path = "../exact2/contract/cli" }
+exact-kernel = { path = "../exact2/kernel" }
+exact-plan = { path = "../exact2/plan" }
+exact-runner = { path = "../exact2/runner" }
+level-data = { path = "../level-data" }
+
+[[test]]
+name = "it"
+path = "tests/it/main.rs"
+
+[[test]]
+name = "leak"
+path = "tests/leak.rs"

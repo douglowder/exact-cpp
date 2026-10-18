@@ -1,0 +1,6 @@
+tamber fixed
+
+theme
+  surface.page = #101010  scheme=fixed
+  ink.on = #48ef8b  scheme=fixed
+  ink.off = #ffffff  scheme=fixed

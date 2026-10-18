@@ -1,0 +1,20 @@
+[package]
+name = "sound-ref"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.97"
+description = "Runs a script of an app that plays sounds on exact2's runner: the reference for the C++ target's voices"
+publish = false
+
+[dependencies]
+contract = { path = "../exact2/contract/cli" }
+exact-kernel = { path = "../exact2/kernel" }
+exact-plan = { path = "../exact2/plan" }
+exact-runner = { path = "../exact2/runner" }
+serde_json = "=1.0.151"
+
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+unwrap_used = "deny"
+expect_used = "warn"
+panic = "deny"

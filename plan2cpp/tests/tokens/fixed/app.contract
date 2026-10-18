@@ -1,0 +1,8 @@
+component A
+  state on = false
+  action flip
+    on = not on
+  view
+    column background-color="surface.page" testId="page"
+      button press=flip appearance="none" testId="flip"
+        text "x" color=(on ? "ink.on" : "ink.off")

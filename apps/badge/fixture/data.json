@@ -1,0 +1,20 @@
+{
+  "_about": "A made-up badge for the Mac boards and badge-ref: no real person's data. profile.bin is this profile as the badge firmware stores it (tools/badge_profile.py writes it); url and label are what the data module must derive from network and handle.",
+  "epoch_ms": 1791477900000,
+  "utc_offset": -420,
+  "battery": 74,
+  "settings": {
+    "brightness": 60,
+    "orientation": "Default",
+    "unlocked": false
+  },
+  "profile": {
+    "name": "Ada Example",
+    "company": "Example Laboratories of Applied Badges",
+    "network": "github",
+    "handle": "ada-example",
+    "url": "https://github.com/ada-example",
+    "label": "GitHub",
+    "photo": "app:/data/avatar"
+  }
+}

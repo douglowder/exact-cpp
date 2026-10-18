@@ -1,0 +1,11 @@
+{
+  "extension": "marks",
+  "version": 1,
+  "summary": "A test extension that reads the data-* words of the marks app.",
+  "props": [
+    { "name": "snap", "summary": "the axis a list snaps on" },
+    { "name": "snap-align", "summary": "where a card snaps to" },
+    { "name": "mode" },
+    { "name": "count" }
+  ]
+}

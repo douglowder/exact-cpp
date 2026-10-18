@@ -1,0 +1,91 @@
+// ESPtember Day 10: Level, for the M5Stack Stopwatch (468 x 466 round screen).
+// The device's data source filters the IMU and answers `attitude` in tenths of
+// a degree; this file owns the zero, the LEVEL hysteresis, the cue, the
+// controls, and the screen. BtnA/left is ArrowLeft, BtnB/right ArrowRight,
+// both briefly Enter, both held 600 ms Escape.
+shape Attitude
+  pitch: number
+  roll: number
+
+// Signed tenths of a degree as "+1.2", "-0.4", or " 0.0".
+fn signed(tenths: number): string = tenths > 0 ? `+${(tenths / 10).toFixed(1)}` : (tenths < 0 ? `-${(0 - tenths / 10).toFixed(1)}` : " 0.0")
+fn magnitude(tenths: number): number = max(tenths, 0 - tenths)
+// LEVEL within 1.0 degree; once level, it holds until either axis passes 2.5.
+fn levelAfter(wasLevel: bool, pitch: number, roll: number): bool = max(magnitude(pitch), magnitude(roll)) <= (wasLevel ? 25 : 10)
+// The bubble moves to the raised side: up for +pitch, right for +roll, 7 px a degree, inside the vial.
+fn bubbleOffset(tenths: number): number = max(-66, min(66, tenths * 0.7))
+
+style Label
+  position="absolute" left=0 width=468 text-align="center" color="ink.primary"
+
+style Control
+  position="absolute" left=104 width=260 height=48 box-sizing="border-box" border-radius=14 border-width=1 border-style="solid" border-color="border.button" background-color="surface.button" display="flex" align-items="center" justify-content="center"
+
+style Focused
+  position="absolute" left=104 width=260 height=48 box-sizing="border-box" border-radius=14 border-width=3 border-style="solid" border-color="border.focus" background-color="surface.button-focus" display="flex" align-items="center" justify-content="center"
+
+component Level
+  resource tilt = attitude() as shape Attitude
+  state screen = "bubble"
+  state focus = "zero"
+  state zeroed = false
+  state zeroPitch = 0
+  state zeroRoll = 0
+  state level = false
+  state cues = 0
+  derive pitch = tilt.pitch - zeroPitch
+  derive roll = tilt.roll - zeroRoll
+  task follow mount
+    every(50, observe)
+  action observe
+    let next = levelAfter(level, pitch, roll)
+    if next and not level
+      cues = cues + 1
+      haptic("success")
+    level = next
+  action zero
+    focus = "zero"
+    zeroed = true
+    zeroPitch = tilt.pitch
+    zeroRoll = tilt.roll
+  action clearZero
+    zeroed = false
+    zeroPitch = 0
+    zeroRoll = 0
+  action toggleMode
+    focus = "mode"
+    screen = screen == "bubble" ? "numeric" : "bubble"
+  action onKey(k: string)
+    if k == "ArrowLeft" or k == "ArrowRight"
+      focus = focus == "zero" ? "mode" : "zero"
+      preventDefault()
+    if k == "Enter"
+      if focus == "zero"
+        zero()
+      else
+        toggleMode()
+      preventDefault()
+    if k == "Escape"
+      clearZero()
+      preventDefault()
+  view
+    column autofocus=true key=onKey testId="level" position="relative" width=468 height=466 background-color="surface.screen"
+      column position="absolute" left=2 top=1 width=464 height=464 border-radius=232 background-color="surface.dial"
+      text (level ? "L E V E L" : "T I L T E D") class=Label top=25 font-size=18 font-weight=700 color=(level ? "status.level" : "status.tilted") testId="state"
+      text `P ${signed(pitch)}°   R ${signed(roll)}°` class=Label top=62 font-size=24 font-weight=700 testId="angles"
+      button press=zero top=110 testId="zero" class=(focus == "zero" ? Focused : Control)
+        text (zeroed ? "ZERO: SET" : "ZERO: OFF") font-size=24 font-weight=700 color="ink.primary"
+      button press=toggleMode top=178 testId="mode" class=(focus == "mode" ? Focused : Control)
+        text (screen == "bubble" ? "MODE: BUBBLE" : "MODE: NUMERIC") font-size=24 font-weight=700 color="ink.primary"
+      if screen == "bubble"
+        column position="absolute" left=150 top=232 width=168 height=168 border-radius=84 border-width=2 border-style="solid" border-color="border.vial" background-color="surface.vial" testId="vial"
+          column position="absolute" left=60 top=60 width=44 height=44 border-radius=22 border-width=1 border-style="solid" border-color="border.target"
+          column position="absolute" left=(67 + bubbleOffset(roll)) top=(67 - bubbleOffset(pitch)) width=30 height=30 border-radius=15 background-color=(level ? "status.level" : "status.tilted") testId="bubble"
+      else
+        text "PITCH" class=Label left=60 width=170 top=243 font-size=18 font-weight=700 color="ink.caption"
+        text "ROLL" class=Label left=238 width=170 top=243 font-size=18 font-weight=700 color="ink.caption"
+        text `${signed(pitch)}°` class=Label left=40 width=200 top=272 font-size=48 font-weight=700 color=(level ? "status.level" : "ink.primary") testId="pitch"
+        text `${signed(roll)}°` class=Label left=228 width=200 top=272 font-size=48 font-weight=700 color=(level ? "status.level" : "ink.primary") testId="roll"
+      text (zeroed ? "zero: set" : "zero: off") class=Label top=389 font-size=18 color="ink.status"
+      text "A prev   B next   Both select" class=Label top=413 font-size=18 color="ink.hint"
+      text "Hold both: back" class=Label top=433 font-size=18 color="ink.hint"

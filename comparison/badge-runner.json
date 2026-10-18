@@ -1,0 +1,6347 @@
+{
+  "steps": [
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-init",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "init-title",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 60,
+          "clockValid": true,
+          "current": {
+            "id": 0,
+            "name": "init",
+            "params": {},
+            "tab": "init",
+            "url": "/"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": -1,
+          "elapsed": 0,
+          "nav": {
+            "next": 5,
+            "tab": "init",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": null,
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "boot"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-init",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "init-title",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 60,
+          "clockValid": true,
+          "current": {
+            "id": 0,
+            "name": "init",
+            "params": {},
+            "tab": "init",
+            "url": "/"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": -1,
+          "elapsed": 0,
+          "nav": {
+            "next": 5,
+            "tab": "init",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": null,
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": -60,
+          "swipeY": 2,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "pan",
+        "route-init -60 2"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-schedule",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "schedule-title",
+          "text": "Schedule"
+        },
+        {
+          "inactive": false,
+          "testId": "sessions",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-0",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-1",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-1-now",
+          "text": "On now"
+        },
+        {
+          "inactive": false,
+          "testId": "session-2",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-3",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-4",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-5",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-6",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-7",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-8",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "schedule-hint",
+          "text": "Swipe up or down"
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 60,
+          "clockValid": true,
+          "current": {
+            "id": 1,
+            "name": "schedule",
+            "params": {},
+            "tab": "schedule",
+            "url": "/schedule"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": -1,
+          "elapsed": 0,
+          "nav": {
+            "next": 5,
+            "tab": "schedule",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": null,
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "panrelease",
+        "route-init -400 0"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-schedule",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "schedule-title",
+          "text": "Schedule"
+        },
+        {
+          "inactive": false,
+          "testId": "sessions",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-0",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-1",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-1-now",
+          "text": "On now"
+        },
+        {
+          "inactive": false,
+          "testId": "session-2",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-3",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-4",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-5",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-6",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-7",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-8",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "schedule-hint",
+          "text": "Swipe up or down"
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 60,
+          "clockValid": true,
+          "current": {
+            "id": 1,
+            "name": "schedule",
+            "params": {},
+            "tab": "schedule",
+            "url": "/schedule"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": -1,
+          "elapsed": 0,
+          "nav": {
+            "next": 5,
+            "tab": "schedule",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": null,
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "pan",
+        "sessions 0 -130"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-schedule",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "schedule-title",
+          "text": "Schedule"
+        },
+        {
+          "inactive": false,
+          "testId": "sessions",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-0",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-1",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-1-now",
+          "text": "On now"
+        },
+        {
+          "inactive": false,
+          "testId": "session-2",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-3",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-4",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-5",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-6",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-7",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-8",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "schedule-hint",
+          "text": "Swipe up or down"
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 60,
+          "clockValid": true,
+          "current": {
+            "id": 1,
+            "name": "schedule",
+            "params": {},
+            "tab": "schedule",
+            "url": "/schedule"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": -1,
+          "elapsed": 0,
+          "nav": {
+            "next": 5,
+            "tab": "schedule",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": null,
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "panrelease",
+        "sessions 0 -300"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-init",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "init-title",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 60,
+          "clockValid": true,
+          "current": {
+            "id": 0,
+            "name": "init",
+            "params": {},
+            "tab": "init",
+            "url": "/"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": -1,
+          "elapsed": 0,
+          "nav": {
+            "next": 5,
+            "tab": "init",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": null,
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "key",
+        "ArrowLeft"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-schedule",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "schedule-title",
+          "text": "Schedule"
+        },
+        {
+          "inactive": false,
+          "testId": "sessions",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-0",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-1",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-1-now",
+          "text": "On now"
+        },
+        {
+          "inactive": false,
+          "testId": "session-2",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-3",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-4",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-5",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-6",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-7",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-8",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "schedule-hint",
+          "text": "Swipe up or down"
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 60,
+          "clockValid": true,
+          "current": {
+            "id": 1,
+            "name": "schedule",
+            "params": {},
+            "tab": "schedule",
+            "url": "/schedule"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": -1,
+          "elapsed": 0,
+          "nav": {
+            "next": 5,
+            "tab": "schedule",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": null,
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "key",
+        "ArrowRight"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-schedule",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "schedule-title",
+          "text": "Schedule"
+        },
+        {
+          "inactive": false,
+          "testId": "sessions",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-0",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-1",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-1-now",
+          "text": "On now"
+        },
+        {
+          "inactive": false,
+          "testId": "session-2",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-3",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-4",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-5",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-6",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-7",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "session-8",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "schedule-hint",
+          "text": "Swipe up or down"
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 60,
+          "clockValid": true,
+          "current": {
+            "id": 1,
+            "name": "schedule",
+            "params": {},
+            "tab": "schedule",
+            "url": "/schedule"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": -1,
+          "elapsed": 0,
+          "nav": {
+            "next": 5,
+            "tab": "schedule",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": null,
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "pan",
+        "sessions 80 3"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-init",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "init-title",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 60,
+          "clockValid": true,
+          "current": {
+            "id": 0,
+            "name": "init",
+            "params": {},
+            "tab": "init",
+            "url": "/"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": -1,
+          "elapsed": 0,
+          "nav": {
+            "next": 5,
+            "tab": "init",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": null,
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "panrelease",
+        "sessions 300 0"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "settings-title",
+          "text": "Settings"
+        },
+        {
+          "inactive": false,
+          "testId": "settings-menu",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "battery",
+          "text": "Battery 74%"
+        },
+        {
+          "inactive": false,
+          "testId": "menu-brightness",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-orientation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-hack",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-phone",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-advanced",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "open-reset",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 60,
+          "clockValid": true,
+          "current": {
+            "id": 4,
+            "name": "settings",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": -1,
+          "elapsed": 0,
+          "nav": {
+            "next": 5,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": null,
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "key",
+        "ArrowLeft"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "settings-title",
+          "text": "Settings"
+        },
+        {
+          "inactive": false,
+          "testId": "settings-menu",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "battery",
+          "text": "Battery 74%"
+        },
+        {
+          "inactive": false,
+          "testId": "menu-brightness",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-orientation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-hack",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-phone",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-advanced",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "open-reset",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 60,
+          "clockValid": true,
+          "current": {
+            "id": 4,
+            "name": "settings",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": -1,
+          "elapsed": 0,
+          "nav": {
+            "next": 5,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": null,
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "pan",
+        "settings-menu 0 -200"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "settings-title",
+          "text": "Settings"
+        },
+        {
+          "inactive": false,
+          "testId": "settings-menu",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "battery",
+          "text": "Battery 74%"
+        },
+        {
+          "inactive": false,
+          "testId": "menu-brightness",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-orientation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-hack",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-phone",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-advanced",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "open-reset",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 60,
+          "clockValid": true,
+          "current": {
+            "id": 4,
+            "name": "settings",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": -1,
+          "elapsed": 0,
+          "nav": {
+            "next": 5,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": null,
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "panrelease",
+        "settings-menu 0 -500"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "settings-title",
+          "text": "Settings"
+        },
+        {
+          "inactive": true,
+          "testId": "settings-menu",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "battery",
+          "text": "Battery 74%"
+        },
+        {
+          "inactive": true,
+          "testId": "menu-brightness",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "menu-orientation",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "menu-hack",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "menu-phone",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "menu-advanced",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "open-reset",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "dots",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-reset",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "reset-title",
+          "text": "Reset badge?"
+        },
+        {
+          "inactive": false,
+          "testId": "reset-message",
+          "text": "Clears your profile, saved sessions and invitation unlock.\n\nRestores 70% brightness and Default orientation. The clock stays set."
+        },
+        {
+          "inactive": false,
+          "testId": "reset-confirm",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "reset-cancel",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 60,
+          "clockValid": true,
+          "current": {
+            "id": 5,
+            "name": "reset",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings/reset"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": -1,
+          "elapsed": 0,
+          "nav": {
+            "next": 6,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  },
+                  {
+                    "id": 5,
+                    "name": "reset",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings/reset"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": null,
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "tap",
+        "open-reset"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "settings-title",
+          "text": "Settings"
+        },
+        {
+          "inactive": false,
+          "testId": "settings-menu",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "battery",
+          "text": "Battery 74%"
+        },
+        {
+          "inactive": false,
+          "testId": "menu-brightness",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-orientation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-hack",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-phone",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-advanced",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "open-reset",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 60,
+          "clockValid": true,
+          "current": {
+            "id": 4,
+            "name": "settings",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": -1,
+          "elapsed": 0,
+          "nav": {
+            "next": 6,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": null,
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "tap",
+        "reset-cancel"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "brightness",
+          "text": "60%"
+        },
+        {
+          "inactive": false,
+          "testId": "brightness-down",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "brightness-up",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "settings-title",
+          "text": "Brightness"
+        },
+        {
+          "inactive": false,
+          "testId": "menu-done",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 60,
+          "clockValid": true,
+          "current": {
+            "id": 4,
+            "name": "settings",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": -1,
+          "elapsed": 0,
+          "nav": {
+            "next": 6,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": null,
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "tap",
+        "menu-brightness"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "brightness",
+          "text": "70%"
+        },
+        {
+          "inactive": false,
+          "testId": "brightness-down",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "brightness-up",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "settings-title",
+          "text": "Brightness"
+        },
+        {
+          "inactive": false,
+          "testId": "menu-done",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 4,
+            "name": "settings",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 6,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "tap",
+        "brightness-up"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "settings-title",
+          "text": "Settings"
+        },
+        {
+          "inactive": false,
+          "testId": "settings-menu",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "battery",
+          "text": "Battery 74%"
+        },
+        {
+          "inactive": false,
+          "testId": "menu-brightness",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-orientation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-hack",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-phone",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-advanced",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "open-reset",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 4,
+            "name": "settings",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 6,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "tap",
+        "menu-done"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "settings-title",
+          "text": "Settings"
+        },
+        {
+          "inactive": false,
+          "testId": "settings-menu",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "battery",
+          "text": "Battery 74%"
+        },
+        {
+          "inactive": false,
+          "testId": "menu-brightness",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-orientation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-hack",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-phone",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-advanced",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "open-reset",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 4,
+            "name": "settings",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 6,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": -70,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "pan",
+        "route-settings -70 0"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-init",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "init-title",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 0,
+            "name": "init",
+            "params": {},
+            "tab": "init",
+            "url": "/"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 6,
+            "tab": "init",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "panrelease",
+        "route-settings -300 0"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "settings-title",
+          "text": "Settings"
+        },
+        {
+          "inactive": false,
+          "testId": "settings-menu",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "battery",
+          "text": "Battery 74%"
+        },
+        {
+          "inactive": false,
+          "testId": "menu-brightness",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-orientation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-hack",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-phone",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-advanced",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "open-reset",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 4,
+            "name": "settings",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 6,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "key",
+        "ArrowLeft"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-party",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "party-title",
+          "text": "Party"
+        },
+        {
+          "inactive": false,
+          "testId": "party-art",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 2,
+            "name": "party",
+            "params": {},
+            "tab": "party",
+            "url": "/party"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 6,
+            "tab": "party",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "navigate",
+        "/party"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "route-party",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "party-title",
+          "text": "Party"
+        },
+        {
+          "inactive": true,
+          "testId": "party-art",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "dots",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-reset",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "reset-title",
+          "text": "Reset badge?"
+        },
+        {
+          "inactive": false,
+          "testId": "reset-message",
+          "text": "Clears your profile, saved sessions and invitation unlock.\n\nRestores 70% brightness and Default orientation. The clock stays set."
+        },
+        {
+          "inactive": false,
+          "testId": "reset-confirm",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "reset-cancel",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 6,
+            "name": "reset",
+            "params": {},
+            "tab": "party",
+            "url": "/settings/reset"
+          },
+          "filled": true,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 7,
+            "tab": "party",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  },
+                  {
+                    "id": 6,
+                    "name": "reset",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/settings/reset"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": false,
+          "resetDone": false,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": ""
+        }
+      },
+      "step": [
+        "navigate",
+        "/settings/reset"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "route-party",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "party-title",
+          "text": "Party"
+        },
+        {
+          "inactive": true,
+          "testId": "party-code",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "party-prompt",
+          "text": "tap the code to reveal a secret invitation"
+        },
+        {
+          "inactive": true,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "dots",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-reset",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "reset-title",
+          "text": "Badge reset"
+        },
+        {
+          "inactive": false,
+          "testId": "reset-message",
+          "text": "Your profile, saved sessions and invitation unlock are cleared.\n\nBrightness is 70%. You can configure a new badge."
+        },
+        {
+          "inactive": false,
+          "testId": "reset-finish",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 6,
+            "name": "reset",
+            "params": {},
+            "tab": "party",
+            "url": "/settings/reset"
+          },
+          "filled": false,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": false
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 7,
+            "tab": "party",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  },
+                  {
+                    "id": 6,
+                    "name": "reset",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/settings/reset"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "Default",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": true,
+          "resetDone": true,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": "locked"
+        }
+      },
+      "step": [
+        "tap",
+        "reset-confirm"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-badge",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "badge-title",
+          "text": "Badge"
+        },
+        {
+          "inactive": false,
+          "testId": "badge-portrait",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "badge-name",
+          "text": "Your name"
+        },
+        {
+          "inactive": false,
+          "testId": "badge-company",
+          "text": "Company"
+        },
+        {
+          "inactive": false,
+          "testId": "open-setup",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 3,
+            "name": "badge",
+            "params": {},
+            "tab": "badge",
+            "url": "/badge"
+          },
+          "filled": false,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": false
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 7,
+            "tab": "badge",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "Default",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": true,
+          "resetDone": true,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": "locked"
+        }
+      },
+      "step": [
+        "tap",
+        "reset-finish"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "settings-title",
+          "text": "Settings"
+        },
+        {
+          "inactive": false,
+          "testId": "settings-menu",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "battery",
+          "text": "Battery 74%"
+        },
+        {
+          "inactive": false,
+          "testId": "menu-brightness",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-orientation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-hack",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-phone",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-advanced",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "open-reset",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 4,
+            "name": "settings",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings"
+          },
+          "filled": false,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": false
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 7,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "Default",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": true,
+          "resetDone": true,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": "locked"
+        }
+      },
+      "step": [
+        "key",
+        "Escape"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "connect-phone",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "settings-title",
+          "text": "Connect phone"
+        },
+        {
+          "inactive": false,
+          "testId": "menu-done",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 4,
+            "name": "settings",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings"
+          },
+          "filled": false,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": false
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 7,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "Default",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": true,
+          "resetDone": true,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": "locked"
+        }
+      },
+      "step": [
+        "tap",
+        "menu-phone"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "connect-phone",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "settings-title",
+          "text": "Connect phone"
+        },
+        {
+          "inactive": true,
+          "testId": "menu-done",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-connect",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "setup-title",
+          "text": "Connect phone"
+        },
+        {
+          "inactive": false,
+          "testId": "setup-status",
+          "text": "Starting setup..."
+        },
+        {
+          "inactive": false,
+          "testId": "setup-done",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 7,
+            "name": "connect",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings/connect"
+          },
+          "filled": false,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": false
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 8,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  },
+                  {
+                    "id": 7,
+                    "name": "connect",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings/connect"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "Default",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": true,
+          "resetDone": true,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": "locked"
+        }
+      },
+      "step": [
+        "tap",
+        "connect-phone"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "connect-phone",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "settings-title",
+          "text": "Connect phone"
+        },
+        {
+          "inactive": true,
+          "testId": "menu-done",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-connect",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "setup-title",
+          "text": "Connect phone"
+        },
+        {
+          "inactive": false,
+          "testId": "setup-status",
+          "text": "Starting setup..."
+        },
+        {
+          "inactive": false,
+          "testId": "setup-done",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 7,
+            "name": "connect",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings/connect"
+          },
+          "filled": false,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": false
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 8,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  },
+                  {
+                    "id": 7,
+                    "name": "connect",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings/connect"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "Default",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": true,
+          "resetDone": true,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": "locked"
+        }
+      },
+      "step": [
+        "pan",
+        "route-settings -80 0"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "connect-phone",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "settings-title",
+          "text": "Connect phone"
+        },
+        {
+          "inactive": true,
+          "testId": "menu-done",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-connect",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "setup-title",
+          "text": "Connect phone"
+        },
+        {
+          "inactive": false,
+          "testId": "setup-status",
+          "text": "Starting setup..."
+        },
+        {
+          "inactive": false,
+          "testId": "setup-done",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 7,
+            "name": "connect",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings/connect"
+          },
+          "filled": false,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": false
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 8,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  },
+                  {
+                    "id": 7,
+                    "name": "connect",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings/connect"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "Default",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": true,
+          "resetDone": true,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": "locked"
+        }
+      },
+      "step": [
+        "panrelease",
+        "route-settings -300 0"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "connect-phone",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "settings-title",
+          "text": "Connect phone"
+        },
+        {
+          "inactive": false,
+          "testId": "menu-done",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 4,
+            "name": "settings",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings"
+          },
+          "filled": false,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": false
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 8,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "Default",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": true,
+          "resetDone": true,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": "locked"
+        }
+      },
+      "step": [
+        "tap",
+        "setup-done"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-party",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "party-title",
+          "text": "Party"
+        },
+        {
+          "inactive": false,
+          "testId": "party-code",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "party-prompt",
+          "text": "tap the code to reveal a secret invitation"
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 2,
+            "name": "party",
+            "params": {},
+            "tab": "party",
+            "url": "/party"
+          },
+          "filled": false,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": false
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 8,
+            "tab": "party",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "Default",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": true,
+          "resetDone": true,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": "locked"
+        }
+      },
+      "step": [
+        "navigate",
+        "/party"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-party",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "party-title",
+          "text": "Party"
+        },
+        {
+          "inactive": false,
+          "testId": "party-art",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 2,
+            "name": "party",
+            "params": {},
+            "tab": "party",
+            "url": "/party"
+          },
+          "filled": false,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 8,
+            "tab": "party",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "Default",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": true,
+          "resetDone": true,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": "unlocked"
+        }
+      },
+      "step": [
+        "tap",
+        "party-code"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "route-party",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "party-title",
+          "text": "Party"
+        },
+        {
+          "inactive": true,
+          "testId": "party-art",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": true,
+          "testId": "dots",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-notfound",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "not-found-title",
+          "text": "Page not found"
+        },
+        {
+          "inactive": false,
+          "testId": "not-found-message",
+          "text": "There is no page at /nowhere."
+        },
+        {
+          "inactive": false,
+          "testId": "not-found-back",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 8,
+            "name": "notfound",
+            "params": {},
+            "tab": "party",
+            "url": "/nowhere"
+          },
+          "filled": false,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 9,
+            "tab": "party",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  },
+                  {
+                    "id": 8,
+                    "name": "notfound",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/nowhere"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "Default",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": true,
+          "resetDone": true,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": "unlocked"
+        }
+      },
+      "step": [
+        "navigate",
+        "/nowhere"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-party",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "party-title",
+          "text": "Party"
+        },
+        {
+          "inactive": false,
+          "testId": "party-art",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 2,
+            "name": "party",
+            "params": {},
+            "tab": "party",
+            "url": "/party"
+          },
+          "filled": false,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 9,
+            "tab": "party",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "Default",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": true,
+          "resetDone": true,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": "unlocked"
+        }
+      },
+      "step": [
+        "tap",
+        "not-found-back"
+      ]
+    },
+    {
+      "nodes": [
+        {
+          "inactive": false,
+          "testId": "navigation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "route-settings",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "settings-title",
+          "text": "Settings"
+        },
+        {
+          "inactive": false,
+          "testId": "settings-menu",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "battery",
+          "text": "Battery 74%"
+        },
+        {
+          "inactive": false,
+          "testId": "menu-brightness",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-orientation",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-hack",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-phone",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "menu-advanced",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "open-reset",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-previous",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "page-next",
+          "text": ""
+        },
+        {
+          "inactive": false,
+          "testId": "dots",
+          "text": ""
+        }
+      ],
+      "state": {
+        "derives": {
+          "brightness": 70,
+          "clockValid": true,
+          "current": {
+            "id": 4,
+            "name": "settings",
+            "params": {},
+            "tab": "settings",
+            "url": "/settings"
+          },
+          "filled": false,
+          "minute": 585,
+          "orientation": "Default",
+          "unlocked": true
+        },
+        "resources": {
+          "battery": {
+            "percent": 74
+          },
+          "profile": {
+            "company": "Example Laboratories of Applied Badges",
+            "label": "GitHub",
+            "name": "Ada Example",
+            "photo": "app:/data/avatar",
+            "url": "https://github.com/ada-example"
+          },
+          "saved": {
+            "brightness": 60,
+            "orientation": "Default",
+            "unlocked": false
+          },
+          "time": {
+            "epochAtZero": 1791477900000,
+            "utcOffset": -420
+          }
+        },
+        "slots": {
+          "brightnessSet": 70,
+          "elapsed": 0,
+          "nav": {
+            "next": 9,
+            "tab": "settings",
+            "tabs": [
+              {
+                "name": "init",
+                "stack": [
+                  {
+                    "id": 0,
+                    "name": "init",
+                    "params": {},
+                    "tab": "init",
+                    "url": "/"
+                  }
+                ]
+              },
+              {
+                "name": "schedule",
+                "stack": [
+                  {
+                    "id": 1,
+                    "name": "schedule",
+                    "params": {},
+                    "tab": "schedule",
+                    "url": "/schedule"
+                  }
+                ]
+              },
+              {
+                "name": "party",
+                "stack": [
+                  {
+                    "id": 2,
+                    "name": "party",
+                    "params": {},
+                    "tab": "party",
+                    "url": "/party"
+                  }
+                ]
+              },
+              {
+                "name": "badge",
+                "stack": [
+                  {
+                    "id": 3,
+                    "name": "badge",
+                    "params": {},
+                    "tab": "badge",
+                    "url": "/badge"
+                  }
+                ]
+              },
+              {
+                "name": "settings",
+                "stack": [
+                  {
+                    "id": 4,
+                    "name": "settings",
+                    "params": {},
+                    "tab": "settings",
+                    "url": "/settings"
+                  }
+                ]
+              }
+            ]
+          },
+          "orientationSet": "Default",
+          "panel": {
+            "ok": true
+          },
+          "profileCleared": true,
+          "resetDone": true,
+          "swipeX": 0,
+          "swipeY": 0,
+          "unlockChoice": "unlocked"
+        }
+      },
+      "step": [
+        "key",
+        "Escape"
+      ]
+    }
+  ]
+}

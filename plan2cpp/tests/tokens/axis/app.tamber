@@ -1,0 +1,8 @@
+tamber axis
+
+axes
+  style = calm | loud
+
+theme
+  surface.page = #101010  scheme=fixed
+    when style=loud: #ff0000

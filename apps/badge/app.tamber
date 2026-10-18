@@ -1,0 +1,21 @@
+// The badge app's colours, those of the init() badge firmware (exact2 LLP 1121): the board
+// has one scheme, so each token is one colour by design (`scheme=fixed`). plan2cpp writes
+// them as the board's token table.
+tamber badge
+
+theme
+  surface.screen = #000000  scheme=fixed
+  surface.card = #101010  scheme=fixed
+  surface.control = #181818  scheme=fixed
+  surface.step = #ffffff  scheme=fixed
+  surface.notch = #000000  scheme=fixed
+  surface.inverse = #ffffff  scheme=fixed
+  ink.primary = #ffffff  scheme=fixed
+  ink.heading = #f5f2e8  scheme=fixed
+  ink.control = #f5f2e8  scheme=fixed
+  ink.time = #e7e7e7  scheme=fixed
+  ink.secondary = #808080  scheme=fixed
+  ink.inverse = #000000  scheme=fixed
+  border.selected = #ffffff  scheme=fixed
+  indicator.on = #ffffff  scheme=fixed
+  indicator.off = #808080  scheme=fixed

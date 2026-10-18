@@ -1,0 +1,4 @@
+{
+  "app": { "id": "com.example.marks", "name": "marks" },
+  "data": ["snap", "snap-align", "mode", "count"]
+}

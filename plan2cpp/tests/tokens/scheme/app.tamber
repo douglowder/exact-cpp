@@ -1,0 +1,4 @@
+tamber scheme
+
+theme
+  surface.page = light-dark(#ffffff, #000000)

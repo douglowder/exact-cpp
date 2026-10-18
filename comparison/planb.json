@@ -1,0 +1,1009 @@
+{
+ "name": "Plan B (C++)",
+ "boot": {
+  "frames": 64,
+  "commits": 153,
+  "paint_us": 1956,
+  "push_us": 1376,
+  "damage_px": 11700,
+  "input_to_panel_us": 0,
+  "ready_ms": 580,
+  "internal_free": 329752,
+  "internal_min": 327892,
+  "psram_free": 7491396
+ },
+ "states": [
+  {
+   "step": [
+    "tilt",
+    5.0,
+    0.0
+   ],
+   "state": {
+    "slots": {
+     "screen": "bubble",
+     "focus": "zero",
+     "zeroed": false,
+     "zeroPitch": 0,
+     "zeroRoll": 0,
+     "level": false,
+     "cues": 0
+    },
+    "derives": {
+     "pitch": 50,
+     "roll": 0
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 50,
+      "roll": 0
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "tilt",
+    0.0,
+    0.0
+   ],
+   "state": {
+    "slots": {
+     "screen": "bubble",
+     "focus": "zero",
+     "zeroed": false,
+     "zeroPitch": 0,
+     "zeroRoll": 0,
+     "level": true,
+     "cues": 1
+    },
+    "derives": {
+     "pitch": 0,
+     "roll": 0
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 0,
+      "roll": 0
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "tilt",
+    2.0,
+    0.0
+   ],
+   "state": {
+    "slots": {
+     "screen": "bubble",
+     "focus": "zero",
+     "zeroed": false,
+     "zeroPitch": 0,
+     "zeroRoll": 0,
+     "level": true,
+     "cues": 1
+    },
+    "derives": {
+     "pitch": 20,
+     "roll": 0
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 20,
+      "roll": 0
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "tilt",
+    4.0,
+    0.0
+   ],
+   "state": {
+    "slots": {
+     "screen": "bubble",
+     "focus": "zero",
+     "zeroed": false,
+     "zeroPitch": 0,
+     "zeroRoll": 0,
+     "level": false,
+     "cues": 1
+    },
+    "derives": {
+     "pitch": 40,
+     "roll": 0
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 40,
+      "roll": 0
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "key",
+    "ArrowRight"
+   ],
+   "state": {
+    "slots": {
+     "screen": "bubble",
+     "focus": "mode",
+     "zeroed": false,
+     "zeroPitch": 0,
+     "zeroRoll": 0,
+     "level": false,
+     "cues": 1
+    },
+    "derives": {
+     "pitch": 40,
+     "roll": 0
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 40,
+      "roll": 0
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "key",
+    "Enter"
+   ],
+   "state": {
+    "slots": {
+     "screen": "numeric",
+     "focus": "mode",
+     "zeroed": false,
+     "zeroPitch": 0,
+     "zeroRoll": 0,
+     "level": false,
+     "cues": 1
+    },
+    "derives": {
+     "pitch": 40,
+     "roll": 0
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 40,
+      "roll": 0
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "tilt",
+    0.4,
+    -0.3
+   ],
+   "state": {
+    "slots": {
+     "screen": "numeric",
+     "focus": "mode",
+     "zeroed": false,
+     "zeroPitch": 0,
+     "zeroRoll": 0,
+     "level": true,
+     "cues": 2
+    },
+    "derives": {
+     "pitch": 4,
+     "roll": -3
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 4,
+      "roll": -3
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "tilt",
+    0.2,
+    0.1
+   ],
+   "state": {
+    "slots": {
+     "screen": "numeric",
+     "focus": "mode",
+     "zeroed": false,
+     "zeroPitch": 0,
+     "zeroRoll": 0,
+     "level": true,
+     "cues": 2
+    },
+    "derives": {
+     "pitch": 2,
+     "roll": 1
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 2,
+      "roll": 1
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "key",
+    "Enter"
+   ],
+   "state": {
+    "slots": {
+     "screen": "bubble",
+     "focus": "mode",
+     "zeroed": false,
+     "zeroPitch": 0,
+     "zeroRoll": 0,
+     "level": true,
+     "cues": 2
+    },
+    "derives": {
+     "pitch": 2,
+     "roll": 1
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 2,
+      "roll": 1
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "key",
+    "ArrowLeft"
+   ],
+   "state": {
+    "slots": {
+     "screen": "bubble",
+     "focus": "zero",
+     "zeroed": false,
+     "zeroPitch": 0,
+     "zeroRoll": 0,
+     "level": true,
+     "cues": 2
+    },
+    "derives": {
+     "pitch": 2,
+     "roll": 1
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 2,
+      "roll": 1
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "tilt",
+    3.0,
+    -1.5
+   ],
+   "state": {
+    "slots": {
+     "screen": "bubble",
+     "focus": "zero",
+     "zeroed": false,
+     "zeroPitch": 0,
+     "zeroRoll": 0,
+     "level": false,
+     "cues": 2
+    },
+    "derives": {
+     "pitch": 30,
+     "roll": -15
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 30,
+      "roll": -15
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "key",
+    "Enter"
+   ],
+   "state": {
+    "slots": {
+     "screen": "bubble",
+     "focus": "zero",
+     "zeroed": true,
+     "zeroPitch": 30,
+     "zeroRoll": -15,
+     "level": true,
+     "cues": 3
+    },
+    "derives": {
+     "pitch": 0,
+     "roll": 0
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 30,
+      "roll": -15
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "tilt",
+    3.5,
+    -1.0
+   ],
+   "state": {
+    "slots": {
+     "screen": "bubble",
+     "focus": "zero",
+     "zeroed": true,
+     "zeroPitch": 30,
+     "zeroRoll": -15,
+     "level": true,
+     "cues": 3
+    },
+    "derives": {
+     "pitch": 5,
+     "roll": 5
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 35,
+      "roll": -10
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "key",
+    "Escape"
+   ],
+   "state": {
+    "slots": {
+     "screen": "bubble",
+     "focus": "zero",
+     "zeroed": false,
+     "zeroPitch": 0,
+     "zeroRoll": 0,
+     "level": false,
+     "cues": 3
+    },
+    "derives": {
+     "pitch": 35,
+     "roll": -10
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 35,
+      "roll": -10
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "tap",
+    "mode"
+   ],
+   "state": {
+    "slots": {
+     "screen": "numeric",
+     "focus": "mode",
+     "zeroed": false,
+     "zeroPitch": 0,
+     "zeroRoll": 0,
+     "level": false,
+     "cues": 3
+    },
+    "derives": {
+     "pitch": 35,
+     "roll": -10
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 35,
+      "roll": -10
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "tap",
+    "zero"
+   ],
+   "state": {
+    "slots": {
+     "screen": "numeric",
+     "focus": "zero",
+     "zeroed": true,
+     "zeroPitch": 35,
+     "zeroRoll": -10,
+     "level": true,
+     "cues": 4
+    },
+    "derives": {
+     "pitch": 0,
+     "roll": 0
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 35,
+      "roll": -10
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "tilt",
+    -45.0,
+    45.0
+   ],
+   "state": {
+    "slots": {
+     "screen": "numeric",
+     "focus": "zero",
+     "zeroed": true,
+     "zeroPitch": 35,
+     "zeroRoll": -10,
+     "level": false,
+     "cues": 4
+    },
+    "derives": {
+     "pitch": -485,
+     "roll": 460
+    },
+    "resources": {
+     "tilt": {
+      "pitch": -450,
+      "roll": 450
+     }
+    }
+   }
+  },
+  {
+   "step": [
+    "tilt",
+    1.25,
+    -0.75
+   ],
+   "state": {
+    "slots": {
+     "screen": "numeric",
+     "focus": "zero",
+     "zeroed": true,
+     "zeroPitch": 35,
+     "zeroRoll": -10,
+     "level": false,
+     "cues": 4
+    },
+    "derives": {
+     "pitch": -22,
+     "roll": 2
+    },
+    "resources": {
+     "tilt": {
+      "pitch": 13,
+      "roll": -8
+     }
+    }
+   }
+  }
+ ],
+ "bubble": [
+  {
+   "frames": 95,
+   "commits": 390,
+   "paint_us": 5833,
+   "push_us": 4821,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329448,
+   "internal_min": 327428,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 96,
+   "commits": 401,
+   "paint_us": 5913,
+   "push_us": 4826,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329436,
+   "internal_min": 327428,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 97,
+   "commits": 413,
+   "paint_us": 5906,
+   "push_us": 4825,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329428,
+   "internal_min": 327428,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 98,
+   "commits": 425,
+   "paint_us": 5853,
+   "push_us": 4823,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329132,
+   "internal_min": 327244,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 99,
+   "commits": 437,
+   "paint_us": 5861,
+   "push_us": 4826,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329124,
+   "internal_min": 327236,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 100,
+   "commits": 448,
+   "paint_us": 5869,
+   "push_us": 4827,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329132,
+   "internal_min": 327236,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 101,
+   "commits": 460,
+   "paint_us": 5913,
+   "push_us": 4827,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329136,
+   "internal_min": 327236,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 102,
+   "commits": 472,
+   "paint_us": 5905,
+   "push_us": 4822,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329132,
+   "internal_min": 327236,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 103,
+   "commits": 483,
+   "paint_us": 5870,
+   "push_us": 4811,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329128,
+   "internal_min": 327236,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 104,
+   "commits": 495,
+   "paint_us": 5912,
+   "push_us": 4821,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329124,
+   "internal_min": 327236,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 105,
+   "commits": 507,
+   "paint_us": 5684,
+   "push_us": 4827,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329132,
+   "internal_min": 327236,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 106,
+   "commits": 518,
+   "paint_us": 5884,
+   "push_us": 4816,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329128,
+   "internal_min": 327236,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 107,
+   "commits": 530,
+   "paint_us": 5960,
+   "push_us": 4823,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329144,
+   "internal_min": 327236,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 108,
+   "commits": 542,
+   "paint_us": 5730,
+   "push_us": 4812,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329136,
+   "internal_min": 327236,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 109,
+   "commits": 553,
+   "paint_us": 5911,
+   "push_us": 4815,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329136,
+   "internal_min": 327232,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 110,
+   "commits": 565,
+   "paint_us": 5845,
+   "push_us": 4825,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329132,
+   "internal_min": 327232,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 111,
+   "commits": 577,
+   "paint_us": 5740,
+   "push_us": 4814,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329136,
+   "internal_min": 327232,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 112,
+   "commits": 588,
+   "paint_us": 5906,
+   "push_us": 4809,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329144,
+   "internal_min": 327232,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 113,
+   "commits": 600,
+   "paint_us": 5816,
+   "push_us": 4824,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329128,
+   "internal_min": 327232,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 114,
+   "commits": 612,
+   "paint_us": 5927,
+   "push_us": 4825,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329124,
+   "internal_min": 327232,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 115,
+   "commits": 623,
+   "paint_us": 5859,
+   "push_us": 4810,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329132,
+   "internal_min": 327232,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 116,
+   "commits": 635,
+   "paint_us": 5925,
+   "push_us": 4806,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329136,
+   "internal_min": 327232,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 117,
+   "commits": 647,
+   "paint_us": 5932,
+   "push_us": 4816,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329132,
+   "internal_min": 327232,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 118,
+   "commits": 659,
+   "paint_us": 5872,
+   "push_us": 4822,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329124,
+   "internal_min": 327232,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 119,
+   "commits": 671,
+   "paint_us": 5910,
+   "push_us": 4811,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329140,
+   "internal_min": 327232,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 120,
+   "commits": 683,
+   "paint_us": 5793,
+   "push_us": 4829,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329140,
+   "internal_min": 327232,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 121,
+   "commits": 695,
+   "paint_us": 5950,
+   "push_us": 4814,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329128,
+   "internal_min": 327232,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 122,
+   "commits": 706,
+   "paint_us": 5919,
+   "push_us": 4821,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329136,
+   "internal_min": 327232,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 123,
+   "commits": 718,
+   "paint_us": 5858,
+   "push_us": 4819,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329124,
+   "internal_min": 327228,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 124,
+   "commits": 730,
+   "paint_us": 5913,
+   "push_us": 4812,
+   "damage_px": 30810,
+   "input_to_panel_us": 28802,
+   "ready_ms": 580,
+   "internal_free": 329136,
+   "internal_min": 327228,
+   "psram_free": 7491396
+  }
+ ],
+ "switches": [
+  {
+   "frames": 127,
+   "commits": 762,
+   "paint_us": 16697,
+   "push_us": 11041,
+   "damage_px": 72910,
+   "input_to_panel_us": 38834,
+   "ready_ms": 580,
+   "internal_free": 329124,
+   "internal_min": 327212,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 128,
+   "commits": 774,
+   "paint_us": 15980,
+   "push_us": 10987,
+   "damage_px": 72910,
+   "input_to_panel_us": 34709,
+   "ready_ms": 580,
+   "internal_free": 329124,
+   "internal_min": 327212,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 129,
+   "commits": 785,
+   "paint_us": 16660,
+   "push_us": 11032,
+   "damage_px": 72910,
+   "input_to_panel_us": 38606,
+   "ready_ms": 580,
+   "internal_free": 329136,
+   "internal_min": 327212,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 130,
+   "commits": 797,
+   "paint_us": 15841,
+   "push_us": 10995,
+   "damage_px": 72910,
+   "input_to_panel_us": 39263,
+   "ready_ms": 580,
+   "internal_free": 329136,
+   "internal_min": 327212,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 131,
+   "commits": 808,
+   "paint_us": 16813,
+   "push_us": 11031,
+   "damage_px": 72910,
+   "input_to_panel_us": 34797,
+   "ready_ms": 580,
+   "internal_free": 329124,
+   "internal_min": 327212,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 132,
+   "commits": 820,
+   "paint_us": 15987,
+   "push_us": 11010,
+   "damage_px": 72910,
+   "input_to_panel_us": 34725,
+   "ready_ms": 580,
+   "internal_free": 329124,
+   "internal_min": 327212,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 133,
+   "commits": 831,
+   "paint_us": 16814,
+   "push_us": 11033,
+   "damage_px": 72910,
+   "input_to_panel_us": 34597,
+   "ready_ms": 580,
+   "internal_free": 329136,
+   "internal_min": 327212,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 134,
+   "commits": 842,
+   "paint_us": 15979,
+   "push_us": 10984,
+   "damage_px": 72910,
+   "input_to_panel_us": 34929,
+   "ready_ms": 580,
+   "internal_free": 329124,
+   "internal_min": 327212,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 135,
+   "commits": 854,
+   "paint_us": 16823,
+   "push_us": 11025,
+   "damage_px": 72910,
+   "input_to_panel_us": 34597,
+   "ready_ms": 580,
+   "internal_free": 329124,
+   "internal_min": 327212,
+   "psram_free": 7491396
+  },
+  {
+   "frames": 136,
+   "commits": 865,
+   "paint_us": 15972,
+   "push_us": 10990,
+   "damage_px": 72910,
+   "input_to_panel_us": 34925,
+   "ready_ms": 580,
+   "internal_free": 329136,
+   "internal_min": 327212,
+   "psram_free": 7491396
+  }
+ ],
+ "final": {
+  "frames": 136,
+  "commits": 868,
+  "paint_us": 15972,
+  "push_us": 10990,
+  "damage_px": 72910,
+  "input_to_panel_us": 34925,
+  "ready_ms": 580,
+  "internal_free": 329124,
+  "internal_min": 327212,
+  "psram_free": 7491396
+ }
+}

@@ -1,0 +1,11 @@
+[
+  ["tap", "toggle"],
+  ["clock", "2000"],
+  ["key", "ArrowRight"],
+  ["key", "ArrowRight"],
+  ["clock", "1500"],
+  ["key", "Escape"],
+  ["clock", "1500"],
+  ["key", "Enter"],
+  ["clock", "1000"]
+]

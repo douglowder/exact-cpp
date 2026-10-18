@@ -1,0 +1,23 @@
+{
+  "extension": "attitude",
+  "version": 1,
+  "summary": "The board's tilt from its accelerometer, filtered, in tenths of a degree.",
+  "sources": [
+    {
+      "name": "attitude",
+      "summary": "Pitch and roll in tenths of a degree; level is 0, 0.",
+      "live": true,
+      "result": { "pitch": "number", "roll": "number" }
+    }
+  ],
+  "ops": [
+    {
+      "name": "tilt",
+      "summary": "Sets the attitude in degrees and stops the sensor, so scripted runs see the same values on every board.",
+      "params": [
+        { "name": "pitch", "type": "number" },
+        { "name": "roll", "type": "number" }
+      ]
+    }
+  ]
+}

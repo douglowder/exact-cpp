@@ -1,0 +1,8 @@
+sound "assets/click.wav"
+
+component A
+  action click
+    playSound("assets/click.wav")
+  view
+    button appearance="none" press=click testId="click"
+      text "Click"

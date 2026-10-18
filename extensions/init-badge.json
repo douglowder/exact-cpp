@@ -1,0 +1,35 @@
+{
+  "extension": "init-badge",
+  "version": 1,
+  "summary": "What the init() badge firmware saved on a board (its profile record and settings), the battery, and the panel's brightness.",
+  "sources": [
+    {
+      "name": "badgeProfile",
+      "summary": "The saved badge: name, company, the social link and its label, and \"app:/data/avatar\" when there is a photo.",
+      "result": { "name": "string", "company": "string", "url": "string", "label": "string", "photo": "string" }
+    },
+    {
+      "name": "badgeSettings",
+      "summary": "The saved settings: brightness 10-100, orientation \"Free\", \"Default\", or \"180\", and the invitation unlock.",
+      "result": { "brightness": "number", "orientation": "string", "unlocked": "bool" }
+    },
+    {
+      "name": "badgeBattery",
+      "summary": "The battery in percent, or -1 when the board cannot read it.",
+      "live": true,
+      "result": { "percent": "number" }
+    },
+    {
+      "name": "setBrightness",
+      "summary": "Sets the panel's brightness, 10-100 %.",
+      "params": [{ "name": "level", "type": "number" }],
+      "result": { "ok": "bool" }
+    }
+  ],
+  "ops": [
+    {
+      "name": "panel",
+      "summary": "Answers {\"brightness\": n}: the brightness the app last set, or -1."
+    }
+  ]
+}

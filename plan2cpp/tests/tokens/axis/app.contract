@@ -1,0 +1,3 @@
+component A
+  view
+    column background-color="surface.page"

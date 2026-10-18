@@ -1,0 +1,43 @@
+// Controls of the level, driven as the device host drives them: BtnA/BtnB are
+// ArrowLeft/ArrowRight, both briefly Enter, both held Escape, at the root.
+
+test "starts on the bubble screen with Zero focused"
+  expect state screen == "bubble"
+  expect state focus == "zero"
+  expect state zeroed == false
+  expect tree has "vial"
+
+test "arrows move the focus and wrap"
+  type "level" key "ArrowRight"
+  expect state focus == "mode"
+  type "level" key "ArrowRight"
+  expect state focus == "zero"
+  type "level" key "ArrowLeft"
+  expect state focus == "mode"
+
+test "Enter on Mode switches screens and back"
+  type "level" key "ArrowRight"
+  type "level" key "Enter"
+  expect state screen == "numeric"
+  expect tree missing "vial"
+  expect tree has "pitch"
+  type "level" key "Enter"
+  expect state screen == "bubble"
+
+test "Enter on Zero stores the zero; Escape clears it"
+  type "level" key "Enter"
+  expect state zeroed == true
+  expect text "zero" == "ZERO: SET"
+  expect state pitch == 0
+  expect state roll == 0
+  type "level" key "Escape"
+  expect state zeroed == false
+  expect text "zero" == "ZERO: OFF"
+
+test "touch runs the same actions"
+  tap "mode"
+  expect state focus == "mode"
+  expect state screen == "numeric"
+  tap "zero"
+  expect state focus == "zero"
+  expect state zeroed == true

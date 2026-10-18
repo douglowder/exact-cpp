@@ -1,0 +1,27 @@
+shape Step
+  beat: number
+  src: string
+  gain: number
+  group: string
+  note: number
+  velocity: number
+  channel: number
+  duration: number
+  haptic: string
+
+shape Track
+  beats: number
+  loops: number
+  offset: number
+  output: string
+  steps: Step[]
+
+component A
+  state playing = false
+  action toggle
+    playing = not playing
+  sequence pulse when playing
+    play([Track(beats=1, loops=0, offset=0, output="", steps=[Step(beat=0, src="", gain=1, group="", note=-1, velocity=1, channel=0, duration=0, haptic="success")])], bpm=60)
+  view
+    button appearance="none" press=toggle testId="toggle"
+      text "Pulse"

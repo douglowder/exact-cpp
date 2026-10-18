@@ -1,0 +1,523 @@
+// The init() badge (stopwatch/firmware/factory_badge), its pages and modals
+// as routes, drawn as the badge draws them: its coordinates, fonts (Inter
+// Medium and IBM Plex Mono, assets/fonts, SIL OFL 1.1), and marks
+// (assets/images), on the M5Stack Stopwatch's 468 x 466 round screen.
+// The badge's five pages are tabs; Setup, Connect, and Reset are modal routes
+// over their page. BtnA/left is ArrowLeft (previous page), BtnB/right
+// ArrowRight (next page), both held 600 ms Escape: Settings from a page, or
+// Back from a modal. The arrows at the screen's sides turn pages by touch.
+// The screens are the selected tab's stack only, so leaving a page drops its
+// own state (the schedule's scroll, a Settings submenu), as the badge does.
+//
+// A horizontal drag of 50 px or more turns the page (the badge's LVGL
+// gesture limit); the Schedule list and the Settings menu follow a vertical
+// drag, and the Schedule snaps to the card nearest the arrows on release.
+// Not here yet: the intro animation, momentum, the Morse code (a tap unlocks
+// the invitation), QR codes (the "QR unavailable" frame the badge shows when
+// it cannot make one), and the clock, battery, profile, and Wi-Fi the badge
+// reads.
+routes nav
+  tab init "/"
+  tab schedule "/schedule"
+  tab party "/party"
+  tab badge "/badge"
+    setup "/badge/setup"
+  tab settings "/settings"
+    connect "/settings/connect"
+    reset "/settings/reset"
+  notfound
+
+font "Inter"
+  500 = "assets/fonts/Inter-Medium.ttf"
+font "Plex Mono"
+  400 = "assets/fonts/IBMPlexMono-Regular.ttf"
+  500 = "assets/fonts/IBMPlexMono-Medium.ttf"
+  600 = "assets/fonts/IBMPlexMono-SemiBold.ttf"
+
+// The badge's page order, with wrap-around.
+fn nextTab(t: string): string = t == "init" ? "schedule" : (t == "schedule" ? "party" : (t == "party" ? "badge" : (t == "badge" ? "settings" : "init")))
+fn previousTab(t: string): string = t == "init" ? "settings" : (t == "schedule" ? "init" : (t == "party" ? "schedule" : (t == "badge" ? "party" : "badge")))
+
+// A drag's axis: the larger of its first move.
+fn axisOf(x: number, y: number): string = max(x, -x) > max(y, -y) ? "x" : "y"
+
+// The schedule's cards stacked with 12 px gaps: 131 px with a two-line title,
+// 98 px with one (Inter 24 in the card's 241 px). Each card's center, from
+// the list's top, and the card nearest a point.
+fn cardCenter(i: number): number = i == 0 ? 65.5 : (i == 1 ? 192 : (i == 2 ? 318.5 : (i == 3 ? 445 : (i == 4 ? 571.5 : (i == 5 ? 698 : (i == 6 ? 824.5 : (i == 7 ? 967.5 : 1094)))))))
+fn nearestCard(p: number): number = p < 128.75 ? 0 : (p < 255.25 ? 1 : (p < 381.75 ? 2 : (p < 508.25 ? 3 : (p < 634.75 ? 4 : (p < 761.25 ? 5 : (p < 896 ? 6 : (p < 1030.75 ? 7 : 8)))))))
+
+// Text roles: the badge's fonts with its line boxes (ui/widgets.cpp set_font).
+// CSS centers a line's leading around the glyphs, and LVGL puts some of it
+// below; a margin pair moves the glyphs to the badge's baseline without
+// changing the space the text takes.
+style Sans24
+  font-family="Inter" font-weight=500 font-size=24 line-height="33px" margin-top=-1 margin-bottom=1
+style Sans32
+  font-family="Inter" font-weight=500 font-size=32 line-height="42px"
+style Sans20
+  font-family="Inter" font-weight=500 font-size=20 line-height="26px" margin-top=1 margin-bottom=-1
+style Sans16
+  font-family="Inter" font-weight=500 font-size=16 line-height="21px"
+style Sans14
+  font-family="Inter" font-weight=500 font-size=14 line-height="18px" margin-top=1 margin-bottom=-1
+style Mono12
+  font-family="Plex Mono" font-weight=500 font-size=12 line-height="16px" margin-top=-1 margin-bottom=1
+style MonoCaption
+  font-family="Plex Mono" font-weight=600 font-size=12 line-height="21px" margin-top=-3 margin-bottom=3
+style Mono18
+  font-family="Plex Mono" font-weight=500 font-size=18 line-height="24px"
+style Mono20
+  font-family="Plex Mono" font-weight=400 font-size=20 line-height="26px"
+style Mono24
+  font-family="Plex Mono" font-weight=500 font-size=24 line-height="31px"
+
+style Screen
+  position="absolute" left=0 top=0 width=468 height=466 background-color="surface.screen" color="ink.primary" text-align="center"
+
+// A page heading (ui/widgets.cpp page_heading).
+style Heading
+  position="absolute" left=84 top=52 width=300 text-align="center" color="ink.heading" font-family="Inter" font-weight=500 font-size=24 line-height="33px" margin-top=-1 margin-bottom=1
+
+// A badge button: panel gray, square, its label centered in cream.
+style Button
+  position="absolute" background-color="surface.control" display="flex" align-items="center" justify-content="center" color="ink.control"
+
+// A Settings row (ui/page_settings.cpp row): a 272 x 52 button in a menu column.
+style Row
+  width=272 height=52 background-color="surface.control" display="flex" align-items="center" justify-content="center" color="ink.control" box-sizing="border-box"
+style RowSelected
+  width=272 height=52 background-color="surface.control" display="flex" align-items="center" justify-content="center" color="ink.control" box-sizing="border-box" border-width=1 border-style="solid" border-color="border.selected"
+
+// The page dots: square, the current one larger and white.
+style Dot
+  width=8 height=8 background-color="indicator.off"
+style DotOn
+  width=12 height=12 background-color="indicator.on"
+
+// A schedule card: dark gray with stepped corners; the session on now is
+// lighter, with a white border that follows the steps.
+style Card
+  position="relative" width=273 box-sizing="border-box" display="flex" flex-direction="column" padding-top=12 padding-right=14 padding-bottom=14 padding-left=14 border-width=2 border-style="solid" border-color="transparent" background-color="surface.card"
+style CardNow
+  position="relative" width=273 box-sizing="border-box" display="flex" flex-direction="column" padding-top=12 padding-right=14 padding-bottom=14 padding-left=14 border-width=2 border-style="solid" border-color="border.selected" background-color="surface.control"
+style Step
+  position="absolute" background-color="surface.step"
+style Notch
+  position="absolute" width=8 height=8 background-color="surface.notch"
+
+// The name and company of a configured badge: one line, cut with an ellipsis.
+style Mono32
+  font-family="Plex Mono" font-weight=500 font-size=32 line-height="39px" white-space="nowrap" overflow-x="hidden" text-overflow="ellipsis"
+style MonoLine24
+  font-family="Plex Mono" font-weight=400 font-size=24 line-height="30px" white-space="nowrap" overflow-x="hidden" text-overflow="ellipsis"
+
+// What the board tells the app: the clock (exactTime), and from its data
+// module the battery (-1 when it cannot be read; a native module, as LLP
+// 1069 puts battery), the saved badge, and the saved settings. The badge keeps the clock in UTC with a fixed offset in
+// minutes, as the badge firmware does.
+shape Time
+  epochAtZero: number
+  utcOffset: number
+shape Battery
+  percent: number
+shape Profile
+  name: string
+  company: string
+  url: string
+  label: string
+  photo: string
+shape Saved
+  brightness: number
+  orientation: string
+  unlocked: bool
+shape Done
+  ok: bool
+
+// The agenda's start minutes (badge_schedule::Items); each session runs to the
+// next one's start, the last to midnight. The card on now, or -1.
+fn currentCard(m: number): number = m < 480 ? -1 : (m < 570 ? 0 : (m < 630 ? 1 : (m < 660 ? 2 : (m < 750 ? 3 : (m < 825 ? 4 : (m < 900 ? 5 : (m < 930 ? 6 : (m < 990 ? 7 : 8))))))))
+fn cardState(i: number, m: number): string = m < 0 ? "unknown" : (currentCard(m) == i ? "now" : (currentCard(m) > i ? "passed" : "upcoming"))
+
+component Badge
+  resource time = exactTime() as shape Time
+  resource battery = badgeBattery() as shape Battery
+  resource profile = badgeProfile() as shape Profile
+  resource saved = badgeSettings() as shape Saved
+  mutation panel as shape Done
+  // Choices made since boot; "" or -1 until then, so the saved ones show. The
+  // board's saved badge is only read, so a reset clears it until restart.
+  state unlockChoice = ""
+  state brightnessSet = -1
+  state orientationSet = ""
+  state profileCleared = false
+  state elapsed = 0
+  state swipeX = 0
+  state swipeY = 0
+  state resetDone = false
+  derive clockValid = time.epochAtZero >= 1704067200000
+  derive minute = clockValid ? floor((((time.epochAtZero + elapsed) / 1000 + time.utcOffset * 60) % 86400) / 60) : -1
+  // The invitation also opens by itself at 13:30 on 2026-10-07, local time.
+  derive unlocked = unlockChoice == "unlocked" or (unlockChoice == "" and (saved.unlocked or (clockValid and time.epochAtZero + elapsed >= (1791379800 - time.utcOffset * 60) * 1000)))
+  derive brightness = brightnessSet >= 0 ? brightnessSet : saved.brightness
+  derive orientation = orientationSet != "" ? orientationSet : saved.orientation
+  derive filled = not profileCleared and (profile.name != "" or profile.company != "" or profile.photo != "" or profile.url != "")
+  task clock mount
+    every(30000, tick)
+  action tick
+    elapsed = performanceNow()
+  derive current = top(nav)
+  action follow(url: string)
+    nav = go(nav, url)
+  action back
+    nav = back(nav)
+  action previous
+    nav = select(nav, previousTab(nav.tab))
+  action next
+    nav = select(nav, nextTab(nav.tab))
+  action openSetup
+    nav = push(nav, "/badge/setup")
+  action openConnect
+    nav = push(nav, "/settings/connect")
+  action openReset
+    resetDone = false
+    nav = push(nav, "/settings/reset")
+  action unlock
+    unlockChoice = "unlocked"
+  action brighter(delta: number)
+    let level = max(10, min(100, brightness + delta))
+    brightnessSet = level
+    send panel = setBrightness(level)
+  action orient(o: string)
+    orientationSet = o
+  action confirmReset
+    unlockChoice = "locked"
+    brightnessSet = 70
+    orientationSet = "Default"
+    profileCleared = true
+    resetDone = true
+    send panel = setBrightness(70)
+  action finishReset
+    nav = open(back(nav), "/badge")
+  action pageDrag(x: number, y: number)
+    swipeX = swipeX + x
+    swipeY = swipeY + y
+  action pageSettle(vx: number, vy: number)
+    if depth(nav) == 1 and swipeX <= -50 and max(swipeX, -swipeX) > max(swipeY, -swipeY)
+      nav = select(nav, nextTab(nav.tab))
+    else if depth(nav) == 1 and swipeX >= 50 and max(swipeX, -swipeX) > max(swipeY, -swipeY)
+      nav = select(nav, previousTab(nav.tab))
+    swipeX = 0
+    swipeY = 0
+  action onKey(k: string)
+    if depth(nav) == 1 and k == "ArrowRight"
+      nav = select(nav, nextTab(nav.tab))
+      preventDefault()
+    if depth(nav) == 1 and k == "ArrowLeft"
+      nav = select(nav, previousTab(nav.tab))
+      preventDefault()
+    if depth(nav) == 1 and k == "Escape"
+      nav = select(nav, "settings")
+      preventDefault()
+  view
+    main navigationKey=`${current.id}` navigationBack="back" navigate=follow key=onKey autofocus=true testId="navigation" position="relative" width=468 height=466 background-color="surface.screen"
+      for e in stack(nav) key=e.id
+        column navigationKey=`${e.id}` navigationPresentation=(e.name == "setup" or e.name == "connect" or e.name == "reset" or e.name == "notfound" ? "modal" : "") testId=`route-${e.name}` class=Screen pan=pageDrag panrelease=pageSettle
+          if e.name == "init"
+            Intro()
+            Chrome(page=0, logo=false, arrows=true, dots=true, previous=previous, next=next)
+          if e.name == "schedule"
+            Schedule(minute=minute, previous=previous, next=next)
+            Chrome(page=1, logo=true, arrows=true, dots=true, previous=previous, next=next)
+          if e.name == "party"
+            Party(unlocked=unlocked, unlock=unlock)
+            Chrome(page=2, logo=true, arrows=true, dots=true, previous=previous, next=next)
+          if e.name == "badge"
+            Profile(filled=filled, name=profile.name, company=profile.company, photo=profile.photo, openSetup=openSetup)
+            Chrome(page=3, logo=true, arrows=true, dots=not filled, previous=previous, next=next)
+          if e.name == "settings"
+            Settings(battery=battery.percent, brightness=brightness, orientation=orientation, brighter=brighter, orient=orient, openConnect=openConnect, openReset=openReset, previous=previous, next=next)
+          if e.name == "setup" or e.name == "connect"
+            Setup(back=back)
+          if e.name == "reset"
+            Reset(done=resetDone, confirm=confirmReset, back=back, finish=finishReset)
+          if e.name == "notfound"
+            NotFound(url=e.url, back=back)
+
+// The marks around every page (ui/chrome.cpp): the small init() wordmark,
+// the arrows (each a touch target down its side of the screen), and the dots.
+component Chrome
+  props
+    page: number
+    logo: bool
+    arrows: bool
+    dots: bool
+    previous: action
+    next: action
+  view
+    column position="absolute" left=0 top=0 width=468 height=466
+      if logo
+        image "assets/images/logo_small.png" position="absolute" left=205 top=24 width=57 height=13
+      if arrows
+        button press=previous aria-label="Previous page" testId="page-previous" position="absolute" left=0 top=100 width=72 height=304
+          image "assets/images/left.png" position="absolute" left=30 top=114 width=23 height=38
+        button press=next aria-label="Next page" testId="page-next" position="absolute" left=396 top=100 width=72 height=304
+          image "assets/images/right.png" position="absolute" left=17 top=114 width=23 height=38
+      if arrows and dots
+        row position="absolute" left=196 top=429 height=12 align-items="center" column-gap=8 testId="dots"
+          view class=(page == 0 ? DotOn : Dot)
+          view class=(page == 1 ? DotOn : Dot)
+          view class=(page == 2 ? DotOn : Dot)
+          view class=(page == 3 ? DotOn : Dot)
+          view class=(page == 4 ? DotOn : Dot)
+
+// init(): the large wordmark (ui/page_init.cpp), without the intro loop behind it.
+component Intro
+  view
+    image "assets/images/logo_large.png" position="absolute" left=135 top=210 width=197 height=46 testId="init-title"
+
+// One session of the schedule (badge_schedule::Items). With no clock, no
+// session is current or past. `shift` moves the first card, and the list with it.
+component Session
+  props
+    at: number
+    shift: number
+    minute: number
+    time: string
+    title: string
+  view
+    column class=(cardState(at, minute) == "now" ? CardNow : Card) opacity=(cardState(at, minute) == "passed" ? 0.5 : 1) margin-top=(at == 0 ? shift : 0) testId=`session-${at}`
+      view height=26
+        text time class=Mono18 position="absolute" left=0 top=0 width=145 text-align="left" color="ink.time"
+        if cardState(at, minute) == "now"
+          text "On now" class=Mono12 position="absolute" left=159 top=4 width=82 text-align="right" color="ink.secondary" testId=`session-${at}-now`
+      text title class=Sans24 margin-top=8 text-align="left"
+      view class=Notch left=-2 top=-2
+      view class=Notch right=-2 top=-2
+      view class=Notch left=-2 bottom=-2
+      view class=Notch right=-2 bottom=-2
+      if cardState(at, minute) == "now"
+        view class=Step left=6 top=-2 width=2 height=10
+        view class=Step left=-2 top=6 width=10 height=2
+        view class=Step right=6 top=-2 width=2 height=10
+        view class=Step right=-2 top=6 width=10 height=2
+        view class=Step left=6 bottom=-2 width=2 height=10
+        view class=Step left=-2 bottom=6 width=10 height=2
+        view class=Step right=6 bottom=-2 width=2 height=10
+        view class=Step right=-2 bottom=6 width=10 height=2
+
+// Schedule (ui/page_schedule.cpp): the cards in a 273 x 280 window, the card
+// `first` centered between the arrows (133 px down the window), as the
+// badge's snap puts it. A vertical drag moves the list; on release it snaps
+// to the nearest card. A horizontal drag turns the page. Its scroll is this
+// page's own.
+component Schedule
+  props
+    minute: number
+    previous: action
+    next: action
+  // The card on now, or the first, as the badge scrolls to on entry.
+  state first = max(0, currentCard(minute))
+  state axis = ""
+  state dx = 0
+  state dy = 0
+  action drag(x: number, y: number)
+    if axis == ""
+      axis = axisOf(x, y)
+    dx = dx + x
+    dy = dy + y
+  action settle(vx: number, vy: number)
+    if axis == "y"
+      first = nearestCard(cardCenter(first) - dy)
+    if axis == "x" and dx <= -50
+      next()
+    else if axis == "x" and dx >= 50
+      previous()
+    axis = ""
+    dx = 0
+    dy = 0
+  view
+    column position="absolute" left=0 top=0 width=468 height=466
+      text "Schedule" class=Heading testId="schedule-title"
+      column position="absolute" left=98 top=100 width=273 height=280 row-gap=12 overflow-y="hidden" pan=drag panrelease=settle testId="sessions"
+        Session(at=0, minute=minute, shift=133 - cardCenter(first) + (axis == "y" ? dy : 0), time="8:00 AM", title="Check-in and breakfast")
+        Session(at=1, minute=minute, shift=0, time="9:30 AM", title="Opening keynote")
+        Session(at=2, minute=minute, shift=0, time="10:30 AM", title="Networking break and sponsors")
+        Session(at=3, minute=minute, shift=0, time="11:00 AM", title="Morning program")
+        Session(at=4, minute=minute, shift=0, time="12:30 PM", title="Lunch and networking")
+        Session(at=5, minute=minute, shift=0, time="1:45 PM", title="Afternoon program")
+        Session(at=6, minute=minute, shift=0, time="3:00 PM", title="Networking break and sponsors")
+        Session(at=7, minute=minute, shift=0, time="3:30 PM", title="Afternoon program (continued)")
+        Session(at=8, minute=minute, shift=0, time="4:30 PM", title="Happy hour")
+      text "Swipe up or down" class=MonoCaption position="absolute" left=84 top=394 width=300 color="ink.secondary" testId="schedule-hint"
+
+// Party (ui/page_invite.cpp): the prompt while locked; the invitation once
+// unlocked, its 300 x 300 artwork in a rounded frame.
+component Party
+  props
+    unlocked: bool
+    unlock: action
+  view
+    column position="absolute" left=0 top=0 width=468 height=466
+      text "Party" class=Heading testId="party-title"
+      if unlocked
+        image "assets/images/developers-after-dark.png" position="absolute" left=84 top=100 width=300 height=300 border-radius=16 testId="party-art"
+      else
+        button press=unlock testId="party-code" position="absolute" left=72 top=100 width=324 height=304
+          text "tap the code to reveal a secret invitation" class=Sans24 position="absolute" left=8 top=116 width=308 testId="party-prompt"
+
+// Badge (ui/page_badge.cpp). With no profile: the empty portrait, the
+// placeholders, and the button to configure it. With one: the photo (or the
+// portrait) at 208 px, the name and company, no heading, and no dots.
+component Profile
+  props
+    filled: bool
+    name: string
+    company: string
+    photo: string
+    openSetup: action
+  view
+    column position="absolute" left=0 top=0 width=468 height=466
+      if filled
+        image (photo != "" ? photo : "assets/images/empty_portrait.png") position="absolute" left=130 top=100 width=208 height=208 border-radius=16 testId="badge-photo"
+        text name class=Mono32 position="absolute" left=78 top=316 width=312 testId="badge-name"
+        text company class=MonoLine24 position="absolute" left=78 top=358 width=312 color="ink.secondary" testId="badge-company"
+      else
+        text "Badge" class=Heading testId="badge-title"
+        image "assets/images/empty_portrait.png" position="absolute" left=154 top=100 width=160 height=160 testId="badge-portrait"
+        text "Your name" class=Mono24 position="absolute" left=78 top=272 width=312 testId="badge-name"
+        text "Company" class=Mono20 position="absolute" left=78 top=308 width=312 color="ink.secondary" testId="badge-company"
+        button press=openSetup class=Button left=134 top=355 width=200 height=44 testId="open-setup"
+          text "Tap to configure" class=Sans16
+
+// Settings (ui/page_settings.cpp): the menu and its submenus, which close
+// when the page is left. A submenu hides the arrows and dots, and has Done.
+component Settings
+  props
+    battery: number
+    brightness: number
+    orientation: string
+    brighter: action
+    orient: action
+    openConnect: action
+    openReset: action
+    previous: action
+    next: action
+  state menu = "home"
+  state scrolled = 0
+  state dy = 0
+  action show(m: string)
+    menu = m
+  action home
+    menu = "home"
+  // The home menu's rows reach 86 px below its window; a vertical drag moves
+  // them, and they stay where released. Horizontal drags on the menu do
+  // nothing, as on the badge.
+  action menuDrag(x: number, y: number)
+    dy = dy + y
+  action menuSettle(vx: number, vy: number)
+    scrolled = max(0, min(86, scrolled - dy))
+    dy = 0
+  view
+    column position="absolute" left=0 top=0 width=468 height=466
+      if menu == "home"
+        text "Settings" class=Heading testId="settings-title"
+        column position="absolute" left=98 top=100 width=272 height=304 row-gap=9 overflow-y="hidden" pan=menuDrag panrelease=menuSettle testId="settings-menu"
+          text (battery < 0 ? "Battery unavailable" : `Battery ${min(100, battery)}%`) class=Mono18 color="ink.secondary" margin-top=(0 - max(0, min(86, scrolled - dy))) testId="battery"
+          button press=show("brightness") class=Row testId="menu-brightness"
+            text "Brightness" class=Sans20
+          button press=show("orientation") class=Row testId="menu-orientation"
+            text "Orientation" class=Sans20
+          button press=show("hack") class=Row testId="menu-hack"
+            text "Hack this device" class=Sans20
+          button press=show("phone") class=Row testId="menu-phone"
+            text "Connect phone" class=Sans20
+          button press=show("advanced") class=Row testId="menu-advanced"
+            text "Advanced" class=Sans20
+          button press=openReset class=Row testId="open-reset"
+            text "Reset" class=Sans20
+        Chrome(page=4, logo=true, arrows=true, dots=true, previous=previous, next=next)
+      else
+        column position="absolute" left=98 top=100 width=272 height=246 row-gap=9 overflow-y="hidden"
+          if menu == "brightness"
+            text `${brightness}%` class=Sans24 testId="brightness"
+            button press=brighter(-10) class=Row testId="brightness-down"
+              text "Decrease" class=Sans20
+            button press=brighter(10) class=Row testId="brightness-up"
+              text "Increase" class=Sans20
+          if menu == "orientation"
+            button press=orient("Free") class=(orientation == "Free" ? RowSelected : Row) testId="orientation-free"
+              text "Free" class=Sans20
+            button press=orient("Default") class=(orientation == "Default" ? RowSelected : Row) testId="orientation-default"
+              text "Default" class=Sans20
+            button press=orient("180") class=(orientation == "180" ? RowSelected : Row) testId="orientation-180"
+              text "180°" class=Sans20
+          if menu == "hack"
+            column width=216 height=216 margin-left=28 background-color="surface.inverse" testId="hack-qr"
+              text "QR unavailable" class=Sans14 position="absolute" left=4 top=100 width=208 color="ink.inverse"
+            text "workos.com/init/badge" class=Mono12
+          if menu == "phone"
+            text "Connect to edit your badge and sync its clock." class=Sans16
+            button press=openConnect class=Row testId="connect-phone"
+              text "Connect phone" class=Sans20
+          if menu == "advanced"
+            button class=Row
+              text "Calibrate touch" class=Sans20
+            button class=Row
+              text "Touch test" class=Sans20
+        text (menu == "brightness" ? "Brightness" : (menu == "orientation" ? "Orientation" : (menu == "hack" ? "Hack this device" : (menu == "phone" ? "Connect phone" : "Advanced")))) class=Heading testId="settings-title"
+        image "assets/images/logo_small.png" position="absolute" left=205 top=24 width=57 height=13
+        button press=home position="absolute" left=98 top=354 width=272 height=46 background-color="surface.inverse" display="flex" align-items="center" justify-content="center" testId="menu-done"
+          text "Done" class=Sans20 color="ink.inverse"
+
+// Setup, "Connect phone" (ui/modal_setup.cpp), before the badge's Wi-Fi
+// starts: no code yet, and the line that says so.
+component Setup
+  props
+    back: action
+  view
+    column position="absolute" left=0 top=0 width=468 height=466
+      image "assets/images/logo_small.png" position="absolute" left=205 top=24 width=57 height=13
+      text "Connect phone" class=Sans24 position="absolute" left=64 top=64 width=340 color="ink.heading" testId="setup-title"
+      text "Scan to join this badge's Wi-Fi" class=MonoCaption position="absolute" left=54 top=98 width=360 color="ink.secondary"
+      text "Starting setup..." class=MonoCaption position="absolute" left=54 top=316 width=360 testId="setup-status"
+      button id="back" press=back autofocus=true class=Button left=182 top=396 width=104 height=44 testId="setup-done"
+        text "Go back" class=Sans16
+
+// Reset (ui/modal_reset.cpp): ready, then complete.
+component Reset
+  props
+    done: bool
+    confirm: action
+    back: action
+    finish: action
+  view
+    column position="absolute" left=0 top=0 width=468 height=466
+      image "assets/images/logo_small.png" position="absolute" left=205 top=24 width=57 height=13
+      if done
+        text "Badge reset" class=Sans24 position="absolute" left=64 top=80 width=340 testId="reset-title"
+        text "Your profile, saved sessions and invitation unlock are cleared.\n\nBrightness is 70%. You can configure a new badge." class=Sans16 position="absolute" left=84 top=135 width=300 testId="reset-message"
+        button press=finish autofocus=true class=Button left=164 top=352 width=140 height=44 testId="reset-finish"
+          text "Done" class=Sans16
+      else
+        text "Reset badge?" class=Sans24 position="absolute" left=64 top=80 width=340 testId="reset-title"
+        text "Clears your profile, saved sessions and invitation unlock.\n\nRestores 70% brightness and Default orientation. The clock stays set." class=Sans16 position="absolute" left=84 top=135 width=300 testId="reset-message"
+        button press=confirm class=Button left=124 top=294 width=220 height=44 testId="reset-confirm"
+          text "Reset badge" class=Sans16
+        button id="back" press=back autofocus=true class=Button left=164 top=352 width=140 height=44 testId="reset-cancel"
+          text "Cancel" class=Sans16
+
+// A location no route matches. The badge firmware has no locations, so this is
+// a modal in the badge's style, written here so the compiler does not write
+// its own "Page not found" screen.
+component NotFound
+  props
+    url: string
+    back: action
+  view
+    column position="absolute" left=0 top=0 width=468 height=466
+      image "assets/images/logo_small.png" position="absolute" left=205 top=24 width=57 height=13
+      text "Page not found" class=Sans24 position="absolute" left=64 top=80 width=340 testId="not-found-title"
+      text `There is no page at ${url}.` class=Sans16 position="absolute" left=84 top=135 width=300 testId="not-found-message"
+      button id="back" press=back autofocus=true class=Button left=182 top=396 width=104 height=44 testId="not-found-back"
+        text "Go back" class=Sans16

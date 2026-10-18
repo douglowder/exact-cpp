@@ -1,0 +1,82 @@
+// A minimal metronome for the M5Stack Stopwatch (468 x 466 round screen), from exact2's
+// apps/metronome: a tempo, Start and Stop, and a click on each beat, high on beat 1 when
+// accented. One `sequence` declares what plays; the host plays it on its own clock (exact2
+// LLP 1125), so no action runs per beat. BtnA/left is ArrowLeft (slower), BtnB/right
+// ArrowRight (faster), both briefly Enter (Start or Stop), both held 600 ms Escape (accent).
+sound "assets/click-high.wav"
+sound "assets/click-low.wav"
+
+shape Step
+  beat: number
+  src: string
+  gain: number
+  group: string
+  note: number
+  velocity: number
+  channel: number
+  duration: number
+  haptic: string
+
+shape Track
+  beats: number
+  loops: number
+  offset: number
+  output: string
+  steps: Step[]
+
+// A click: a sample at a level, with no MIDI note and no haptic.
+fn click(beat: number, src: string, gain: number): Step = Step(beat=beat, src=src, gain=gain, group="", note=-1, velocity=1, channel=0, duration=0, haptic="")
+
+// A bar of four clicks, looping; beat 1 is high when accented.
+fn bar(accent: bool): Track = Track(beats=4, loops=0, offset=0, output="", steps=[click(0, accent ? "assets/click-high.wav" : "assets/click-low.wav", 1), click(1, "assets/click-low.wav", 0.6), click(2, "assets/click-low.wav", 0.6), click(3, "assets/click-low.wav", 0.6)])
+
+style Label
+  position="absolute" left=0 width=468 text-align="center" color="ink.primary"
+
+style Control
+  position="absolute" top=240 width=96 height=72 box-sizing="border-box" border-radius=36 border-width=1 border-style="solid" border-color="border.button" background-color="surface.button" display="flex" align-items="center" justify-content="center"
+
+component Metronome
+  state playing = false
+  state bpm = 120
+  state accent = true
+
+  action toggle
+    playing = not playing
+  action slower
+    bpm = max(30, bpm - 1)
+  action faster
+    bpm = min(300, bpm + 1)
+  action flipAccent
+    accent = not accent
+  action onKey(k: string)
+    if k == "ArrowLeft"
+      slower()
+      preventDefault()
+    if k == "ArrowRight"
+      faster()
+      preventDefault()
+    if k == "Enter"
+      toggle()
+      preventDefault()
+    if k == "Escape"
+      flipAccent()
+      preventDefault()
+
+  sequence click when playing
+    play([bar(accent)], bpm=bpm)
+
+  view
+    column autofocus=true key=onKey testId="metronome" position="relative" width=468 height=466 background-color="surface.screen"
+      column position="absolute" left=2 top=1 width=464 height=464 border-radius=232 background-color="surface.dial"
+      text `${bpm}` class=Label top=96 font-size=72 font-weight=700 testId="bpm"
+      text "beats a minute" class=Label top=184 font-size=18 color="ink.caption"
+      button appearance="none" press=slower aria-label="Slower" testId="slower" class=Control left=88
+        text "-" font-size=40 color="ink.primary"
+      button appearance="none" press=toggle testId="toggle" class=Control left=186 border-color=(playing ? "status.playing" : "border.button")
+        text (playing ? "Stop" : "Start") font-size=24 color=(playing ? "status.playing" : "ink.primary") testId="toggle-label"
+      button appearance="none" press=faster aria-label="Faster" testId="faster" class=Control left=284
+        text "+" font-size=40 color="ink.primary"
+      button appearance="none" press=flipAccent testId="accent" position="absolute" left=134 top=336 width=200 height=40 display="flex" align-items="center" justify-content="center"
+        text (accent ? "Accent: on" : "Accent: off") font-size=18 color="ink.caption" testId="accent-label"
+      text "A slower   B faster   Both start" class=Label top=396 font-size=16 color="ink.hint"

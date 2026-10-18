@@ -1,0 +1,11 @@
+# Host workspace: plan2cpp, and the apps on exact2's runner (the references the C++ target is
+# checked against). exact2 is the submodule beside them.
+[workspace]
+resolver = "2"
+members = ["level-data", "level-tests", "plan2cpp", "badge-ref", "sound-ref"]
+# exact2's crates belong to exact2's own workspace (its root manifest gives their edition).
+exclude = ["exact2"]
+
+# exact2's vendored crates, as exact2's own workspace patches them in.
+[patch.crates-io]
+taffy = { path = "exact2/vendor/taffy" }

@@ -1,0 +1,14 @@
+// The app data_check runs: `data-*` words on nodes, from literals and from
+// state, one of them an option that is absent until `grow` runs.
+component Marks
+  state count = 2
+  state wide = false
+  action grow
+    count = count + 1
+    wide = true
+  view
+    column testId="list" data-snap="y" data-mode=(wide ? some("wide") : none)
+      text "a" testId="a" data-snap-align="center" data-count=count
+      text "b" testId="b" data-snap-align="start"
+      button press=grow appearance="none" testId="grow"
+        text "grow"

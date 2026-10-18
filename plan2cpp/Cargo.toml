@@ -1,0 +1,25 @@
+[package]
+name = "plan2cpp"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.97"
+description = "Compiles a Contract plan to app-specific C++ over the contract_rt runtime"
+publish = false
+
+[dependencies]
+contract = { path = "../exact2/contract/cli" }
+exact-kernel = { path = "../exact2/kernel" }
+exact-plan = { path = "../exact2/plan" }
+exact-runner = { path = "../exact2/runner" }
+# The versions exact2 itself locks, for its text and image hosts.
+png = "=0.18.1"
+swash = "=0.2.10"
+# Extension files: the versions exact2 locks.
+serde_json = "=1.0.151"
+sha2 = "=0.10.9"
+
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+unwrap_used = "deny"
+expect_used = "warn"
+panic = "deny"

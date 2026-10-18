@@ -1,0 +1,20 @@
+// The level app's colours (exact2 LLP 1121): the board has one scheme, so each token is one
+// colour by design (`scheme=fixed`). plan2cpp writes them as the board's token table.
+tamber level
+
+theme
+  surface.screen = #000000  scheme=fixed
+  surface.dial = #101014  scheme=fixed
+  surface.button = #1c1c24  scheme=fixed
+  border.button = #3a3a46  scheme=fixed
+  surface.button-focus = #23302a  scheme=fixed
+  border.focus = #48ef8b  scheme=fixed
+  status.level = #48ef8b  scheme=fixed
+  status.tilted = #ffb347  scheme=fixed
+  surface.vial = #15201a  scheme=fixed
+  border.vial = #3a4a40  scheme=fixed
+  border.target = #6a7a70  scheme=fixed
+  ink.primary = #ffffff  scheme=fixed
+  ink.caption = #a7a7b0  scheme=fixed
+  ink.status = #c8c8d0  scheme=fixed
+  ink.hint = #9a9aa4  scheme=fixed

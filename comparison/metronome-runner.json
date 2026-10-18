@@ -1,0 +1,315 @@
+{
+  "steps": [
+    {
+      "slots": {
+        "accent": true,
+        "bpm": 120,
+        "playing": false
+      },
+      "step": [
+        "boot"
+      ]
+    },
+    {
+      "slots": {
+        "accent": true,
+        "bpm": 120,
+        "playing": true
+      },
+      "step": [
+        "tap",
+        "toggle"
+      ]
+    },
+    {
+      "slots": {
+        "accent": true,
+        "bpm": 120,
+        "playing": true
+      },
+      "step": [
+        "clock",
+        "2000"
+      ]
+    },
+    {
+      "slots": {
+        "accent": true,
+        "bpm": 121,
+        "playing": true
+      },
+      "step": [
+        "key",
+        "ArrowRight"
+      ]
+    },
+    {
+      "slots": {
+        "accent": true,
+        "bpm": 122,
+        "playing": true
+      },
+      "step": [
+        "key",
+        "ArrowRight"
+      ]
+    },
+    {
+      "slots": {
+        "accent": true,
+        "bpm": 122,
+        "playing": true
+      },
+      "step": [
+        "clock",
+        "1500"
+      ]
+    },
+    {
+      "slots": {
+        "accent": false,
+        "bpm": 122,
+        "playing": true
+      },
+      "step": [
+        "key",
+        "Escape"
+      ]
+    },
+    {
+      "slots": {
+        "accent": false,
+        "bpm": 122,
+        "playing": true
+      },
+      "step": [
+        "clock",
+        "1500"
+      ]
+    },
+    {
+      "slots": {
+        "accent": false,
+        "bpm": 122,
+        "playing": false
+      },
+      "step": [
+        "key",
+        "Enter"
+      ]
+    },
+    {
+      "slots": {
+        "accent": false,
+        "bpm": 122,
+        "playing": false
+      },
+      "step": [
+        "clock",
+        "1000"
+      ]
+    }
+  ],
+  "voices": [
+    {
+      "at": 0.0,
+      "by": "end",
+      "ends": 30.02267573696145,
+      "gain": 1.0,
+      "id": 1,
+      "seq": true,
+      "sound": 0,
+      "src": "assets/click-high.wav"
+    },
+    {
+      "at": 500.0,
+      "by": "end",
+      "ends": 530.0226757369614,
+      "gain": 0.6,
+      "id": 2,
+      "seq": true,
+      "sound": 1,
+      "src": "assets/click-low.wav"
+    },
+    {
+      "at": 1000.0,
+      "by": "end",
+      "ends": 1030.0226757369614,
+      "gain": 0.6,
+      "id": 3,
+      "seq": true,
+      "sound": 1,
+      "src": "assets/click-low.wav"
+    },
+    {
+      "at": 1500.0,
+      "by": "end",
+      "ends": 1530.0226757369614,
+      "gain": 0.6,
+      "id": 4,
+      "seq": true,
+      "sound": 1,
+      "src": "assets/click-low.wav"
+    },
+    {
+      "at": 2000.0,
+      "by": "edit",
+      "ends": 2000.0,
+      "gain": 1.0,
+      "id": 5,
+      "seq": true,
+      "sound": 0,
+      "src": "assets/click-high.wav"
+    },
+    {
+      "at": 2500.0,
+      "by": "edit",
+      "ends": 2500.0,
+      "gain": 0.6,
+      "id": 6,
+      "seq": true,
+      "sound": 1,
+      "src": "assets/click-low.wav"
+    },
+    {
+      "at": 2000.0,
+      "by": "edit",
+      "ends": 2000.0,
+      "gain": 1.0,
+      "id": 7,
+      "seq": true,
+      "sound": 0,
+      "src": "assets/click-high.wav"
+    },
+    {
+      "at": 2495.8677685950415,
+      "by": "edit",
+      "ends": 2495.8677685950415,
+      "gain": 0.6,
+      "id": 8,
+      "seq": true,
+      "sound": 1,
+      "src": "assets/click-low.wav"
+    },
+    {
+      "at": 2991.7355371900826,
+      "by": "edit",
+      "ends": 2991.7355371900826,
+      "gain": 0.6,
+      "id": 9,
+      "seq": true,
+      "sound": 1,
+      "src": "assets/click-low.wav"
+    },
+    {
+      "at": 2000.0,
+      "by": "end",
+      "ends": 2030.0226757369614,
+      "gain": 1.0,
+      "id": 10,
+      "seq": true,
+      "sound": 0,
+      "src": "assets/click-high.wav"
+    },
+    {
+      "at": 2491.8032786885246,
+      "by": "end",
+      "ends": 2521.825954425486,
+      "gain": 0.6,
+      "id": 11,
+      "seq": true,
+      "sound": 1,
+      "src": "assets/click-low.wav"
+    },
+    {
+      "at": 2983.6065573770493,
+      "by": "end",
+      "ends": 3013.6292331140107,
+      "gain": 0.6,
+      "id": 12,
+      "seq": true,
+      "sound": 1,
+      "src": "assets/click-low.wav"
+    },
+    {
+      "at": 3475.4098360655735,
+      "by": "end",
+      "ends": 3505.432511802535,
+      "gain": 0.6,
+      "id": 13,
+      "seq": true,
+      "sound": 1,
+      "src": "assets/click-low.wav"
+    },
+    {
+      "at": 3967.2131147540986,
+      "by": "edit",
+      "ends": 3967.2131147540986,
+      "gain": 1.0,
+      "id": 14,
+      "seq": true,
+      "sound": 0,
+      "src": "assets/click-high.wav"
+    },
+    {
+      "at": 4459.016393442623,
+      "by": "edit",
+      "ends": 4459.016393442623,
+      "gain": 0.6,
+      "id": 15,
+      "seq": true,
+      "sound": 1,
+      "src": "assets/click-low.wav"
+    },
+    {
+      "at": 3967.2131147540986,
+      "by": "end",
+      "ends": 3997.23579049106,
+      "gain": 1.0,
+      "id": 16,
+      "seq": true,
+      "sound": 1,
+      "src": "assets/click-low.wav"
+    },
+    {
+      "at": 4459.016393442623,
+      "by": "end",
+      "ends": 4489.039069179585,
+      "gain": 0.6,
+      "id": 17,
+      "seq": true,
+      "sound": 1,
+      "src": "assets/click-low.wav"
+    },
+    {
+      "at": 4950.819672131147,
+      "by": "end",
+      "ends": 4980.842347868109,
+      "gain": 0.6,
+      "id": 18,
+      "seq": true,
+      "sound": 1,
+      "src": "assets/click-low.wav"
+    },
+    {
+      "at": 5442.622950819672,
+      "by": "cancelled",
+      "ends": 5442.622950819672,
+      "gain": 0.6,
+      "id": 19,
+      "seq": true,
+      "sound": 1,
+      "src": "assets/click-low.wav"
+    },
+    {
+      "at": 5934.426229508197,
+      "by": "cancelled",
+      "ends": 5934.426229508197,
+      "gain": 1.0,
+      "id": 20,
+      "seq": true,
+      "sound": 1,
+      "src": "assets/click-low.wav"
+    }
+  ]
+}
