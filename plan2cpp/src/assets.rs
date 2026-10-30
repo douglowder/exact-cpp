@@ -46,9 +46,17 @@ impl Rows<'_> {
     /// The node's own binding for `row`: its possible values (sizes in 1/16
     /// px), and whether it may also yield nothing (and so inherit).
     fn own(&self, node: usize, row: StyleId) -> Result<Option<(BTreeSet<u32>, bool)>, String> {
-        let n = &self.plan.nodes[node];
+        let n = self
+            .plan
+            .nodes
+            .get(node)
+            .ok_or_else(|| format!("no node {node}"))?;
         for b in n.bindings.start..n.bindings.start + n.bindings.len {
-            let b = &self.plan.bindings[b as usize];
+            let b = self
+                .plan
+                .bindings
+                .get(b as usize)
+                .ok_or_else(|| format!("no binding {b}"))?;
             if b.kind != BindingKind::Style || StyleId::from_bit(u32::from(b.id)) != Some(row) {
                 continue;
             }
@@ -65,7 +73,11 @@ impl Rows<'_> {
     }
 
     fn values(&self, node: usize, row: StyleId, default: u32) -> Result<BTreeSet<u32>, String> {
-        let n = &self.plan.nodes[node];
+        let n = self
+            .plan
+            .nodes
+            .get(node)
+            .ok_or_else(|| format!("no node {node}"))?;
         let parent = n.parent.map(|p| p.0 as usize);
         let arm = n.arm.map(|a| a.0);
         match self.own(node, row)? {
@@ -554,13 +566,16 @@ fn rgb565(p: [u8; 4]) -> u16 {
 fn image_uses(plan: &Plan) -> Result<BTreeMap<String, BTreeSet<(usize, usize)>>, String> {
     let mut out: BTreeMap<String, BTreeSet<(usize, usize)>> = BTreeMap::new();
     let mut free = BTreeSet::new();
-    for n in &plan.nodes {
+    for n in plan.nodes.iter() {
         if NodeType::from_wire(n.node_type) != Some(NodeType::Image) {
             continue;
         }
         let (mut sources, mut w, mut h) = (Vec::new(), None, None);
         for b in n.bindings.start..n.bindings.start + n.bindings.len {
-            let b = &plan.bindings[b as usize];
+            let b = plan
+                .bindings
+                .get(b as usize)
+                .ok_or_else(|| format!("no binding {b}"))?;
             let consts = code::constants(plan, b.expr)?;
             let constant = code::is_constant(plan, b.expr)?;
             let number = match consts.first() {

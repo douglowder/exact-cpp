@@ -474,7 +474,7 @@ pub struct Needs {
 /// A refusal naming a malformed instruction.
 pub fn needs(plan: &Plan) -> Result<Needs, String> {
     let mut keys = false;
-    for n in &plan.nodes {
+    for n in plan.nodes.iter() {
         keys |= NodeType::from_wire(n.node_type) == Some(NodeType::Pressable);
     }
     let mut touch = false;

@@ -109,6 +109,7 @@ dependencies = [
  "exact-motion",
  "exact-num",
  "exact-plan",
+ "exact-route",
  "exact-tamber",
  "icu_locale",
  "serde_json",
@@ -218,6 +219,7 @@ name = "exact-color"
 version = "0.1.0"
 dependencies = [
  "exact-num",
+ "libm",
 ]
 
 [[package]]
@@ -226,6 +228,15 @@ version = "0.1.0"
 dependencies = [
  "serde_json",
  "url",
+]
+
+[[package]]
+name = "exact-js-value"
+version = "0.1.0"
+dependencies = [
+ "exact-num",
+ "exact-plan",
+ "serde_json",
 ]
 
 [[package]]
@@ -283,6 +294,7 @@ version = "0.1.0"
 dependencies = [
  "exact-canvas",
  "exact-grants",
+ "exact-js-value",
  "exact-kernel",
  "exact-motion",
  "exact-num",
@@ -303,6 +315,7 @@ dependencies = [
  "exact-color",
  "exact-motion",
  "exact-num",
+ "serde",
  "serde_json",
 ]
 
