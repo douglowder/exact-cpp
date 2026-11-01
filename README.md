@@ -14,13 +14,14 @@ contract-stopwatch (the M5Stack Stopwatch, an ESP32-S3).
 | Path | What it is |
 | --- | --- |
 | `exact2/` | exact2, as a submodule (the compiler, plan, runner and kernel) |
-| `apps/<app>/app.contract` | The app, in Contract (`level`, `badge`, `metronome`) |
+| `apps/<app>/app.contract` | The app, in Contract (`level`, `badge`, `metronome`, `skull`) |
 | `apps/<app>/cpp/` | The app's C++: the generated `app_gen.cpp` and extension headers, and its glue |
 | `apps/{level,badge}/extensions.json` | The host extensions the app uses, by name and version |
 | `apps/<app>/app.tamber` | The app's colours as design tokens (exact2 LLP 1121), `scheme=fixed` |
 | `apps/level/app.test.contract` | Authored tests (`contract verify`) |
 | `apps/badge/` | The init() badge's pages and modals as routes; `assets/` (fonts, SIL OFL 1.1, and marks; `README.md` has their sources); `fixture/`, a made-up badge the Mac boards and `badge-ref` answer from; `steps.json`, its parity script |
 | `apps/metronome/` | A minimal metronome from exact2's `apps/metronome`: a tempo, Start and Stop, an accented beat 1; one `sequence` plays two clicks (`assets/`, made by `tools/make_clicks.py`) |
+| `apps/skull/` | A Halloween skull: the four frames of an animated GIF as PNGs in `assets/`, 326 x 466 on a black screen, one every 250 ms |
 | `extensions/` | Host extension files (prototype): `attitude.json` (level), `init-badge.json` (badge) |
 | `plan2cpp/` | Compiles a plan to C++ with the app's fonts, PNG images, design tokens and sounds; refuses the rest by name; checks the app's sources against its extensions and writes each extension's C++ base class |
 | `rt/` | The core: values, layout, paint, timers, the transport that plays a `sequence`, the agent; the `Board` interface and its defaults. An Arduino library (`library.properties`) |
@@ -58,7 +59,7 @@ display may draw the screen in bands (`band_rows()`).
 ## On the Mac
 
 ```sh
-make -C mac                        # build/{level,badge,metronome}-{mac,headless}
+make -C mac                        # build/{level,badge,metronome,skull}-{mac,headless}
 make -C mac test                   # sanitizer builds + mac_check.py, badge_check.py, sound_check.py
 make -C mac container              # build/ContractMac and build/apps/*.bundle
 mac/build/ContractMac metronome    # a window: arrows, Return, Escape, the mouse as touch

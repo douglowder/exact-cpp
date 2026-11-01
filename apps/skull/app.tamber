@@ -1,0 +1,6 @@
+// The skull's colours (exact2 LLP 1121): the board has one scheme, so each token is one colour
+// by design (`scheme=fixed`). plan2cpp writes them as the board's token table.
+tamber skull
+
+theme
+  surface.screen = #000000  scheme=fixed
