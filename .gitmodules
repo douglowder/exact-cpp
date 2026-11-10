@@ -1,3 +1,3 @@
-[submodule "exact2"]
-	path = exact2
-	url = https://github.com/ccheever/exact2
+[submodule "exact"]
+	path = exact
+	url = https://github.com/expo/exact

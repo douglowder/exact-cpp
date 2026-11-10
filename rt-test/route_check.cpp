@@ -2,7 +2,7 @@
 // tools/route_corpus.py. Every string argument is hex-encoded UTF-8, so a
 // case may hold any bytes. Commands:
 //   T NAME N            a table of N following rows: R NAME PATTERN PARENT TAB NOTFOUND
-//   canonical S | location_of S | component S | segment S
+//   canonical S | location_of S | fragment_of S | component S | segment S
 //   search URL NAME     searchParam of an entry with that URL
 //   match T LOC | pattern T LOC | chain T LOC | names T
 //   path T NAME [P...]
@@ -49,9 +49,11 @@ std::string params_json(const Params& p) {
   return out + "}";
 }
 
+// As the Rust crate's serde: `fragment` only when it is not empty.
 std::string entry_json(const Entry& e) {
   return "{\"id\":" + std::to_string(e.id) + ",\"name\":" + quote(e.name) + ",\"url\":" + quote(e.url) +
-         ",\"tab\":" + quote(e.tab) + ",\"params\":" + params_json(e.params) + "}";
+         ",\"tab\":" + quote(e.tab) + ",\"params\":" + params_json(e.params) +
+         (e.fragment.empty() ? "" : ",\"fragment\":" + quote(e.fragment)) + "}";
 }
 
 std::string router_json(const Router& r) {
@@ -105,6 +107,8 @@ int main() {
       std::cout << quote(canonical(unhex(a.empty() ? "-" : a[0]))) << "\n";
     } else if (op == "location_of") {
       std::cout << quote(location_of(unhex(a.empty() ? "-" : a[0]))) << "\n";
+    } else if (op == "fragment_of") {
+      std::cout << quote(fragment_of(unhex(a.empty() ? "-" : a[0]))) << "\n";
     } else if (op == "component") {
       std::cout << quote(encode_uri_component(unhex(a.empty() ? "-" : a[0]))) << "\n";
     } else if (op == "search") {

@@ -51,8 +51,13 @@ struct Entry {
   uint64_t id = 0;
   std::string name, url, tab;
   Params params;
+  // What the location that last named this visit had after its `#`,
+  // fragment-encoded (fragment_of); "" when none. Not part of the visit's
+  // identity: `url` is.
+  std::string fragment;
   bool operator==(const Entry& o) const {
-    return id == o.id && name == o.name && url == o.url && tab == o.tab && params == o.params;
+    return id == o.id && name == o.name && url == o.url && tab == o.tab && params == o.params &&
+           fragment == o.fragment;
   }
 };
 
@@ -96,7 +101,10 @@ class Table {
 };
 
 std::string canonical(const std::string& location);
+// A host's incoming URL as a location, its fragment kept.
 std::string location_of(const std::string& href);
+// The browser's `hash` without its `#`, fragment-encoded; "" when none.
+std::string fragment_of(const std::string& location);
 std::string encode_uri_component(const std::string& value);
 // encodeURIComponent, or nullopt for "", "." and "..".
 std::optional<std::string> encode_route_segment(const std::string& value);

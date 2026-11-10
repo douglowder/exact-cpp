@@ -7,8 +7,9 @@ Usage:
 ROUTE_CHECK is rt-test/build/route_check (or its -san build); CORPUS is
 exact2's route/tests/corpus.json, whose expected values come from Chrome and
 the Rust crate. Every record is run except `checks` (the compiler's static
-table rejects, not ported) and `laws` (properties of the same verbs that the
-sequences already pin). Exit 0 when every answer matches.
+table rejects, not ported) and `laws` with their `law_locations` (properties
+of the same verbs that the sequences already pin); `oracle` and `decisions`
+describe the corpus and hold no cases. Exit 0 when every answer matches.
 """
 
 from __future__ import annotations
@@ -69,6 +70,8 @@ def run(c: Check, corpus: dict) -> list[str]:
     for op in ("canonical", "location_of"):
         for case in corpus[op]:
             expect(f"{op} {case['input']!r}", c.ask(f"{op} {hx(case['input'])}"), case["expected"])
+    for case in corpus["fragments"]:
+        expect(f"fragment_of {case['input']!r}", c.ask(f"fragment_of {hx(case['input'])}"), case["expected"])
     for case in corpus["components"]:
         expect(f"component {case['input']!r}", c.ask(f"component {hx(case['input'])}"), case["expected"])
     for case in corpus["search"]:

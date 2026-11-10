@@ -7,10 +7,10 @@ description = "Compiles a Contract plan to app-specific C++ over the contract_rt
 publish = false
 
 [dependencies]
-contract = { path = "../exact2/contract/cli" }
-exact-kernel = { path = "../exact2/kernel" }
-exact-plan = { path = "../exact2/plan" }
-exact-runner = { path = "../exact2/runner" }
+contract = { path = "../exact/contract/cli" }
+exact-kernel = { path = "../exact/kernel" }
+exact-plan = { path = "../exact/plan" }
+exact-runner = { path = "../exact/runner" }
 # The versions exact2 itself locks, for its text and image hosts.
 png = "=0.18.1"
 swash = "=0.2.10"

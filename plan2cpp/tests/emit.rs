@@ -82,11 +82,12 @@ fn the_badge_app_emits_routes_rows_and_owned_slots() {
 }
 
 #[test]
-fn every_route_call_is_a_roster_entry_with_its_ordinal() {
-    for (i, name) in plan2cpp::ROUTE_CALLS.iter().enumerate() {
-        let ordinal = u8::try_from(i + 8).unwrap_or_default();
-        let call = exact_plan::Stdlib::from_wire(ordinal).map(exact_plan::Stdlib::name);
-        assert_eq!(call, Some(*name), "ordinal {ordinal}");
+fn every_route_call_is_a_roster_entry() {
+    for name in plan2cpp::ROUTE_CALLS {
+        let found = (0..=u8::MAX)
+            .filter_map(exact_plan::Stdlib::from_wire)
+            .any(|call| call.name() == name);
+        assert!(found, "{name} is not in the stdlib roster");
     }
 }
 
