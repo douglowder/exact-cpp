@@ -2,9 +2,9 @@
 # ext_check and data_check with AddressSanitizer and UBSan, runs exact2's
 # route corpus through route_check (tools/route_corpus.py), runs ext_check
 # (how the runtime binds host extensions, on the level app's tables), and
-# runs data_check (`data-*` props, on the marks app in marks/). EXACT2 is
-# exact2's checkout.
-EXACT2 ?= ../exact2
+# runs data_check (`data-*` props, on the marks app in marks/). EXACT is
+# Exact's checkout (the `exact` submodule).
+EXACT ?= ../exact
 
 CXX := clang++
 WARN := -Wall -Wextra -Wpedantic -Wshadow -Werror
@@ -38,7 +38,7 @@ build/data_check-san: $(DATA) $(wildcard ../rt/src/*.h ../rt/src/*.hpp) marks/ex
 	$(CXX) $(CXXFLAGS) -Imarks $(SAN) $(DATA) -o $@
 
 test: build/route_check-san build/ext_check-san build/data_check-san
-	python3 -I ../tools/route_corpus.py build/route_check-san $(EXACT2)/route/tests/corpus.json
+	python3 -I ../tools/route_corpus.py build/route_check-san $(EXACT)/route/tests/corpus.json
 	build/ext_check-san
 	build/data_check-san
 

@@ -6,8 +6,8 @@ rust-version = "1.97"
 description = "The level app's data source: a filtered IMU attitude, announced on the `attitude` topic"
 
 [dependencies]
-exact-plan = { path = "../exact2/plan" }
-exact-runner = { path = "../exact2/runner" }
+exact-plan = { path = "../exact/plan" }
+exact-runner = { path = "../exact/runner" }
 
 [lints.clippy]
 pedantic = { level = "warn", priority = -1 }

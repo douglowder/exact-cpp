@@ -1,6 +1,6 @@
 // The router at the plan seam (the runner's runner/router.rs): the routes
 // slot holds a positional Router{tab, tabs, next} with Tab{name, stack} and
-// Entry{id, name, url, tab, params}, Params in the table's first-declaration
+// Entry{id, name, url, tab, params, fragment}, Params in the table's first-declaration
 // order. A verb on a value that is not a valid router traps; a refused verb
 // returns its input and is journaled once per commit.
 #include <algorithm>
@@ -16,6 +16,7 @@ namespace {
 enum Fn : uint8_t {
   kOpen = 8, kPush, kReplace, kBack, kSelect, kGo, kStack, kTop, kDepth, kParams, kSearchParam,
   kEncodeUriComponent, kEncodeRouteSegment,
+  kFragment = 60,
 };
 
 const char* verb_name(uint8_t fn) {
@@ -52,7 +53,7 @@ V Runtime::entry_value(const route::Entry& e) const {
     params.push_back(V::str(v ? *v : ""));
   }
   return V::record({V::num(static_cast<double>(e.id)), V::str(e.name), V::str(e.url), V::str(e.tab),
-                    V::record(std::move(params))});
+                    V::record(std::move(params)), V::str(e.fragment)});
 }
 
 V Runtime::router_value(const route::Router& r) const {
@@ -68,12 +69,12 @@ V Runtime::router_value(const route::Router& r) const {
 route::Entry Runtime::entry_of_value(const V& v, bool* ok) const {
   route::Entry e;
   *ok = false;
-  if (v.k != V::K::Rec || v.size() != 5) return e;
+  if (v.k != V::K::Rec || v.size() != 6) return e;
   const V& params = (*v.rec)[4];
   const std::vector<std::string>& names = table_->param_names();
   if (params.k != V::K::Rec || params.size() != names.size()) return e;
   if (!integer((*v.rec)[0], e.id) || !text((*v.rec)[1], e.name) || !text((*v.rec)[2], e.url) ||
-      !text((*v.rec)[3], e.tab)) {
+      !text((*v.rec)[3], e.tab) || !text((*v.rec)[5], e.fragment)) {
     return e;
   }
   for (size_t i = 0; i < names.size(); ++i) {
@@ -144,6 +145,15 @@ V Runtime::call(uint8_t fn, const V* args, int argc) {
       return V();
     }
     return V::str(route::search_param(e, args[1].s));
+  }
+  if (fn == kFragment) {
+    bool ok = false;
+    route::Entry e = entry_of_value(args[0], &ok);
+    if (!ok) {
+      trap("fragment of a value that is not an entry");
+      return V();
+    }
+    return V::str(e.fragment);
   }
   route::Router r;
   if (!router_of(args[0], r)) {

@@ -13,7 +13,7 @@ contract-stopwatch (the M5Stack Stopwatch, an ESP32-S3).
 
 | Path | What it is |
 | --- | --- |
-| `exact2/` | exact2, as a submodule (the compiler, plan, runner and kernel) |
+| `exact/` | Exact ([expo/exact](https://github.com/expo/exact)), as a submodule (the compiler, plan, runner and kernel) |
 | `apps/<app>/app.contract` | The app, in Contract (`level`, `badge`, `metronome`, `skull`) |
 | `apps/<app>/cpp/` | The app's C++: the generated `app_gen.cpp` and extension headers, and its glue |
 | `apps/{level,badge}/extensions.json` | The host extensions the app uses, by name and version |
@@ -87,7 +87,7 @@ cargo run -p sound-ref -- apps/metronome/app.contract apps/metronome/steps.json 
 ```
 
 `contract verify apps/level/app.contract` checks the runner against the Lean semantics. Build
-the CLI with `cargo build --release -p contract --bin contract --manifest-path exact2/Cargo.toml`;
+the CLI with `cargo build --release -p contract --bin contract --manifest-path exact/Cargo.toml`;
 it needs Lean (`elan default leanprover/lean4:v4.34.1`).
 
 ## Host extensions (prototype)

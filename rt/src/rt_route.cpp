@@ -63,6 +63,12 @@ bool query_escape(unsigned char b) {
   return b < 0x21 || b > 0x7e || b == '"' || b == '#' || b == '<' || b == '>' || b == '\'';
 }
 
+// WHATWG URL's fragment percent-encode set: C0 controls, space, `"`, `<`,
+// `>`, `` ` `` and every non-ASCII byte.
+bool fragment_escape(unsigned char b) {
+  return b < 0x21 || b > 0x7e || b == '"' || b == '<' || b == '>' || b == '`';
+}
+
 // Trims bytes up to ' ' at both ends (every char <= ' ' is one ASCII byte),
 // then drops tab, LF, and CR.
 std::string clean(const std::string& input) {
@@ -198,7 +204,7 @@ const char* const kNoSelected = "router has no selected stack";
 // A visit id; false when the ids would pass 2^53 - 1.
 bool mint(uint64_t& next, Destination d, Entry& out) {
   if (next >= (uint64_t{1} << 53) - 1) return false;
-  out = Entry{next, std::move(d.name), std::move(d.url), std::move(d.tab), std::move(d.params)};
+  out = Entry{next, std::move(d.name), std::move(d.url), std::move(d.tab), std::move(d.params), ""};
   ++next;
   return true;
 }
@@ -236,17 +242,28 @@ std::string canonical(const std::string& location) {
   return path_query(clean(starts_with(location, "/") ? location : "/" + location));
 }
 
+std::string fragment_of(const std::string& location) {
+  const std::string input = clean(location);
+  const size_t hash = input.find('#');
+  return hash == std::string::npos ? std::string() : encode(input.substr(hash + 1), fragment_escape);
+}
+
 std::string location_of(const std::string& href) {
-  std::string input = clean(href);
+  const std::string input = clean(href);
+  std::string location;
   auto s = scheme(input);
-  if (!s) return canonical(input);
-  const std::string name = lower(s->first);
-  const std::string& after = s->second;
-  if (name != "http" && name != "https") {
-    return path_query("/" + (starts_with(after, "//") ? after.substr(2) : after));
+  if (!s) {
+    location = canonical(input);
+  } else if (lower(s->first) != "http" && lower(s->first) != "https") {
+    const std::string& after = s->second;
+    location = path_query("/" + (starts_with(after, "//") ? after.substr(2) : after));
+  } else {
+    const std::string& after = s->second;
+    size_t a = after.find_first_not_of("/\\");
+    location = path_query(without_authority(a == std::string::npos ? std::string() : after.substr(a)));
   }
-  size_t a = after.find_first_not_of("/\\");
-  return path_query(without_authority(a == std::string::npos ? std::string() : after.substr(a)));
+  const std::string fragment = fragment_of(input);
+  return fragment.empty() ? location : location + "#" + fragment;
 }
 
 std::string encode_uri_component(const std::string& value) {
@@ -515,17 +532,20 @@ Result open(const Table& t, const Router& r, const std::string& location) {
     }
   }
   if (index == out.tabs.size()) return refuse(r, "unknown tab " + target);
+  // Same URL at the same position keeps its id and, above the leaf, its
+  // fragment; the leaf takes the location's.
   std::vector<Entry> entries;
   for (size_t position = 0; position < chain.size(); ++position) {
     Destination& d = chain[position];
     const std::vector<Entry>& old = out.tabs[index].stack;
+    Entry e;
     if (position < old.size() && old[position].url == d.url) {
-      entries.push_back(Entry{old[position].id, d.name, d.url, d.tab, d.params});
-    } else {
-      Entry e;
-      if (!mint(out.next, d, e)) return refuse(r, kExhausted);
-      entries.push_back(std::move(e));
+      e = Entry{old[position].id, d.name, d.url, d.tab, d.params, old[position].fragment};
+    } else if (!mint(out.next, d, e)) {
+      return refuse(r, kExhausted);
     }
+    if (position + 1 == chain.size()) e.fragment = fragment_of(location);
+    entries.push_back(std::move(e));
   }
   out.tabs[index].stack = std::move(entries);
   out.tab = target;
@@ -538,11 +558,20 @@ Result push(const Table& t, const Router& r, const std::string& location) {
   if (!d) return refuse(r, no_match(location));
   std::optional<size_t> index = selected(r);
   if (!index) return refuse(r, kNoSelected);
+  const std::string fragment = fragment_of(location);
+  // A push of the location already on top is no new visit; a new fragment
+  // changes that visit in place.
   const std::vector<Entry>& s = r.tabs[*index].stack;
-  if (!s.empty() && s.back().url == d->url) return Result{r, std::nullopt};
+  if (!s.empty() && s.back().url == d->url) {
+    if (s.back().fragment == fragment) return Result{r, std::nullopt};
+    Router out = r;
+    out.tabs[*index].stack.back().fragment = fragment;
+    return Result{std::move(out), std::nullopt};
+  }
   Router out = r;
   Entry e;
   if (!mint(out.next, *d, e)) return refuse(r, kExhausted);
+  e.fragment = fragment;
   out.tabs[*index].stack.push_back(std::move(e));
   return Result{std::move(out), std::nullopt};
 }
@@ -559,7 +588,7 @@ Result replace(const Table& t, const Router& r, const std::string& location) {
   Router out = r;
   if (out.tabs[*index].stack.empty()) return refuse(r, "router has no top");
   Entry& old = out.tabs[*index].stack.back();
-  old = Entry{old.id, d->name, d->url, d->tab, d->params};
+  old = Entry{old.id, d->name, d->url, d->tab, d->params, fragment_of(location)};
   return Result{std::move(out), std::nullopt};
 }
 
@@ -586,19 +615,33 @@ Result select(const Table&, const Router& r, const std::string& name) {
   return Result{std::move(out), std::nullopt};
 }
 
+// The top takes the location's fragment; a visit popped to or selected on
+// another tab takes it only when the location has one, so a location without
+// one returns to the visit as it was.
 Result go(const Table& t, const Router& r, const std::string& location) {
   const std::string url = canonical(location);
   if (!t.match_index(url)) return refuse(r, no_match(location));
+  const std::string fragment = fragment_of(location);
   const std::vector<Entry>& s = stack(r);
   for (size_t k = s.size(); k-- > 0;) {
     if (s[k].url == url) {
       Router out = r;
-      if (std::optional<size_t> index = selected(out)) out.tabs[*index].stack.resize(k + 1);
+      if (std::optional<size_t> index = selected(out)) {
+        std::vector<Entry>& stack = out.tabs[*index].stack;
+        if (k + 1 == stack.size() || !fragment.empty()) stack[k].fragment = fragment;
+        stack.resize(k + 1);
+      }
       return Result{std::move(out), std::nullopt};
     }
   }
-  for (const Tab& tab : r.tabs) {
-    if (tab.name != r.tab && !tab.stack.empty() && tab.stack.back().url == url) return select(t, r, tab.name);
+  for (size_t i = 0; i < r.tabs.size(); ++i) {
+    const Tab& tab = r.tabs[i];
+    if (tab.name != r.tab && !tab.stack.empty() && tab.stack.back().url == url) {
+      if (fragment.empty()) return select(t, r, tab.name);
+      Router out = r;
+      out.tabs[i].stack.back().fragment = fragment;
+      return select(t, out, tab.name);
+    }
   }
   return push(t, r, location);
 }

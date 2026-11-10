@@ -7,10 +7,10 @@ description = "Runs a script of an app that plays sounds on exact2's runner: the
 publish = false
 
 [dependencies]
-contract = { path = "../exact2/contract/cli" }
-exact-kernel = { path = "../exact2/kernel" }
-exact-plan = { path = "../exact2/plan" }
-exact-runner = { path = "../exact2/runner" }
+contract = { path = "../exact/contract/cli" }
+exact-kernel = { path = "../exact/kernel" }
+exact-plan = { path = "../exact/plan" }
+exact-runner = { path = "../exact/runner" }
 serde_json = "=1.0.151"
 
 [lints.clippy]

@@ -67,8 +67,9 @@ fn number(n: f64) -> Result<String, String> {
 }
 
 /// The router standard functions (LLP 1038 §3): `open` … `encodeRouteSegment`,
-/// in roster order. The runtime runs them on the plan's positional Router.
-pub const ROUTE_CALLS: [&str; 13] = [
+/// in roster order, then `fragment` (LLP 1153 D5). The runtime runs them on
+/// the plan's positional Router.
+pub const ROUTE_CALLS: [&str; 14] = [
     "open",
     "push",
     "replace",
@@ -82,6 +83,7 @@ pub const ROUTE_CALLS: [&str; 13] = [
     "searchParam",
     "encodeURIComponent",
     "encodeRouteSegment",
+    "fragment",
 ];
 
 /// How the C++ target runs a stdlib call: a pure runtime function, a route
