@@ -1,4 +1,4 @@
-# Apps on the Mac boards. `make` builds, for each app (level, badge, metronome, skull),
+# Apps on the Mac boards. `make` builds, for each app (level, badge, metronome),
 # build/APP-mac (with a display) and build/APP-headless (no display); `make
 # check` builds them with AddressSanitizer and UBSan (-san); `make test` runs
 # tools/mac_check.py on the level app against the recorded board run,
@@ -41,8 +41,7 @@ BADGE := ../apps/badge/cpp
 APP_level := $(LEVEL)/app_gen.cpp $(LEVEL)/level_glue.cpp level_app.cpp
 APP_badge := $(BADGE)/app_gen.cpp $(BADGE)/badge_data.cpp $(BADGE)/sha256.cpp badge_app.cpp
 APP_metronome := ../apps/metronome/cpp/app_gen.cpp metronome_app.cpp
-APP_skull := ../apps/skull/cpp/app_gen.cpp skull_app.cpp
-APPS := level badge metronome skull
+APPS := level badge metronome
 
 # $(1): app; $(2): program (mac or headless); $(3): its main file.
 define program

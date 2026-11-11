@@ -7,21 +7,52 @@ a board interface, `rt::Board`. No Rust runs on a board.
 This repo has the parts that know no board: `plan2cpp`, the core, the Mac boards, the Mac
 container, the apps and their references on Exact's runner. Each hardware target is its own
 repo, with its board and sketches, and has this repo as a submodule. The first one is
-exact-esp32-stopwatch (the M5Stack Stopwatch, an ESP32-S3).
+[exact-esp32-stopwatch](https://github.com/douglowder/exact-esp32-stopwatch) (the M5Stack
+Stopwatch, an ESP32-S3).
+
+Comments and docs cite Exact's rules by LLP number, such as LLP 1121. LLP numbers refer to
+Exact's design records, which are not public.
+
+## Requirements
+
+Tested on macOS 26 on Apple silicon.
+
+| Item | Version | Used for |
+| --- | --- | --- |
+| Xcode Command Line Tools (`xcode-select --install`) | Apple clang | The Mac boards and programs (`mac/`, `rt-test/`) |
+| [rustup](https://rustup.rs) | Rust 1.97.0, from `rust-toolchain.toml` | `plan2cpp` and the references on Exact's runner |
+| [arduino-cli](https://arduino.github.io/arduino-cli/) (`brew install arduino-cli`) and M5GFX | M5GFX 0.2.26 | The FreeSans faces the Mac boards draw with |
+| Python 3 | standard library only | The checks and the agent tools in `tools/` |
+
+Install M5GFX once:
+
+```sh
+arduino-cli lib install M5GFX@0.2.26
+```
+
+To build for the Stopwatch, use exact-esp32-stopwatch, which has this repo as a submodule.
+
+## Get the code
+
+```sh
+git clone --recursive https://github.com/douglowder/exact-cpp.git
+cd exact-cpp
+```
+
+In a clone made without `--recursive`, run `git submodule update --init --recursive`.
 
 ## Layout
 
 | Path | What it is |
 | --- | --- |
 | `exact/` | Exact ([expo/exact](https://github.com/expo/exact)), as a submodule (the compiler, plan, runner and kernel) |
-| `apps/<app>/app.contract` | The app's Exact source (`level`, `badge`, `metronome`, `skull`) |
+| `apps/<app>/app.contract` | The app's Exact source (`level`, `badge`, `metronome`) |
 | `apps/<app>/cpp/` | The app's C++: the generated `app_gen.cpp` and extension headers, and its glue |
 | `apps/{level,badge}/extensions.json` | The host extensions the app uses, by name and version |
 | `apps/<app>/app.tamber` | The app's colours as design tokens (Exact LLP 1121), `scheme=fixed` |
 | `apps/level/app.test.contract` | Authored tests (`contract verify`) |
 | `apps/badge/` | The init() badge's pages and modals as routes; `assets/` (fonts, SIL OFL 1.1, and marks; `README.md` has their sources); `fixture/`, a made-up badge the Mac boards and `badge-ref` answer from; `steps.json`, its parity script |
 | `apps/metronome/` | A minimal metronome from Exact's `apps/metronome`: a tempo, Start and Stop, an accented beat 1; one `sequence` plays two clicks (`assets/`, made by `tools/make_clicks.py`) |
-| `apps/skull/` | A Halloween skull: the four frames of an animated GIF as PNGs in `assets/`, 326 x 466 on a black screen, one every 250 ms |
 | `extensions/` | Host extension files (prototype): `attitude.json` (level), `init-badge.json` (badge) |
 | `plan2cpp/` | Compiles a plan to C++ with the app's fonts, PNG images, design tokens and sounds; refuses the rest by name; checks the app's sources against its extensions and writes each extension's C++ base class |
 | `rt/` | The core: values, layout, paint, timers, the transport that plays a `sequence`, the agent; the `Board` interface and its defaults. An Arduino library (`library.properties`) |
@@ -59,7 +90,7 @@ display may draw the screen in bands (`band_rows()`).
 ## On the Mac
 
 ```sh
-make -C mac                        # build/{level,badge,metronome,skull}-{mac,headless}
+make -C mac                        # build/{level,badge,metronome}-{mac,headless}
 make -C mac test                   # sanitizer builds + mac_check.py, badge_check.py, sound_check.py
 make -C mac container              # build/ExactMac and build/apps/*.bundle
 mac/build/ExactMac metronome    # a window: arrows, Return, Escape, the mouse as touch
@@ -99,3 +130,7 @@ type, and a send with another argument count, and records each extension's name,
 SHA-256. `ext` writes a C++ base class with a typed method for each source, op and prop. At
 boot the host writes `CE_WARN missing=extension:<name>` for each listed extension the board
 does not give.
+
+## License
+
+MIT, the same as [Exact](https://github.com/expo/exact). See [LICENSE](LICENSE). The badge app's fonts are under the SIL Open Font License 1.1 (`apps/badge/assets/README.md`).
