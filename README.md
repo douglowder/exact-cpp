@@ -152,6 +152,84 @@ values. While its source gives no answer it shows its placeholder (`else source(
 item of a list (`for`) is refused. At boot the host writes `CE_WARN missing=extension:<name>` for each listed extension
 the board does not give.
 
+## Not supported yet
+
+exact-cpp runs a subset of what Exact's runner runs. plan2cpp refuses, by name, the first
+construct of an app outside it, so `plan2cpp emit` on an app says what stops it first. A few
+things compile and behave differently from Exact's runner; they are listed below too.
+
+### Refused by plan2cpp
+
+- Code: optional unwrapping and indexing, `map` and `filter` on lists, refreshing a resource,
+  and the pending and failed states of resources and mutations (the opcodes `LoadBound`,
+  `JumpIfNone`, `Unwrap`, `LoadIndex`, `Map`, `Filter`, `Refresh`, `PendingResource`,
+  `PendingMutation`, `FailedResource`, `FailureResource`, `FailedMutation` and
+  `FailureMutation`).
+- Standard functions other than `toFixed`, `max`, `min`, `floor`, `ceil`, `round`, `toString`,
+  `performanceNow` and the route functions (`open`, `push`, `replace`, `back`, `select`, `go`,
+  `stack`, `top`, `depth`, `params`, `searchParam`, `encodeURIComponent`, `encodeRouteSegment`,
+  `fragment`). Among those refused: `length`, `isEmpty`, `includes`, `join`, `split`, `slice`,
+  `trim`, `formatTime`, `formatDate`, `formatNumber`, `parseNumber`, `sin`, `cos`, `sum`,
+  `sortBy`, `range` and `t`.
+- Regions: `match`, and a `for` region with more than one arm. A late child slot.
+- Tasks that are gated (`when`), keyed or run per frame; plain intervals and `once` run.
+- Mutations that refresh resources, run `then`, or queue. Resources asked once for each item of
+  a list (`for … in`). A routes slot other than slot 0.
+- Node types other than `View`, `Text`, `Pressable` and `Image`: `ScrollView`, `List`,
+  `TextInput`, `Control`, `NativeView`, `Canvas`, `WebView`, `Video`, `Head`, and every SVG
+  node.
+- Events other than `press`, `key`, `navigate`, `pan` and `panrelease`: among them `change`,
+  `input`, `submit`, `focus`, `blur`, `scroll`, `hover`, `pointerdown`, `pointerup`,
+  `pointermove`, the media events and the drag events.
+- Style rows other than `width`, `height`, `padding` and `margin` (each side), `display`,
+  `flex-direction`, `justify-content`, `align-items`, `row-gap`, `column-gap`, `position`, `top`,
+  `right`, `bottom`, `left`, `box-sizing`, `border-width`, `border-style`, `border-color` and
+  `border-radius` (each side or corner), `background-color`, `color`, `font-size`,
+  `font-weight`, `font-family`, `line-height`, `text-align`, `white-space`, `text-overflow`,
+  `overflow`, `object-fit`, `opacity`, `appearance` and `animation`. Among those refused:
+  `flex-grow`, `flex-shrink`, `flex-wrap`, `min-width`, `max-width`, the grid rows,
+  `transform`, `scale`, `rotate`, `box-shadow`, `transition`, `z-index`, and the SVG rows.
+- Props other than the text, image source, `testId`, `id`, `autofocus`, the navigation props
+  (`navigationKey`, `navigationBack`, `navigationPresentation`), `closedby`, `data-*`, and the
+  accessibility role and controls; the other accessibility props, such as `aria-label`, are kept
+  and not used.
+- Animations of a property other than opacity, `color`, `background-color`, the border colors
+  and `translate` (so `scale` and `rotate` too), and keyframe colors in OKLab.
+- Canvas surfaces, icon tokens (`symbol:`), localized texts (`t`), color profiles
+  (`@color-profile`), and app axes (`app.tamber` `axes`, `setMode`).
+- Design tokens that vary by color scheme, role overrides, and tokens that are not colors.
+- Images and fonts outside the app's `assets/`.
+- Sound: more than one `sequence`, a sequence with no `when` gate, a keyed one, one with
+  `ended=`, `from=`, `countIn=`, `clock=` or `clockOut=`, and WAV files that are not 16-bit
+  mono.
+
+### Accepted, with different behavior
+
+- Colors: the core reads `#rgb`, `#rrggbb`, `#rrggbbaa`, `transparent` and design tokens. A
+  named color (`red`), `rgb()`, `hsl()` or `light-dark()` in a style row draws as no color.
+- Exact's own sources other than `exactTime` (`exactViewport`, `exactTransport`, `exactMIDI`,
+  `exactPage`, `exactSurface`, `exactDelivery`, `exactActivities` and the activity sends) have
+  no answer on a board, so a resource that reads one shows its type's zero.
+- An `animation` value made at run time from other text is logged once and plays nothing;
+  plan2cpp reads only the plan's string literals.
+- A board has one color scheme at a time (white text on black by default); `light-dark()` does
+  not follow it.
+- Hatches are left out: the node shows as it would on a platform without one.
+
+### Needs a host extension
+
+Every source that is not Exact's own, including those of Exact's `@exact/*` packages (camera,
+geolocation, contacts and the rest) and an app's own data sources, needs a host extension
+written in C++ for each board (see Host extensions). An extension's results are records of
+numbers, strings and bools; a source that answers a list or a nested record cannot be declared
+yet.
+
+### Outside exact-cpp
+
+exact-cpp compiles an app's `app.contract`. Exact's terminal apps (`terminal.contract`), its
+game engine (`game/`), and the widget, Live Activity and watch entries of its apps run on
+Exact's own hosts.
+
 ## License
 
 MIT, the same as [Exact](https://github.com/expo/exact). See [LICENSE](LICENSE). The badge app's fonts are under the SIL Open Font License 1.1 (`apps/badge/assets/README.md`).
