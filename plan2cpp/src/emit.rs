@@ -531,7 +531,15 @@ fn types(plan: &Plan, s: &mut String) {
         .iter()
         .map(|f| format!("{{{}, {}}}", cpp_string(plan.str(f.name)), f.ty.0))
         .collect();
-    let _ = writeln!(s, "const rt::Type kTypes[] = {{{}}};", rows.join(", "));
+    let _ = writeln!(
+        s,
+        "const rt::Type kTypes[] = {{{}}};",
+        if rows.is_empty() {
+            "{rt::Type::K::Other, -1, 0, 0}".into()
+        } else {
+            rows.join(", ")
+        }
+    );
     let _ = writeln!(
         s,
         "const rt::Field kFields[] = {{{}}};",
