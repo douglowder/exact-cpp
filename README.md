@@ -94,13 +94,18 @@ make -C mac                        # build/{level,badge,metronome}-{mac,headless
 make -C mac test                   # sanitizer builds + mac_check.py, badge_check.py, sound_check.py
 make -C mac container              # build/ExactMac and build/apps/*.bundle
 mac/build/ExactMac metronome    # a window: arrows, Return, Escape, the mouse as touch
-make -C rt-test test               # route corpus, extension binding, data-* props
+make -C rt-test test               # route corpus, extensions, data-* props, resources, animations
 mac/build/level-mac --band 32      # prints "PTY /dev/ttysNNN"; drive it with tools/agent.py
 mac/build/badge-headless --watch   # no display; prints each new state as "STATE {…}"
 ```
 
 The Mac boards read the FreeSans faces from the installed M5GFX library (`M5GFX=<path>` to
 override), so text is measured and drawn with the Stopwatch's glyphs.
+
+Where an app sets no color, the screen is black and text is white: the dark scheme, the default
+on every board. ExactMac's Appearance menu switches between Dark (⌘D) and Light (⌘L, black text
+on white) and keeps the choice across apps; the agent's `{"op":"scheme","scheme":"light"}` does
+the same on any board, and `{"op":"scheme"}` reports it.
 
 `mac_check.py` requires the Mac's level app state after each step to equal the recorded board
 run, and its screenshots to equal the board's pixel for pixel, with 466-, 32-, 7- and 1-row

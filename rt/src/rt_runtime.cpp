@@ -347,6 +347,14 @@ void Runtime::run(uint16_t action, const V* params, Scope* scope) {
   if (!sends.empty()) settle();
 }
 
+void Runtime::set_scheme(Scheme scheme) {
+  if (scheme == scheme_) return;
+  scheme_ = scheme;
+  if (!view_) return;
+  view_->repaint_all();
+  settle();
+}
+
 void Runtime::refresh(uint16_t resource) {
   V next = answer(resource);
   if (equal(next, resources_[resource])) return;
@@ -832,6 +840,13 @@ std::string Runtime::agent(const std::string& line) {
   }
   if (op == "stats") return stats_json();
   if (op == "sounds") return transport_->json();
+  if (op == "scheme") {
+    const std::string want = string_field(line, "scheme");
+    if (want == "dark") set_scheme(Scheme::Dark);
+    else if (want == "light") set_scheme(Scheme::Light);
+    else if (!want.empty()) return "{\"error\":\"scheme is \\\"dark\\\" or \\\"light\\\"\"}";
+    return scheme_ == Scheme::Dark ? "{\"scheme\":\"dark\"}" : "{\"scheme\":\"light\"}";
+  }
   if (op == "clock") {
     return advance(number_field(line, "ms")) ? "{\"ok\":true}" : "{\"error\":\"this board's clock is real\"}";
   }

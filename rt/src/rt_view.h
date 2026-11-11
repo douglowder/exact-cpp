@@ -112,6 +112,8 @@ class View {
   // Applies each running animation at `now_ms` (the runtime's clock) over its
   // node's own style rows.
   void animate(double now_ms);
+  // Paints the whole screen at the next present.
+  void repaint_all() { first_ = true; }
   // Paints what changed since the last call and pushes it; returns pixels painted.
   int64_t present(int64_t& paint_us, int64_t& push_us);
   const std::vector<std::pair<int, Rect>>& hits() const { return hits_; }

@@ -626,6 +626,10 @@ struct Stats {
 class View;
 class Transport;
 
+// The screen and the text color where the app sets none: dark (the default)
+// is white text on black, light is black text on white.
+enum class Scheme : uint8_t { Dark, Light };
+
 class Runtime {
  public:
   // Binds each extension the app lists to the one in `extensions` with its
@@ -659,6 +663,9 @@ class Runtime {
   bool navigate(const std::string& location);
   // Agent ops: one JSON answer per request line.
   std::string agent(const std::string& line);
+  // Sets the color scheme and repaints the whole screen.
+  void set_scheme(Scheme scheme);
+  Scheme scheme() const { return scheme_; }
   // What the app needs that the board lacks: "display", "keys", "touch",
   // "command:<name>", and "extension:<name>" (none with its name and
   // version). The agent's `stats` lists them under "missing".
@@ -752,6 +759,7 @@ class Runtime {
   std::string focus_key_;  // the focused instance's key, kept across updates
   std::vector<std::string> shown_;  // instance keys after the last update
   int focus_ = -1;
+  Scheme scheme_ = Scheme::Dark;
   bool prevented_ = false;
   bool trapped_ = false;
   int64_t input_at_us_ = -1;
