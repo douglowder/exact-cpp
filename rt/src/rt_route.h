@@ -1,4 +1,4 @@
-// contract-rt routes: a C++ port of exact2's `exact-route` crate (route/src,
+// exact-rt routes: a C++ port of Exact's `exact-route` crate (route/src,
 // LLP 1038 §3): canonical locations, matching, a deep link's chain, the six
 // verbs, and the reads. It must give the same bytes as the Rust crate:
 // tools/route_corpus.py runs route/tests/corpus.json against it. The static

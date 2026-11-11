@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""The C++ route port (rt/src/rt_route.cpp) against exact2's route corpus.
+"""The C++ route port (rt/src/rt_route.cpp) against Exact's route corpus.
 
 Usage:
   route_corpus.py ROUTE_CHECK CORPUS.json
 
 ROUTE_CHECK is rt-test/build/route_check (or its -san build); CORPUS is
-exact2's route/tests/corpus.json, whose expected values come from Chrome and
+Exact's route/tests/corpus.json, whose expected values come from Chrome and
 the Rust crate. Every record is run except `checks` (the compiler's static
 table rejects, not ported) and `laws` with their `law_locations` (properties
 of the same verbs that the sequences already pin); `oracle` and `decisions`

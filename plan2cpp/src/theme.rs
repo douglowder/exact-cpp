@@ -1,4 +1,4 @@
-//! The app's design tokens (`app.tamber`, exact2 LLP 1121) as a table the runtime looks a
+//! The app's design tokens (`app.tamber`, Exact LLP 1121) as a table the runtime looks a
 //! colour up in by name. A row names a token by its name, as a literal or as a value made
 //! at run time, so the board resolves the name where it parses a colour (`rt_view.cpp`
 //! `parse_color`). The board has one scheme: it takes a token that is one colour, written as

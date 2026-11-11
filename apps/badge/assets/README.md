@@ -8,7 +8,7 @@ board stores only the sizes the app uses.
 ## Fonts (`fonts/`)
 
 The badge firmware has only converted LVGL bitmap subsets of these fonts
-(`firmware/factory_badge/main/ui/font_*.c`). Contract declares a font from a TTF
+(`firmware/factory_badge/main/ui/font_*.c`). Exact declares a font from a TTF
 or OTF file, so these are the upstream files those subsets were made from,
 downloaded from the pinned sources in the firmware's
 `firmware/factory_badge/main/ui/fonts/README.md`, with the same SHA-256 checksums.

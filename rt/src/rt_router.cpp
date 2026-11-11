@@ -6,13 +6,13 @@
 #include <algorithm>
 #include <cmath>
 
-#include "contract_rt.h"
+#include "exact_rt.h"
 
 namespace rt {
 
 namespace {
 
-// Stdlib ordinals (exact2 plan/tables/format.json roster order).
+// Stdlib ordinals (Exact plan/tables/format.json roster order).
 enum Fn : uint8_t {
   kOpen = 8, kPush, kReplace, kBack, kSelect, kGo, kStack, kTop, kDepth, kParams, kSearchParam,
   kEncodeUriComponent, kEncodeRouteSegment,

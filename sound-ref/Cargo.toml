@@ -3,7 +3,7 @@ name = "sound-ref"
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.97"
-description = "Runs a script of an app that plays sounds on exact2's runner: the reference for the C++ target's voices"
+description = "Runs a script of an app that plays sounds on Exact's runner: the reference for the C++ target's voices"
 publish = false
 
 [dependencies]

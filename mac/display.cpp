@@ -1,5 +1,5 @@
 // An app on the Mac board (with a display): the same generated app_gen.cpp,
-// the same contract_rt core, and the same app glue as the Stopwatch firmware.
+// the same exact_rt core, and the same app glue as the Stopwatch firmware.
 // Built once per app (level-mac, badge-mac). It prints the pseudo-terminal it
 // serves, then runs until interrupted; drive it with tools/agent.py or
 // tools/compare.py as if it were the board.
@@ -19,8 +19,8 @@
 #include <string>
 
 #include "app_glue.h"
-#include "contract_rt.h"
-#include "contract_rt_mac.h"
+#include "exact_rt.h"
+#include "exact_rt_mac.h"
 #include "speaker_mac.hpp"
 
 namespace {

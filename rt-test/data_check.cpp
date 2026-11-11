@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-#include "contract_rt.h"
+#include "exact_rt.h"
 #include "ext_marks.h"
 
 namespace app {
@@ -48,7 +48,7 @@ std::string list(const std::vector<rt::Mark>& marks) {
   return out;
 }
 
-// The runner's NativeProps rules (exact2 runner/src/stdlib.rs): every value a
+// The runner's NativeProps rules (Exact runner/src/stdlib.rs): every value a
 // string, a number as JavaScript prints it, none left out, JSON escaping.
 void check_native_props() {
   const rt::V pairs[] = {

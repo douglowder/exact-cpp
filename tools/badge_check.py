@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""The badge app on the Mac boards against exact2's runner.
+"""The badge app on the Mac boards against Exact's runner.
 
 Usage:
   badge_check.py BADGE_MAC BADGE_HEADLESS RUNNER_RUN.json OUT_DIR
 
-RUNNER_RUN.json is badge-ref's run of apps/badge/steps.json on exact2's
+RUNNER_RUN.json is badge-ref's run of apps/badge/steps.json on Exact's
 runner (`cargo run -p badge-ref -- apps/badge/app.contract
 apps/badge/steps.json apps/badge/fixture/data.json`). Every host starts on the
 fixture's clock (`--clock`), and its `init-badge` extension answers from the fixture.

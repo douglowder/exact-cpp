@@ -1,4 +1,4 @@
-// The badge app's colours, those of the init() badge firmware (exact2 LLP 1121): the board
+// The badge app's colours, those of the init() badge firmware (Exact LLP 1121): the board
 // has one scheme, so each token is one colour by design (`scheme=fixed`). plan2cpp writes
 // them as the board's token table.
 tamber badge

@@ -1,4 +1,4 @@
-// The transport (exact2 LLP 1125 D2–D4, `runner/src/transport.rs`): a gated `sequence`'s
+// The transport (Exact LLP 1125 D2–D4, `runner/src/transport.rs`): a gated `sequence`'s
 // `play(tracks, bpm=)` expanded into the app's sounds on the transport's own clock, up to a
 // second ahead, so no action runs per beat. The board's speaker starts each voice at its
 // time. The subset is plan2cpp's (`sound.rs`): one gated, unkeyed sequence with no count-in,
@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-#include "contract_rt.h"
+#include "exact_rt.h"
 
 namespace rt {
 

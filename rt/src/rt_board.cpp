@@ -1,7 +1,7 @@
 // The defaults of the board interface: what a board leaves out. The shapes
 // are rt_shapes.h's, made of `fill_rect` spans, so a board that draws only
 // rectangles matches the Stopwatch's pixels.
-#include "contract_rt.h"
+#include "exact_rt.h"
 #include "rt_shapes.h"
 
 namespace rt {

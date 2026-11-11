@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""An app's sounds on the headless Mac board against exact2's runner.
+"""An app's sounds on the headless Mac board against Exact's runner.
 
 Usage:
   sound_check.py APP_HEADLESS RUNNER_RUN.json
 
-RUNNER_RUN.json is sound-ref's run of an app's steps on exact2's runner (`cargo run -p
+RUNNER_RUN.json is sound-ref's run of an app's steps on Exact's runner (`cargo run -p
 sound-ref -- apps/metronome/app.contract apps/metronome/steps.json metronome`). The board
 runs on its manual clock (`--manual-clock`), which starts at 0 as the runner's does and moves
 only by the agent's `clock` op. The check:

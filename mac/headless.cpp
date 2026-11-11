@@ -1,5 +1,5 @@
 // An app on the headless Mac board: the same generated app_gen.cpp,
-// contract_rt core, and app glue, with no display. Built once per app
+// exact_rt core, and app glue, with no display. Built once per app
 // (level-headless, badge-headless). The app's state, keys, taps by testId,
 // routes, timers, and the agent work; touch and screenshots do not. It
 // prints the pseudo-terminal it serves, a MISSING line for each part the app
@@ -26,8 +26,8 @@
 #include <string>
 
 #include "app_glue.h"
-#include "contract_rt.h"
-#include "contract_rt_mac.h"
+#include "exact_rt.h"
+#include "exact_rt_mac.h"
 
 namespace {
 

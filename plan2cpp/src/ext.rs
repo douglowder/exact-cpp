@@ -1,12 +1,12 @@
-//! Host extensions: a prototype of the extension feature the RFC asks exact2
-//! for, built outside exact2. An extension file (`extensions/<name>.json`)
+//! Host extensions: a prototype of the extension feature the RFC asks Exact
+//! for, built outside Exact. An extension file (`extensions/<name>.json`)
 //! declares the sources an app may read or send to, with their parameter and
 //! result types, and the agent ops the extension adds. An app lists the
 //! extensions it uses in `extensions.json` next to its `app.contract`, by
 //! name and version, never by path.
 //!
 //! An extension may also declare props: `data-*` words (LLP 1075.003 §3.3)
-//! the app writes on its nodes and the extension reads. exact2 admits a word
+//! the app writes on its nodes and the extension reads. Exact admits a word
 //! that the app's `app.json` declares in `data`; plan2cpp binds each such
 //! word to the listed extension that declares it.
 //!
@@ -98,7 +98,7 @@ pub struct Op {
 }
 
 /// A prop: a `data-*` word the app writes on nodes and the extension reads.
-/// Its value is text, as exact2 carries every `data-*` value.
+/// Its value is text, as Exact carries every `data-*` value.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Prop {
     pub name: String,
@@ -568,7 +568,7 @@ pub struct PropUse {
 }
 
 /// Binds each `data-*` word that the app at `source` declares (its
-/// `app.json` `data`, read as exact2 reads it) to the listed extension that
+/// `app.json` `data`, read as Exact reads it) to the listed extension that
 /// declares it as a prop.
 ///
 /// # Errors
@@ -937,7 +937,7 @@ pub fn header(e: &Extension) -> String {
     let live: Vec<&Source> = e.sources.iter().filter(|x| x.live).collect();
     let _ = write!(
         s,
-        "#pragma once\n\n#include <cstring>\n#include <string>\n#include <vector>\n\n#include \"contract_rt.h\"\n\nnamespace ext {{\n\nclass {class} : public rt::Extension {{\n public:\n  static constexpr const char* kSources[] = {{{}}};\n  static constexpr const char* kOps[] = {{{}}};\n  static constexpr const char* kProps[] = {{{}}};\n\n  const char* name() const override {{ return {}; }}\n  uint16_t version() const override {{ return {}; }}\n  const char* digest() const override {{ return {}; }}\n  const char* const* sources(uint16_t& count) const override {{\n    count = {};\n    return kSources;\n  }}\n  const char* const* ops(uint16_t& count) const override {{\n    count = {};\n    return kOps;\n  }}\n  const char* const* props(uint16_t& count) const override {{\n    count = {};\n    return kProps;\n  }}\n\n",
+        "#pragma once\n\n#include <cstring>\n#include <string>\n#include <vector>\n\n#include \"exact_rt.h\"\n\nnamespace ext {{\n\nclass {class} : public rt::Extension {{\n public:\n  static constexpr const char* kSources[] = {{{}}};\n  static constexpr const char* kOps[] = {{{}}};\n  static constexpr const char* kProps[] = {{{}}};\n\n  const char* name() const override {{ return {}; }}\n  uint16_t version() const override {{ return {}; }}\n  const char* digest() const override {{ return {}; }}\n  const char* const* sources(uint16_t& count) const override {{\n    count = {};\n    return kSources;\n  }}\n  const char* const* ops(uint16_t& count) const override {{\n    count = {};\n    return kOps;\n  }}\n  const char* const* props(uint16_t& count) const override {{\n    count = {};\n    return kProps;\n  }}\n\n",
         names(e.sources.iter().map(|x| x.name.as_str()).collect()),
         names(e.ops.iter().map(|x| x.name.as_str()).collect()),
         names(e.props.iter().map(|x| x.name.as_str()).collect()),

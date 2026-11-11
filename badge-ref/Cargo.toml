@@ -3,7 +3,7 @@ name = "badge-ref"
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.97"
-description = "Runs a script of the badge-navigation app on exact2's runner: the reference for the C++ target's routes"
+description = "Runs a script of the badge-navigation app on Exact's runner: the reference for the C++ target's routes"
 publish = false
 
 [dependencies]

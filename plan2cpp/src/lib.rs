@@ -1,4 +1,4 @@
-//! Compiles a Contract plan to app-specific C++ over the `contract_rt` runtime
+//! Compiles an Exact plan to app-specific C++ over the `exact_rt` runtime
 //! (Plan B). `emit` refuses, by name, everything outside the C++ subset.
 
 mod assets;

@@ -1,5 +1,5 @@
-# Tests of the contract_rt core on the Mac. `make test` builds route_check,
-# ext_check and data_check with AddressSanitizer and UBSan, runs exact2's
+# Tests of the exact_rt core on the Mac. `make test` builds route_check,
+# ext_check and data_check with AddressSanitizer and UBSan, runs Exact's
 # route corpus through route_check (tools/route_corpus.py), runs ext_check
 # (how the runtime binds host extensions, on the level app's tables), and
 # runs data_check (`data-*` props, on the marks app in marks/). EXACT is

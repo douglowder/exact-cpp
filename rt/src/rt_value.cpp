@@ -1,4 +1,4 @@
-// Contract values with the runner's semantics (exact2 runner/src/stdlib.rs,
+// Exact values with the runner's semantics (Exact runner/src/stdlib.rs,
 // format.rs): JavaScript equality and ordering, max/min that skip NaN,
 // toFixed on the exact binary value with ties away from zero, and
 // JavaScript's number printing.
@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <cstring>
 
-#include "contract_rt.h"
+#include "exact_rt.h"
 
 namespace rt {
 
