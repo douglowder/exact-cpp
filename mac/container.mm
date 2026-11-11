@@ -4,7 +4,8 @@
 // display (the same software surface as the -mac programs, drawn 1:1), keys (the arrows,
 // Return as Enter, Escape), touch (the mouse), a speaker on the real clock, the trackpad's
 // haptics, the system's wall clock, and the agent's pseudo-terminal, so tools/agent.py drives
-// it as it drives the board.
+// it as it drives the board. The Appearance menu picks the color scheme (dark: white text on
+// black, the default; light: black text on white), kept across apps.
 //
 //   ExactMac [APP] [--link PATH]
 //     APP          the app to start with (default: the first bundle)
@@ -86,6 +87,8 @@ struct Container {
   std::unique_ptr<rt::Host> host;
   std::string name;
   uint32_t frames = 0;
+  // The Appearance menu's choice, kept across apps.
+  rt::Scheme scheme = rt::Scheme::Dark;
 
   // Stops the running app and starts the one in `path`; false with a message in `error`.
   bool load(const std::string& path, std::string& error) {
@@ -118,6 +121,7 @@ struct Container {
       }
     }
     host = std::make_unique<rt::Host>(*a->app, board, a->extensions());
+    host->runtime().set_scheme(scheme);
     if (!host->boot()) {
       error = std::string(a->name) + ": the display did not start";
       host.reset();
@@ -239,6 +243,7 @@ const char* key_name(unsigned short code) {
 @property(nonatomic, strong) NSWindow* window;
 @property(nonatomic, strong) ScreenView* screen;
 @property(nonatomic, strong) NSMenu* apps;
+@property(nonatomic, strong) NSMenu* appearance;
 @property(nonatomic, copy) NSString* dir;
 @end
 
@@ -270,9 +275,28 @@ const char* key_name(unsigned short code) {
   [self open:item.title];
 }
 
+// Checks the Appearance item of the scheme in use.
+- (void)markScheme {
+  for (NSMenuItem* item in self.appearance.itemArray) {
+    item.state = item.tag == static_cast<NSInteger>(container->scheme) ? NSControlStateValueOn : NSControlStateValueOff;
+  }
+}
+
+- (void)chooseScheme:(NSMenuItem*)item {
+  container->scheme = static_cast<rt::Scheme>(item.tag);
+  if (container->host) container->host->runtime().set_scheme(container->scheme);
+  [self markScheme];
+  self.screen.needsDisplay = YES;
+}
+
 - (void)turn {
   if (!container->host) return;
   container->host->turn();
+  // The agent's `scheme` op can change it too.
+  if (container->host->runtime().scheme() != container->scheme) {
+    container->scheme = container->host->runtime().scheme();
+    [self markScheme];
+  }
   const uint32_t frames = container->host->runtime().stats.frames;
   if (frames != container->frames) {
     container->frames = frames;
@@ -302,6 +326,19 @@ NSMenu* main_menu(Controller* controller, const std::vector<std::string>& names)
   }
   apps_item.submenu = apps;
   controller.apps = apps;
+  NSMenuItem* appearance_item = [[NSMenuItem alloc] init];
+  [bar addItem:appearance_item];
+  NSMenu* appearance = [[NSMenu alloc] initWithTitle:@"Appearance"];
+  const std::pair<NSString*, rt::Scheme> schemes[] = {{@"Dark", rt::Scheme::Dark}, {@"Light", rt::Scheme::Light}};
+  for (const auto& scheme : schemes) {
+    NSString* key = scheme.second == rt::Scheme::Dark ? @"d" : @"l";
+    NSMenuItem* item = [appearance addItemWithTitle:scheme.first action:@selector(chooseScheme:) keyEquivalent:key];
+    item.tag = static_cast<NSInteger>(scheme.second);
+    item.target = controller;
+  }
+  appearance_item.submenu = appearance;
+  controller.appearance = appearance;
+  [controller markScheme];
   return bar;
 }
 

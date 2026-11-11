@@ -45,7 +45,8 @@ class Screen : public rt::Display {
   int face(float, int) const override { return 0; }
   int text_width(int, const char* text) const override { return 6 * static_cast<int>(std::strlen(text)); }
   int line_height(int) const override { return 10; }
-  void draw_text(int, const char*, int, int, uint32_t) override {}
+  uint32_t text_rgb = 0x123456;  // the color of the text drawn last
+  void draw_text(int, const char*, int, int, uint32_t rgb) override { text_rgb = rgb; }
   uint16_t* row(int y) override { return &px[y * kSize]; }
 
   static uint16_t to565(uint32_t rgb) {
@@ -203,11 +204,28 @@ void check_painting() {
   expect_pixel(board, 10, 130, kWhite, "a value made at run time plays nothing");
 }
 
+void check_scheme() {
+  Clocked board;
+  rt::Runtime runtime(app::kApp, board, {});
+  expect(runtime.boot(), "scheme: boot");
+  runtime.tick();
+  expect(board.screen.text_rgb == 0xffffff, "dark: text the app gives no color is white");
+  expect(runtime.agent("{\"op\":\"scheme\"}") == "{\"scheme\":\"dark\"}", "dark is the default");
+  expect(runtime.agent("{\"op\":\"scheme\",\"scheme\":\"light\"}") == "{\"scheme\":\"light\"}", "the op sets light");
+  runtime.tick();
+  expect(board.screen.text_rgb == 0x000000, "light: text the app gives no color is black");
+  expect(runtime.stats.damage_px == kSize * kSize, "a new scheme repaints the whole screen");
+  expect(runtime.agent("{\"op\":\"scheme\",\"scheme\":\"sepia\"}").find("error") != std::string::npos,
+         "an unknown scheme is an error");
+  expect(runtime.scheme() == rt::Scheme::Light, "an unknown scheme keeps the scheme");
+}
+
 }  // namespace
 
 int main() {
   check_reference();
   check_painting();
+  check_scheme();
   std::printf("anim_check: %s\n", failures ? "failures" : "all checks pass");
   return failures ? 1 : 0;
 }

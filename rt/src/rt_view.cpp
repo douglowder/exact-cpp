@@ -380,7 +380,8 @@ void View::evaluate(NodeState& s, Ctx& c) {
 void View::inherit(NodeState& s, const NodeState* parent) {
   s.font_size = !std::isnan(s.box.font_size) ? s.box.font_size : parent ? parent->font_size : 16;
   s.weight = s.box.weight ? s.box.weight : parent ? parent->weight : 400;
-  s.color = s.box.color >= 0 ? s.box.color : parent ? parent->color : 0xff000000LL;
+  const int64_t text = r_.scheme() == Scheme::Dark ? 0xffffffffLL : 0xff000000LL;
+  s.color = s.box.color >= 0 ? s.box.color : parent ? parent->color : text;
   s.text_align = s.box.text_align >= 0 ? s.box.text_align : parent ? parent->text_align : 0;
   s.family = s.box.family >= 0 ? s.box.family : parent ? parent->family : 0;
   s.line_height = s.box.line_height.k != LineHeight::K::Inherit ? s.box.line_height
@@ -1070,7 +1071,7 @@ void View::paint_text(const NodeState& s, Canvas& canvas, unsigned alpha) {
 }
 
 void View::paint(Rect clip, bool whole) {
-  d_->fill_rect(clip, 0x000000);
+  d_->fill_rect(clip, r_.scheme() == Scheme::Dark ? 0x000000 : 0xffffff);
   Canvas canvas(*d_, clip, whole);
   for (int root : roots_) paint_node(root, canvas, 255);
 }
