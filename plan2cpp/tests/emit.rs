@@ -284,20 +284,6 @@ fn refusal(source: &str) -> String {
 const SHAPE_P: &str = "shape P\n  n: number\n";
 
 #[test]
-fn a_resource_placeholder_is_refused_by_name() {
-    for placeholder in ["fallback(1)", "empty(n=1)"] {
-        let source = format!(
-            "{SHAPE_P}component A\n  state n = 1\n  resource p = load(n) as shape P else {placeholder}\n  view\n    text \"a\"\n"
-        );
-        let err = refusal(&source);
-        assert!(
-            err.contains("resource p declares a placeholder"),
-            "{placeholder}: {err}"
-        );
-    }
-}
-
-#[test]
 fn a_resource_asked_for_each_item_is_refused_by_name() {
     let source = format!(
         "{SHAPE_P}component A\n  state ids = [1, 2]\n  resource got = load(u) for u in ids as shape P\n  view\n    text \"a\"\n"

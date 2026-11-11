@@ -325,6 +325,7 @@ def main() -> int:
             "ops": ["panel"],
             "props": [],
             "resource": "battery",
+            "zero": {"percent": 0},
             "request": {"op": "panel"},
         },
         ["display", "keys", "touch"],

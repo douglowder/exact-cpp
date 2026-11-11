@@ -16,8 +16,8 @@ level-headless (or their -san builds). The check:
   5. requires the `extensions` op to report the app's extension (`attitude`)
      bound, built from extensions/attitude.json as it is now (SHA-256), with
      its sources and ops; and, on the headless host started with
-     --no-extensions, the boot report to name the extension, its source to
-     answer none, and its op to be unknown.
+     --no-extensions, the boot report to name the extension, its resource to
+     show its type's zero, and its op to be unknown.
 A sanitizer report on any host's stderr fails the check. Exit 0 when all pass.
 """
 
@@ -161,7 +161,8 @@ def check_extensions(
     """Checks the `extensions` op on BINARY and a headless run without extensions.
 
     `extension` is the app's one extension: its name, the sources, ops and props
-    it declares, a resource that reads its source, and one of its ops (a request).
+    it declares, a resource that reads its source and its type's zero, and one of
+    its ops (a request).
     `missing` is what the headless host lacks besides the extension.
     """
     name = extension["name"]
@@ -187,8 +188,10 @@ def check_extensions(
     want_report = [f"MISSING {m}" for m in [*missing, f"extension:{name}"]]
     if report != want_report:
         failures.append(f"without extensions: boot report {report}, expected {want_report}")
-    if resource is not None:
-        failures.append(f"without extensions: {extension['resource']} is {resource}, not none")
+    if resource != extension["zero"]:
+        failures.append(
+            f"without extensions: {extension['resource']} is {resource}, not {extension['zero']}"
+        )
     if op != {"error": "unknown op"}:
         failures.append(f"without extensions: {extension['request']} answered {op}")
     if not sanitizer_clean(stderr):
@@ -231,7 +234,8 @@ def main() -> int:
     failures += check_extensions(
         binary, headless,
         {"name": "attitude", "sources": ["attitude"], "ops": ["tilt"], "props": [],
-         "resource": "tilt", "request": {"op": "tilt", "pitch": 1, "roll": 1}},
+         "resource": "tilt", "zero": {"pitch": 0, "roll": 0},
+         "request": {"op": "tilt", "pitch": 1, "roll": 1}},
         HEADLESS_MISSING)
     for failure in failures:
         print(f"FAIL {failure}")

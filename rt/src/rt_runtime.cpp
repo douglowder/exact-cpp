@@ -182,28 +182,37 @@ V Runtime::derive(uint64_t i) {
   return derives_[i];
 }
 
-// The answer of an extension source, from the extension bound to it; none
+// The answer of an extension source, from the extension bound to it; false
 // when no extension is bound or it has no answer.
-V Runtime::ask(const char* source, const V* args, int argc) {
+bool Runtime::ask(const char* source, const V* args, int argc, V& out) {
   for (uint16_t i = 0; i < app_.extension_source_count; ++i) {
     const ExtensionSource& es = app_.extension_sources[i];
     if (std::strcmp(es.source, source) != 0) continue;
     Extension* e = bound_[es.extension];
-    V out;
-    return e && e->answer(app_, source, args, argc, out) ? out : V();
+    return e && e->answer(app_, source, args, argc, out);
   }
-  return V();
+  return false;
+}
+
+V Runtime::ask(const char* source, const V* args, int argc) {
+  V out;
+  return ask(source, args, argc, out) ? out : V();
 }
 
 // A resource's answer: `exactTime` from the board's wall clock (an epoch of 0
 // when it has none, as the app's check for a set clock expects), to the
 // second, as a board's clock chip counts; any other source from its
-// extension.
+// extension, and what the resource shows while that has no answer.
 V Runtime::answer(uint16_t i) {
   const Resource& r = app_.resources[i];
   if (std::strcmp(r.source, "exactTime") != 0) {
     asked_[i] = resource_args(i);
-    return ask(r.source, asked_[i].data(), static_cast<int>(asked_[i].size()));
+    V out;
+    if (ask(r.source, asked_[i].data(), static_cast<int>(asked_[i].size()), out)) return out;
+    if (r.placeholder >= 0) return answer(static_cast<uint16_t>(r.placeholder));
+    if (!r.fallback) return V();
+    Ctx c{this, nullptr, false, &view_->root_scope()};
+    return r.fallback(c);
   }
   int64_t epoch = 0;
   int offset = 0;

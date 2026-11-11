@@ -104,6 +104,7 @@ const rt::Node kNodes[] = {
 };
 const rt::Handler kHandlers[] = {{rt::E::Press, 0, 0, 0}};
 const rt::CodeFn kArgs[] = {nullptr};
+const rt::Resource kResources[] = {{"", "", 0, 0, 0, -1, nullptr}};
 const rt::Type kTypes[] = {{rt::Type::K::Other, -1, 0, 0}, {rt::Type::K::Other, -1, 0, 0}};
 const rt::Field kFields[] = {{"", 0}};
 const rt::Glyph kGlyphs[] = {
@@ -143,7 +144,6 @@ const rt::Sound kSounds[] = {{nullptr, nullptr, 0, 0}};
 const rt::Sequence kSequences[] = {{nullptr, nullptr, nullptr, nullptr}};
 const rt::Region kRegions[] = {{rt::R::When, -1, -1, 0, nullptr, nullptr, 0, 0}};
 const rt::Timer kTimers[] = {{0, 0, false}};
-const rt::Resource kResources[] = {{"", "", 0, 0, 0}};
 const uint16_t kSlotTypes[] = {0, 1};
 const uint16_t kDeriveTypes[] = {0};
 const int16_t kSlotOwners[] = {-1, -1};

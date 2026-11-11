@@ -11,6 +11,7 @@ use exact_plan::{BindingKind, Code, EventKind, Plan, RegionKind, TypeKind};
 use crate::assets;
 use crate::code::{self, cpp_string, function};
 use crate::ext;
+use crate::resources;
 use crate::sound;
 use crate::theme;
 
@@ -164,12 +165,6 @@ fn check_plan(plan: &Plan) -> Result<(), String> {
         }
     }
     for r in &plan.resources {
-        if r.placeholder.is_some() || r.placeholder_value.len > 0 {
-            return Err(format!(
-                "resource {} declares a placeholder (`else`); not in the C++ target",
-                plan.str(r.name)
-            ));
-        }
         if r.each.len > 0 {
             return Err(format!(
                 "resource {} asks once for each item of a list (`for`); not in the C++ target",
@@ -324,6 +319,7 @@ pub fn emit(plan: &Plan, source: &Path) -> Result<String, String> {
         .collect::<Result<Vec<_>, _>>()?;
     let regions = region_bodies(plan, &mut out)?;
     let args = arg_bodies(plan, &mut out)?;
+    let fallbacks = resources::fallbacks(plan, &mut out.functions)?;
     let sequences = sequence_rows(plan, &mut out)?;
     let mut bindings = Vec::new();
     for (i, b) in plan.bindings.iter().enumerate() {
@@ -368,6 +364,7 @@ pub fn emit(plan: &Plan, source: &Path) -> Result<String, String> {
         handlers.join(", ")
     );
     let _ = writeln!(s, "const rt::CodeFn kArgs[] = {{{}}};", row(&args));
+    resources::table(plan, &fallbacks, &mut s);
     types(plan, &mut s);
     assets::fonts(plan, root, &mut s)?;
     assets::images(plan, root, &mut s)?;
@@ -648,20 +645,6 @@ fn tables(
         .iter()
         .map(|t| format!("{{{}, {}, {}}}", t.interval_ms, t.action.0, t.once))
         .collect();
-    let resources: Vec<String> = plan
-        .resources
-        .iter()
-        .map(|r| {
-            format!(
-                "{{{}, {}, {}, {}, {}}}",
-                cpp_string(plan.str(r.name)),
-                cpp_string(plan.str(r.source)),
-                r.ty.0,
-                r.args.start,
-                r.args.len
-            )
-        })
-        .collect();
     let _ = writeln!(
         s,
         "const rt::Region kRegions[] = {{{}}};",
@@ -678,15 +661,6 @@ fn tables(
             "{0, 0, false}".into()
         } else {
             timers.join(", ")
-        }
-    );
-    let _ = writeln!(
-        s,
-        "const rt::Resource kResources[] = {{{}}};",
-        if resources.is_empty() {
-            "{\"\", \"\", 0, 0, 0}".into()
-        } else {
-            resources.join(", ")
         }
     );
     slot_tables(plan, s);
