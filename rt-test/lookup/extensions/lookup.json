@@ -1,0 +1,16 @@
+{
+  "extension": "lookup",
+  "version": 1,
+  "summary": "A test extension that answers a resource from its arguments.",
+  "sources": [
+    {
+      "name": "lookup",
+      "summary": "An entry named by its id and word; next is the id after it.",
+      "params": [
+        { "name": "id", "type": "number" },
+        { "name": "word", "type": "string" }
+      ],
+      "result": { "label": "string", "next": "number" }
+    }
+  ]
+}

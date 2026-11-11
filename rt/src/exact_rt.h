@@ -208,10 +208,14 @@ struct Timer {
   bool once;
 };
 
+// A resource asks `source` with its arguments, `arg_count` code functions
+// from `App::args` at `arg_start`, and asks again when their values change.
 struct Resource {
   const char* name;
   const char* source;
   uint16_t ty;
+  uint16_t arg_start;
+  uint16_t arg_count;
 };
 
 // The app's fonts, rasterized by plan2cpp (4-bit coverage, ASCII and
@@ -642,6 +646,8 @@ class Runtime {
   };
   void run(uint16_t action, const V* params, Scope* scope);
   V answer(uint16_t resource);
+  std::vector<V> resource_args(uint16_t resource);
+  void reask();
   void settle();
   void log(const std::string& line);
   // The handler for `event` at the instance or its nearest ancestor that
@@ -666,6 +672,7 @@ class Runtime {
   std::vector<Extension*> bound_;  // per app extension, or nullptr
   std::unique_ptr<route::Table> table_;
   std::vector<V> slots_, derives_, resources_;
+  std::vector<std::vector<V>> asked_;  // each resource's arguments when it last asked
   std::vector<bool> derive_valid_;
   std::vector<Write> writes_;
   std::vector<std::pair<std::string, std::vector<V>>> commands_;

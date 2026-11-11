@@ -112,10 +112,17 @@ fn the_level_apps_needs_list_its_board_parts_and_extension() {
 fn the_committed_extension_headers_match_their_files() {
     for (file, header) in [
         ("extensions/attitude.json", "apps/level/cpp/ext_attitude.h"),
-        ("extensions/init-badge.json", "apps/badge/cpp/ext_init_badge.h"),
+        (
+            "extensions/init-badge.json",
+            "apps/badge/cpp/ext_init_badge.h",
+        ),
         (
             "rt-test/marks/extensions/marks.json",
             "rt-test/marks/ext_marks.h",
+        ),
+        (
+            "rt-test/lookup/extensions/lookup.json",
+            "rt-test/lookup/ext_lookup.h",
         ),
     ] {
         let e = ext::read(&repo().join(file)).unwrap_or_else(|e| panic!("{e}"));
@@ -369,6 +376,30 @@ fn the_marks_apps_words_bind_to_its_extension_and_reach_the_runtime() {
     assert_eq!(
         committed, made,
         "rt-test/marks/app_gen.cpp is stale; run plan2cpp emit"
+    );
+}
+
+/// The lookup app's resources bind to its extension with their arguments, and
+/// its committed tables are what plan2cpp makes now.
+#[test]
+fn the_lookup_apps_resources_with_arguments_bind_to_its_extension() {
+    let source = repo().join("rt-test/lookup/app.contract");
+    let exts = ext::roster(&source).unwrap_or_else(|e| panic!("{e}"));
+    let plan = compile(&source);
+    let uses = ext::check(&plan, &exts).unwrap_or_else(|e| panic!("{e}"));
+    let sources: Vec<&str> = uses.iter().map(|u| u.source.as_str()).collect();
+    assert_eq!(sources, ["lookup"]);
+    let cpp = plan2cpp::emit(&plan, &source).unwrap_or_else(|e| panic!("{e}"));
+    assert!(
+        cpp.contains(r#"{{"entry", "lookup", 2, 0, 2}, {"after", "lookup", 2, 2, 2}}"#),
+        "each resource row carries its arguments' range in kArgs"
+    );
+    let committed = std::fs::read_to_string(repo().join("rt-test/lookup/app_gen.cpp"))
+        .unwrap_or_else(|e| panic!("{e}"));
+    let made = cpp.replace(&source.display().to_string(), "rt-test/lookup/app.contract");
+    assert_eq!(
+        committed, made,
+        "rt-test/lookup/app_gen.cpp is stale; run plan2cpp emit"
     );
 }
 

@@ -275,6 +275,40 @@ fn a_mutation_that_refreshes_is_refused_by_name() {
     assert!(err.contains("mutation saved refreshes"), "{err}");
 }
 
+fn refusal(source: &str) -> String {
+    plan2cpp::emit(&plan(source), std::path::Path::new("a.contract"))
+        .err()
+        .unwrap_or_default()
+}
+
+const SHAPE_P: &str = "shape P\n  n: number\n";
+
+#[test]
+fn a_resource_placeholder_is_refused_by_name() {
+    for placeholder in ["fallback(1)", "empty(n=1)"] {
+        let source = format!(
+            "{SHAPE_P}component A\n  state n = 1\n  resource p = load(n) as shape P else {placeholder}\n  view\n    text \"a\"\n"
+        );
+        let err = refusal(&source);
+        assert!(
+            err.contains("resource p declares a placeholder"),
+            "{placeholder}: {err}"
+        );
+    }
+}
+
+#[test]
+fn a_resource_asked_for_each_item_is_refused_by_name() {
+    let source = format!(
+        "{SHAPE_P}component A\n  state ids = [1, 2]\n  resource got = load(u) for u in ids as shape P\n  view\n    text \"a\"\n"
+    );
+    let err = refusal(&source);
+    assert!(
+        err.contains("resource got asks once for each item"),
+        "{err}"
+    );
+}
+
 fn tokens(case: &str) -> Result<String, String> {
     let path = format!(
         "{}/tests/tokens/{case}/app.contract",

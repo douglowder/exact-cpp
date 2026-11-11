@@ -58,7 +58,7 @@ In a clone made without `--recursive`, run `git submodule update --init --recurs
 | `rt/` | The core: values, layout, paint, timers, the transport that plays a `sequence`, the agent; the `Board` interface and its defaults. An Arduino library (`library.properties`) |
 | `rt-mac/` | The Mac boards: `Board` (a software RGB565 surface in bands, the M5GFX FreeSans data, a pseudo-terminal link) and `HeadlessBoard` (link and clock only); a manual clock; a CoreAudio speaker |
 | `mac/` | The Mac programs for each app, `-mac` and `-headless`; and `ExactMac` (`container.mm`), one window that runs any app's bundle from its App menu |
-| `rt-test/` | `route_check` (the C++ route port against Exact's route corpus), `ext_check` (extension binding) and `data_check` (`data-*` props, on the test app in `marks/`) |
+| `rt-test/` | `route_check` (the C++ route port against Exact's route corpus), `ext_check` (extension binding), `data_check` (`data-*` props, on the test app in `marks/`) and `lookup_check` (resources with arguments, on the test app in `lookup/`) |
 | `level-data/`, `level-tests/` | The level app on Exact's runner (the IMU attitude filter; keys, touch, hysteresis, leak): the reference behavior |
 | `badge-ref/` | Runs a script of the badge app on Exact's runner: the reference for routes |
 | `sound-ref/` | Runs a script of an app with sounds on Exact's runner: the reference for the voices |
@@ -127,9 +127,11 @@ An app's sources other than Exact's own (`exactTime`) come from host extensions,
 outside Exact (Exact LLP 1124, a draft). An extension file declares its sources, agent ops
 and `data-*` props. `emit` refuses a source no listed extension declares, a field with another
 type, and a send with another argument count, and records each extension's name, version and
-SHA-256. `ext` writes a C++ base class with a typed method for each source, op and prop. At
-boot the host writes `CE_WARN missing=extension:<name>` for each listed extension the board
-does not give.
+SHA-256. `ext` writes a C++ base class with a typed method for each source, op and prop. A
+resource asks its source with its arguments, and asks again after a commit that changes their
+values; a placeholder (`else`) and a resource asked for each item of a list (`for`) are
+refused. At boot the host writes `CE_WARN missing=extension:<name>` for each listed extension
+the board does not give.
 
 ## License
 

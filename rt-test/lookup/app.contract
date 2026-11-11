@@ -1,0 +1,24 @@
+// The app lookup_check runs: resources whose arguments read state, a derive
+// and another resource's answer, so each asks again when they change.
+shape Entry
+  label: string
+  next: number
+
+component Lookup
+  state id = 1
+  state suffix = "a"
+  derive word = "w" + suffix
+  resource entry = lookup(id, word) as shape Entry
+  resource after = lookup(entry.next, "after") as shape Entry
+  action step
+    id = id + 1
+  action rename
+    suffix = "b"
+  view
+    column
+      text entry.label testId="entry"
+      text after.label testId="after"
+      button press=step appearance="none" testId="step"
+        text "step"
+      button press=rename appearance="none" testId="rename"
+        text "rename"
