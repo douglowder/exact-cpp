@@ -1,0 +1,36 @@
+// The app anim_check runs: CSS animations of a color, an opacity and a
+// translate, with each kind of timing function, a paused animation, a fill
+// before a delay, one that starts again after `none`, and a value made at run
+// time, which the board cannot play.
+keyframes tint
+  from background-color="#ff0000"
+  to background-color="#0000ff"
+
+keyframes fade
+  from opacity=0
+  to opacity=1
+
+keyframes slide
+  from translate="0px 0px"
+  50% translate="20px 0px"
+  to translate="40px 20px"
+
+keyframes ink
+  to background-color="#00ff00"
+
+component Anim
+  state on = true
+  state seconds = 2
+  action toggle
+    on = not on
+  view
+    column width=200 height=200 background-color="#000000"
+      column testId="tint" position="absolute" left=0 top=0 width=20 height=20 background-color="#ffffff" animation="tint 1s ease-in-out"
+      column testId="fade" position="absolute" left=40 top=0 width=20 height=20 background-color="#ffffff" animation="fade 1s linear forwards"
+      column testId="held" position="absolute" left=80 top=0 width=20 height=20 animation="tint 1s linear -250ms paused"
+      column testId="step" position="absolute" left=120 top=0 width=20 height=20 background-color="#ffffff" animation="tint 1s steps(4, jump-end) 200ms backwards"
+      column testId="ink" position="absolute" left=160 top=0 width=20 height=20 background-color="#ff0000" animation="ink 1s linear(0, 0.25 50%, 1)"
+      column testId="slide" position="absolute" left=0 top=60 width=20 height=20 background-color="#00ff00" animation=(on ? "slide 1s cubic-bezier(0.2, 0.8, 0.2, 1) infinite alternate" : "none")
+      column testId="made" position="absolute" left=0 top=120 width=20 height=20 background-color="#ffffff" animation=("tint " + seconds.toString() + "s")
+      button press=toggle appearance="none" testId="toggle" position="absolute" left=100 top=150 width=20 height=20
+        text "t"

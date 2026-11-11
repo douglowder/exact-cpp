@@ -1,6 +1,7 @@
 //! Compiles an Exact plan to app-specific C++ over the `exact_rt` runtime
 //! (Plan B). `emit` refuses, by name, everything outside the C++ subset.
 
+pub mod anim;
 mod assets;
 mod code;
 pub mod dump;

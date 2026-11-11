@@ -330,7 +330,7 @@ fn an_app_without_a_design_has_an_empty_token_table() {
         "{cpp}"
     );
     assert!(
-        cpp.contains("kTokens, 0, kSounds, 0, kSequences, 0};"),
+        cpp.contains("kTokens, 0, kSounds, 0, kSequences, 0, kEaseStops, kEases, kKeyValues, kAnimations, kAnimationValues, 0};"),
         "{cpp}"
     );
 }
@@ -439,13 +439,14 @@ fn sequence_forms_the_board_does_not_play_are_refused_by_name() {
 }
 
 #[test]
-fn features_the_board_does_not_run_are_refused_by_name() {
+fn animation_longhands_play_as_their_shorthand() {
+    // The compiler writes the longhands as one shorthand literal, which the
+    // board finds in its table.
     let source = "keyframes rise\n  from opacity=0\n  to opacity=1\n\ncomponent A\n  view\n    text \"x\" animation-name=\"rise\" animation-duration=\"1s\"\n";
-    let motion = plan2cpp::emit(&plan(source), std::path::Path::new("a.contract"))
-        .err()
-        .unwrap_or_default();
+    let cpp = plan2cpp::emit(&plan(source), std::path::Path::new("a.contract"))
+        .unwrap_or_else(|e| panic!("{e}"));
     assert!(
-        motion.contains("the app animates with `@keyframes` (1)"),
-        "{motion}"
+        cpp.contains(r#"{"1s ease 0s 1 normal none running rise", 1, 1}"#),
+        "{cpp}"
     );
 }

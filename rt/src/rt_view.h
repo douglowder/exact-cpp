@@ -80,7 +80,15 @@ struct NodeState {
   // Not painted: an unselected route or panel, but the route under a
   // selected modal route.
   bool route_hidden = false;
+  // Where it draws: its layout box, moved by its own and its ancestors'
+  // animated translate.
   Rect rect{0, 0, 0, 0};
+  Rect layout{0, 0, 0, 0};
+  // Its `animation` value (an index of `App::animation_values`, or -1), and
+  // its style rows before animation.
+  int anim = -1;
+  Box base;
+  double dx = 0, dy = 0;
   // Inherited text style, resolved down the tree.
   float font_size = 16;
   int weight = 400, text_align = 0, family = 0;
@@ -101,6 +109,9 @@ class View {
   // routes, and lays out (with a display). Arm instances and rows that no
   // longer show are dropped with their slots.
   void update();
+  // Applies each running animation at `now_ms` (the runtime's clock) over its
+  // node's own style rows.
+  void animate(double now_ms);
   // Paints what changed since the last call and pushes it; returns pixels painted.
   int64_t present(int64_t& paint_us, int64_t& push_us);
   const std::vector<std::pair<int, Rect>>& hits() const { return hits_; }
@@ -126,7 +137,18 @@ class View {
   void build(int parent_inst, int parent_node, int arm, Scope* scope, const std::string& path);
   int add(int node, Scope* scope, int parent_inst, const std::string& path);
   Scope* scope_at(const std::string& path, int arm, Scope* parent, const V& item);
+  // One animation playing on a node: started at `start_ms`; a paused one
+  // holds local time `held_ms`.
+  struct Run {
+    const char* name;
+    double start_ms;
+    double held_ms;
+    bool paused;
+  };
   void evaluate(NodeState& s, Ctx& c);
+  int animation_value(const V& v);
+  void start_runs(double now_ms);
+  void apply_animation(NodeState& s, const NodeState* parent, double now_ms);
   void inherit(NodeState& s, const NodeState* parent);
   void project();
   void mark(int i, bool hide);
@@ -157,6 +179,9 @@ class View {
   std::vector<int> roots_;
   // What each painted instance last drew, by key: its signature and rect.
   std::map<std::string, std::pair<uint64_t, Rect>> painted_;
+  // The animations playing on each node, by its key, in its value's order.
+  std::map<std::string, std::vector<Run>> runs_;
+  std::vector<std::string> unplayable_;  // values logged as not in the plan's literals
   std::vector<std::pair<int, Rect>> hits_, pans_;
   bool first_ = true;
 };

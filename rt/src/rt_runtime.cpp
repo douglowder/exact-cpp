@@ -374,6 +374,7 @@ void Runtime::tick() {
     run(app_.timers[i].action, nullptr, &view_->root_scope());
     timer_due_[i] = app_.timers[i].once ? 0 : now_ms + app_.timers[i].interval_ms;
   }
+  view_->animate(this->now_ms());
   int64_t paint_us = 0, push_us = 0;
   int64_t area = view_->present(paint_us, push_us);
   if (area > 0) {

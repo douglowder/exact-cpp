@@ -6,7 +6,11 @@
 // drawn as a ring. Opacity multiplies down the tree; it is applied to each
 // shape, glyph, and image, not to the group as one layer. All drawing goes
 // through a Canvas on the board's Display, one band of a damaged area at a time.
+// A node's CSS animations set its opacity, colors, and translate each frame
+// over its own style rows; a translate moves it and its subtree as drawn.
 #include "rt_view.h"
+
+#include "rt_animation.h"
 
 #include <algorithm>
 #include <cstdlib>
@@ -192,6 +196,7 @@ void apply_style(Box& b, S row, const V& v, const App& app) {
     case S::OverflowX: case S::OverflowY: b.clip = !none && v.s != "visible"; break;
     case S::WhiteSpace: b.nowrap = !none && (v.s == "nowrap" || v.s == "pre"); break;
     case S::TextOverflow: b.ellipsis = !none && v.s == "ellipsis"; break;
+    case S::Animation: break;  // View::evaluate reads it
     case S::FlexDirection: b.column = v.s == "column"; break;
     case S::JustifyContent: b.justify = v.s == "center" ? 1 : (v.s == "flex-end" || v.s == "end") ? 2 : 0; break;
     case S::AlignItems:
@@ -346,6 +351,10 @@ void View::evaluate(NodeState& s, Ctx& c) {
       v = V::str(b.lit.s);
     }
     if (!b.target.prop) {
+      if (static_cast<S>(b.target.id) == S::Animation) {
+        s.anim = animation_value(v);
+        continue;
+      }
       apply_style(s.box, static_cast<S>(b.target.id), v, app);
       continue;
     }
@@ -401,6 +410,7 @@ int View::add(int node, Scope* scope, int parent_inst, const std::string& path) 
   s.key = path + "#" + std::to_string(node);
   Ctx c{&r_, nullptr, false, scope};
   evaluate(s, c);
+  s.base = s.box;
   inherit(s, parent_inst >= 0 ? &nodes_[parent_inst] : nullptr);
   nodes_.push_back(std::move(s));
   const int i = count() - 1;
@@ -488,8 +498,102 @@ void View::update() {
     it = it->second.used ? std::next(it) : scopes_.erase(it);
   }
   project();
-  if (!d_) return;
-  for (int root : roots_) place(root, 0, 0, d_->width(), d_->height());
+  if (d_) {
+    for (int root : roots_) place(root, 0, 0, d_->width(), d_->height());
+  }
+  start_runs(r_.now_ms());
+  animate(r_.now_ms());
+}
+
+// The index of `animation` value `v` among the plan's literals, or -1; a
+// value that is none of them is logged once and plays nothing.
+int View::animation_value(const V& v) {
+  if (v.k != V::K::Str) return -1;
+  const App& app = r_.app();
+  for (uint16_t i = 0; i < app.animation_value_count; ++i) {
+    if (v.s == app.animation_values[i].text) return i;
+  }
+  if (std::find(unplayable_.begin(), unplayable_.end(), v.s) == unplayable_.end()) {
+    unplayable_.push_back(v.s);
+    r_.log("animation `" + v.s + "` is not one of the plan's literals; it does not play");
+  }
+  return -1;
+}
+
+// Matches each node's animations with those playing on it by name, as CSS
+// does (CSS Animations 1 §3): a name already playing keeps its start time,
+// and a new one starts now. A paused animation holds its local time.
+void View::start_runs(double now_ms) {
+  const App& app = r_.app();
+  std::map<std::string, std::vector<Run>> next;
+  for (const NodeState& s : nodes_) {
+    if (s.anim < 0) continue;
+    const AnimationValue& value = app.animation_values[s.anim];
+    if (value.count == 0) continue;
+    std::vector<Run> old;
+    auto it = runs_.find(s.key);
+    if (it != runs_.end()) old = it->second;
+    std::vector<bool> used(old.size(), false);
+    std::vector<Run>& runs = next[s.key];
+    for (uint16_t k = 0; k < value.count; ++k) {
+      const Animation& a = app.animations[value.start + k];
+      Run run{a.name, now_ms, 0, a.paused};
+      for (size_t o = 0; o < old.size(); ++o) {
+        if (used[o] || std::strcmp(old[o].name, a.name) != 0) continue;
+        used[o] = true;
+        run = old[o];
+        break;
+      }
+      if (a.paused && !run.paused) run.held_ms = now_ms - run.start_ms;
+      if (!a.paused && run.paused) run.start_ms = now_ms - run.held_ms;
+      run.paused = a.paused;
+      runs.push_back(run);
+    }
+  }
+  runs_ = std::move(next);
+}
+
+void View::animate(double now_ms) {
+  if (runs_.empty()) return;
+  for (NodeState& s : nodes_) apply_animation(s, s.parent >= 0 ? &nodes_[s.parent] : nullptr, now_ms);
+}
+
+// The node's style rows before animation, then each of its animations over
+// them in order (a later one over an earlier one's value), and its rect moved
+// by the translate it and its ancestors have now.
+void View::apply_animation(NodeState& s, const NodeState* parent, double now_ms) {
+  s.box = s.base;
+  inherit(s, parent);
+  s.dx = parent ? parent->dx : 0;
+  s.dy = parent ? parent->dy : 0;
+  auto it = s.anim >= 0 ? runs_.find(s.key) : runs_.end();
+  if (it != runs_.end()) {
+    const App& app = r_.app();
+    const AnimationValue& value = app.animation_values[s.anim];
+    for (uint16_t k = 0; k < value.count && k < it->second.size(); ++k) {
+      const Animation& a = app.animations[value.start + k];
+      const Run& run = it->second[k];
+      const double t = run.paused ? run.held_ms : now_ms - run.start_ms;
+      AValue out;
+      AValue under;
+      under.v[0] = s.box.opacity;
+      if (sample(app, a, t, AP::Opacity, under, out)) s.box.opacity = static_cast<float>(std::min(1.0, std::max(0.0, out.v[0])));
+      if (sample(app, a, t, AP::BackgroundColor, color_value(s.box.bg), out)) s.box.bg = color_argb(out);
+      if (sample(app, a, t, AP::Color, color_value(s.color), out)) s.color = color_argb(out);
+      for (int side = 0; side < 4; ++side) {
+        const AP prop = static_cast<AP>(static_cast<int>(AP::BorderTopColor) + side);
+        const int64_t now = s.box.border_color[side] >= 0 ? s.box.border_color[side] : s.color;
+        if (sample(app, a, t, prop, color_value(now), out)) s.box.border_color[side] = color_argb(out);
+      }
+      if (sample(app, a, t, AP::Translate, AValue{}, out)) {
+        s.dx += out.v[0] + out.v[2] * s.layout.w / 100.0;
+        s.dy += out.v[1] + out.v[3] * s.layout.h / 100.0;
+      }
+    }
+  }
+  s.rect = s.layout;
+  s.rect.x += static_cast<int>(std::lround(s.dx));
+  s.rect.y += static_cast<int>(std::lround(s.dy));
 }
 
 int View::nav_root() const {
@@ -651,6 +755,7 @@ void View::place(int i, float x, float y, float w, float h) {
   NodeState& s = nodes_[i];
   s.rect = {static_cast<int>(std::lround(x)), static_cast<int>(std::lround(y)),
             static_cast<int>(std::lround(w)), static_cast<int>(std::lround(h))};
+  s.layout = s.rect;
   if (!s.box.hidden) place_children(i);
 }
 
