@@ -2,7 +2,7 @@
 // (LGFXBase.cpp and lgfx_fonts.cpp, MIT license, M5Stack and lovyan03), and
 // the other shapes are the core's defaults, made of fill_rect, so a Mac
 // screenshot can match the Stopwatch's pixel for pixel.
-#include "contract_rt_mac.h"
+#include "exact_rt_mac.h"
 
 #include <fcntl.h>
 #include <malloc/malloc.h>

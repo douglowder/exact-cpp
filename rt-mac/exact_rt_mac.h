@@ -1,4 +1,4 @@
-// A Mac as a contract_rt board, for host runs and parity checks without
+// A Mac as a exact_rt board, for host runs and parity checks without
 // hardware. `Board`: a software RGB565 surface of a given size, drawn in bands
 // of a given height into a simulated panel; the Stopwatch's FreeSans faces,
 // read from M5GFX's font data; and a pseudo-terminal link that tools/agent.py
@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-#include "contract_rt.h"
+#include "exact_rt.h"
 
 namespace rt_mac {
 
@@ -78,7 +78,7 @@ class Link final : public rt::Link {
 
 // A board's clock: the time since it started, or, set manual, a clock that starts at 0 and
 // moves only by the agent's `clock` op (rt::Board::advance_us), so a script is the same on
-// every run, as exact2's driver's clock is.
+// every run, as Exact's driver's clock is.
 class Clock {
  public:
   int64_t micros() const;

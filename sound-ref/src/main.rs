@@ -1,4 +1,4 @@
-//! Runs a script on exact2's runner and prints what the C++ target must play: the app's slots
+//! Runs a script on Exact's runner and prints what the C++ target must play: the app's slots
 //! after boot and after each step, and every voice the runner issued (LLP 1096 D5, LLP 1125 D3).
 //!
 //! Usage: `sound-ref APP.contract STEPS.json ROOT_TEST_ID > RUN.json`

@@ -2,8 +2,8 @@
 # build/APP-mac (with a display) and build/APP-headless (no display); `make
 # check` builds them with AddressSanitizer and UBSan (-san); `make test` runs
 # tools/mac_check.py on the level app against the recorded board run,
-# tools/badge_check.py on the badge app against exact2's runner, and
-# tools/sound_check.py on the metronome's voices against exact2's runner (no hardware).
+# tools/badge_check.py on the badge app against Exact's runner, and
+# tools/sound_check.py on the metronome's voices against Exact's runner (no hardware).
 #
 # The FreeSans faces come from the installed M5GFX library (the same data the
 # board draws with); M5GFX sets its path.
@@ -70,9 +70,9 @@ test: check
 build:
 	mkdir -p build
 
-# ContractMac: one window that runs any app, chosen from its App menu (container.mm). Each app
+# ExactMac: one window that runs any app, chosen from its App menu (container.mm). Each app
 # is a bundle (its app_gen.cpp, glue and app_entry.cpp) linked against the container's core.
-CONTAINER := build/ContractMac
+CONTAINER := build/ExactMac
 container: $(CONTAINER) $(foreach a,$(APPS),build/apps/$(a).bundle)
 
 $(CONTAINER): container.mm $(CORE) $(HEADERS) | build

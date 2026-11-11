@@ -1,12 +1,12 @@
-// ContractMac: one window in which any of the Mac apps runs, one at a time, chosen from the
+// ExactMac: one window in which any of the Mac apps runs, one at a time, chosen from the
 // App menu. Each app is a bundle (build/apps/APP.bundle: its app_gen.cpp, glue and
-// app_entry.cpp) linked against this program's contract_rt core. The window is a board with a
+// app_entry.cpp) linked against this program's exact_rt core. The window is a board with a
 // display (the same software surface as the -mac programs, drawn 1:1), keys (the arrows,
 // Return as Enter, Escape), touch (the mouse), a speaker on the real clock, the trackpad's
 // haptics, the system's wall clock, and the agent's pseudo-terminal, so tools/agent.py drives
 // it as it drives the board.
 //
-//   ContractMac [APP] [--link PATH]
+//   ExactMac [APP] [--link PATH]
 //     APP          the app to start with (default: the first bundle)
 //     --link PATH  also make PATH a symbolic link to the pseudo-terminal
 #import <AppKit/AppKit.h>
@@ -23,9 +23,9 @@
 #include <string>
 #include <vector>
 
-#include "contract_mac_app.hpp"
-#include "contract_rt.h"
-#include "contract_rt_mac.h"
+#include "exact_mac_app.hpp"
+#include "exact_rt.h"
+#include "exact_rt_mac.h"
 #include "speaker_mac.hpp"
 
 namespace {
@@ -97,14 +97,14 @@ struct Container {
       error = dlerror();
       return false;
     }
-    auto entry = reinterpret_cast<const ContractMacApp* (*)()>(dlsym(bundle, "contract_mac_app"));
+    auto entry = reinterpret_cast<const ExactMacApp* (*)()>(dlsym(bundle, "exact_mac_app"));
     if (!entry) {
-      error = path + " has no contract_mac_app entry";
+      error = path + " has no exact_mac_app entry";
       return false;
     }
-    const ContractMacApp* a = entry();
-    if (a->abi != kContractMacAbi) {
-      error = path + " is built for ContractMac ABI " + std::to_string(a->abi) + "; rebuild it";
+    const ExactMacApp* a = entry();
+    if (a->abi != kExactMacAbi) {
+      error = path + " is built for ExactMac ABI " + std::to_string(a->abi) + "; rebuild it";
       return false;
     }
     if (a->app->sound_count > 0) {
@@ -113,7 +113,7 @@ struct Container {
       if (speaker->start(why)) {
         board.set_speaker(speaker.get());
       } else {
-        NSLog(@"ContractMac: no speaker: %s", why.c_str());
+        NSLog(@"ExactMac: no speaker: %s", why.c_str());
         speaker.reset();
       }
     }
@@ -289,7 +289,7 @@ NSMenu* main_menu(Controller* controller, const std::vector<std::string>& names)
   NSMenuItem* app_item = [[NSMenuItem alloc] init];
   [bar addItem:app_item];
   NSMenu* app_menu = [[NSMenu alloc] init];
-  [app_menu addItemWithTitle:@"Quit ContractMac" action:@selector(terminate:) keyEquivalent:@"q"];
+  [app_menu addItemWithTitle:@"Quit ExactMac" action:@selector(terminate:) keyEquivalent:@"q"];
   app_item.submenu = app_menu;
   NSMenuItem* apps_item = [[NSMenuItem alloc] init];
   [bar addItem:apps_item];
@@ -317,7 +317,7 @@ bool parse(int argc, const char** argv, Options& o) {
     } else if (argv[i][0] != '-' && o.app.empty()) {
       o.app = argv[i];
     } else {
-      std::fprintf(stderr, "usage: ContractMac [APP] [--link PATH]\n");
+      std::fprintf(stderr, "usage: ExactMac [APP] [--link PATH]\n");
       return false;
     }
   }
@@ -334,13 +334,13 @@ int main(int argc, const char** argv) {
     container = &shared;
     std::string error;
     if (!container->board.begin(error)) {
-      std::fprintf(stderr, "ContractMac: %s\n", error.c_str());
+      std::fprintf(stderr, "ExactMac: %s\n", error.c_str());
       return 1;
     }
     if (!options.link.empty()) {
       unlink(options.link.c_str());
       if (symlink(container->board.link_path().c_str(), options.link.c_str()) != 0) {
-        std::fprintf(stderr, "ContractMac: cannot link %s: %s\n", options.link.c_str(), std::strerror(errno));
+        std::fprintf(stderr, "ExactMac: cannot link %s: %s\n", options.link.c_str(), std::strerror(errno));
         return 1;
       }
     }
@@ -348,7 +348,7 @@ int main(int argc, const char** argv) {
     NSString* dir = [[exe stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"apps"];
     const std::vector<std::string> names = bundles(dir.UTF8String);
     if (names.empty()) {
-      std::fprintf(stderr, "ContractMac: no app bundles in %s (make -C mac container)\n", dir.UTF8String);
+      std::fprintf(stderr, "ExactMac: no app bundles in %s (make -C mac container)\n", dir.UTF8String);
       return 1;
     }
     NSApplication* app = [NSApplication sharedApplication];

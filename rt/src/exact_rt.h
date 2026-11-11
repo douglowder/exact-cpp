@@ -1,8 +1,8 @@
-// contract-rt: the runtime for Contract apps compiled to C++ by plan2cpp (Plan B).
+// exact-rt: the runtime for Exact apps compiled to C++ by plan2cpp (Plan B).
 // The generated app_gen.cpp provides `app::kApp`: one function per code body
 // and constant tables. This runtime gives those functions their values and
 // effects, lays out and paints the view, and runs events and timers, with the
-// semantics of exact2's runner for the subset plan2cpp admits.
+// semantics of Exact's runner for the subset plan2cpp admits.
 //
 // Nothing here knows the board. A board implements `Board` and gives the parts
 // it has (`Display`, `Link`, `Accelerometer`, …); `Host` runs an app on it and
@@ -21,7 +21,7 @@
 
 namespace rt {
 
-// A Contract value: number, bool, string, record (positional fields), list,
+// An Exact value: number, bool, string, record (positional fields), list,
 // or none. A record's fields and a list's items are both held in `rec`.
 struct V {
   enum class K : uint8_t { None, Num, Bool, Str, Rec, List };
@@ -277,14 +277,14 @@ struct ExtensionSource {
   uint16_t ty;
 };
 
-// A design token (exact2 LLP 1121, `app.tamber`): a name a colour row may give in place of
+// A design token (Exact LLP 1121, `app.tamber`): a name a colour row may give in place of
 // a colour, and the one colour it stands for on this board, as 0xAARRGGBB.
 struct Token {
   const char* name;
   uint32_t argb;
 };
 
-// A declared sound (exact2 LLP 1096): its path, as a step's `src` names it, and its 16-bit
+// A declared sound (Exact LLP 1096): its path, as a step's `src` names it, and its 16-bit
 // mono samples at `rate` Hz.
 struct Sound {
   const char* src;
@@ -293,7 +293,7 @@ struct Sound {
   uint32_t rate;
 };
 
-// A gated `sequence` (exact2 LLP 1125): its gate and `play`'s tracks and tempo, which the
+// A gated `sequence` (Exact LLP 1125): its gate and `play`'s tracks and tempo, which the
 // transport reads after each commit (`rt_transport.cpp`).
 struct Sequence {
   const char* name;
@@ -434,7 +434,7 @@ class Link {
   virtual void write_line(const std::string& line, bool bulk) = 0;
 };
 
-// A board input: a key in Contract terms, or one contact's raw phases on
+// A board input: a key in Exact terms, or one contact's raw phases on
 // the screen (the core recognizes taps and pans from them).
 struct Input {
   enum class K : uint8_t { Key, Down, Move, Up } k = K::Key;
@@ -488,7 +488,7 @@ class Board {
   virtual Accelerometer* accelerometer() { return nullptr; }
   virtual Speaker* speaker() { return nullptr; }
   // A manual clock moves on by `us`; false on a board whose clock is real. The agent's
-  // `clock` op drives it, as exact2's driver drives the runner's clock.
+  // `clock` op drives it, as Exact's driver drives the runner's clock.
   virtual bool advance_us(int64_t /*us*/) { return false; }
   // The controls `input` can report.
   virtual Inputs inputs() const { return {}; }
@@ -698,7 +698,7 @@ class Runtime {
   void dispatch_pan(int instance, E event, double a, double b);
   Contact contact_;
   // Moves a manual clock on by `ms`, running each timer and transport wake at its own due
-  // time on the way (exact2's seek rule); false on a board whose clock is real.
+  // time on the way (Exact's seek rule); false on a board whose clock is real.
   bool advance(double ms);
   std::unique_ptr<Transport> transport_;
 };

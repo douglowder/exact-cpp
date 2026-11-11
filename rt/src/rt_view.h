@@ -1,4 +1,4 @@
-// The view half of contract-rt: node instances from bindings, `when` arms
+// The view half of exact-rt: node instances from bindings, `when` arms
 // and `each` rows, route projection, layout, paint with dirty rectangles, and
 // press targets. Without a display (a headless board) it keeps instance state
 // only: no layout, paint, or targets.
@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 
-#include "contract_rt.h"
+#include "exact_rt.h"
 #include "rt_canvas.h"
 
 namespace rt {

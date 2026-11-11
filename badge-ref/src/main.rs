@@ -1,4 +1,4 @@
-//! Runs a script on exact2's runner and prints what the C++ target must match:
+//! Runs a script on Exact's runner and prints what the C++ target must match:
 //! the app state and every node with a testId (its text, and whether it lies
 //! under an unselected route) after boot and after each step.
 //!

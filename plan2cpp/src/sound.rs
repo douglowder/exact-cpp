@@ -1,4 +1,4 @@
-//! Sounds (`sound`, exact2 LLP 1096) and a `sequence` (LLP 1125) in the C++ target. Each
+//! Sounds (`sound`, Exact LLP 1096) and a `sequence` (LLP 1125) in the C++ target. Each
 //! declared WAV becomes its samples in flash; the runtime's transport (`rt_transport.cpp`)
 //! plays a sequence through the board's speaker. The board runs one gated, unkeyed sequence
 //! whose `play` keeps its defaults past `bpm`: no count-in (`from` 0, `countIn` []), no MIDI

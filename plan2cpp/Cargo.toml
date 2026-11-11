@@ -3,7 +3,7 @@ name = "plan2cpp"
 version = "0.1.0"
 edition = "2021"
 rust-version = "1.97"
-description = "Compiles a Contract plan to app-specific C++ over the contract_rt runtime"
+description = "Compiles an Exact plan to app-specific C++ over the exact_rt runtime"
 publish = false
 
 [dependencies]
@@ -11,10 +11,10 @@ contract = { path = "../exact/contract/cli" }
 exact-kernel = { path = "../exact/kernel" }
 exact-plan = { path = "../exact/plan" }
 exact-runner = { path = "../exact/runner" }
-# The versions exact2 itself locks, for its text and image hosts.
+# The versions Exact itself locks, for its text and image hosts.
 png = "=0.18.1"
 swash = "=0.2.10"
-# Extension files: the versions exact2 locks.
+# Extension files: the versions Exact locks.
 serde_json = "=1.0.151"
 sha2 = "=0.10.9"
 

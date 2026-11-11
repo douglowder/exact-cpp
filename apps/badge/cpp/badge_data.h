@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 
-#include "contract_rt.h"
+#include "exact_rt.h"
 #include "ext_init_badge.h"
 
 namespace badge {

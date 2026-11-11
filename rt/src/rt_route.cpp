@@ -1,4 +1,4 @@
-// The port of exact2's route/src (location.rs, table.rs, router.rs). Each
+// The port of Exact's route/src (location.rs, table.rs, router.rs). Each
 // function keeps the Rust function's name and order of checks, so a refusal
 // names the same reason.
 #include "rt_route.h"

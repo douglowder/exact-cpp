@@ -1,4 +1,4 @@
-// The transport: exact2's `runner/src/transport.rs` for the C++ target's subset. A fill
+// The transport: Exact's `runner/src/transport.rs` for the C++ target's subset. A fill
 // issues every hit in [issued_to, t + 1 s), and the next is due 500 ms before its end. An
 // edit (arguments that differ by value) starts a new segment at the beat reached when the
 // tempo changed, ends every voice not started by its time, and fills again from it. Only the

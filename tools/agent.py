@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Drive the Contract app on the Stopwatch over USB serial (JSON agent lines).
+"""Drive the Exact app on the Stopwatch over USB serial (JSON agent lines).
 
 Usage:
   agent.py PORT state | stats | tree
