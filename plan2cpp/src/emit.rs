@@ -8,6 +8,7 @@ use std::path::Path;
 use exact_kernel::{NodeType, PropId, StyleId};
 use exact_plan::{BindingKind, Code, EventKind, Plan, RegionKind, TypeKind};
 
+use crate::anim;
 use crate::assets;
 use crate::code::{self, cpp_string, function};
 use crate::ext;
@@ -69,6 +70,7 @@ const STYLES: &[&str] = &[
     "OverflowY",
     "WhiteSpace",
     "TextOverflow",
+    "Animation",
 ];
 
 /// Props the runtime reads; accessibility props are kept by name and not painted.
@@ -213,7 +215,6 @@ fn check_plan(plan: &Plan) -> Result<(), String> {
 fn unsupported_features(plan: &Plan) -> Result<(), String> {
     let features = [
         (plan.surfaces.len(), "draws canvas surfaces"),
-        (plan.keyframes.len(), "animates with `@keyframes`"),
         (
             plan.profiles.len(),
             "declares colour profiles (`@color-profile`)",
@@ -284,6 +285,7 @@ struct Counts {
     tokens: usize,
     sounds: usize,
     sequences: usize,
+    animations: usize,
 }
 
 /// The whole C++ file for `plan`, compiled from `source`; its fonts and images
@@ -371,26 +373,31 @@ pub fn emit(plan: &Plan, source: &Path) -> Result<String, String> {
     ext::tables(&extensions, &uses, &mut s);
     let tokens = theme::tables(plan, &mut s)?;
     let sounds = sound::tables(plan, root, &mut s)?;
-    let none = "{nullptr, nullptr, nullptr, nullptr}".to_string();
-    let _ = writeln!(
-        s,
-        "const rt::Sequence kSequences[] = {{{}}};",
-        if sequences.is_empty() {
-            none
-        } else {
-            sequences.join(", ")
-        }
-    );
+    let animations = anim::tables(plan, &mut s)?;
+    sequence_table(&sequences, &mut s);
     let counts = Counts {
         extensions: extensions.len(),
         uses: uses.len(),
         tokens,
         sounds,
         sequences: sequences.len(),
+        animations,
     };
     tables(plan, &regions, &needs(plan)?, &counts, &mut s);
     s.push_str("}  // namespace app\n");
     Ok(s)
+}
+
+fn sequence_table(sequences: &[String], s: &mut String) {
+    let _ = writeln!(
+        s,
+        "const rt::Sequence kSequences[] = {{{}}};",
+        if sequences.is_empty() {
+            "{nullptr, nullptr, nullptr, nullptr}".to_string()
+        } else {
+            sequences.join(", ")
+        }
+    );
 }
 
 fn idx<T: Into<usize>>(v: Option<T>) -> String {
@@ -686,9 +693,9 @@ fn tables(
     );
     let _ = writeln!(
         s,
-        "extern const rt::App kApp = {{kSlots, kSlotNames, {}, kDerives, kDeriveNames, {}, kResources, {}, kActions, kActionNames, {}, kBindings, kNodes, {}, kHandlers, kRegions, {}, kTimers, {}, {}, {}, kCommands, {}, kTypes, kFields, kSlotTypes, kDeriveTypes, kSlotOwners, kActionParams, kArgs, kRoutes, {}, {}, kGlyphs, kGlyphBits, kKerns, kFontFiles, kFaces, kFaceCount, kStackFamily, kStackCount, kImages, kImageCount, kMutationSlots, {}, kExtensions, {}, kExtensionSources, {}, kTokens, {}, kSounds, {}, kSequences, {}}};",
+        "extern const rt::App kApp = {{kSlots, kSlotNames, {}, kDerives, kDeriveNames, {}, kResources, {}, kActions, kActionNames, {}, kBindings, kNodes, {}, kHandlers, kRegions, {}, kTimers, {}, {}, {}, kCommands, {}, kTypes, kFields, kSlotTypes, kDeriveTypes, kSlotOwners, kActionParams, kArgs, kRoutes, {}, {}, kGlyphs, kGlyphBits, kKerns, kFontFiles, kFaces, kFaceCount, kStackFamily, kStackCount, kImages, kImageCount, kMutationSlots, {}, kExtensions, {}, kExtensionSources, {}, kTokens, {}, kSounds, {}, kSequences, {}, kEaseStops, kEases, kKeyValues, kAnimations, kAnimationValues, {}}};",
         plan.slots.len(), plan.derives.len(), plan.resources.len(), plan.actions.len(), plan.nodes.len(), plan.regions.len(), plan.timers.len(),
         needs.keys, needs.touch, needs.commands.len(), plan.routes.len(), idx(plan.router.map(|r| r.0 as usize)),
-        plan.mutations.len(), counts.extensions, counts.uses, counts.tokens, counts.sounds, counts.sequences
+        plan.mutations.len(), counts.extensions, counts.uses, counts.tokens, counts.sounds, counts.sequences, counts.animations
     );
 }

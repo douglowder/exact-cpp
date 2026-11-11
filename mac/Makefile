@@ -19,6 +19,7 @@ CXXFLAGS := -std=c++17 -O2 $(WARN) -I. -I../rt/src -I../rt-mac -I../apps/level/c
 SAN := -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer -fno-sanitize-recover=all
 
 CORE := \
+  ../rt/src/rt_animation.cpp \
   ../rt/src/rt_value.cpp \
   ../rt/src/rt_view.cpp \
   ../rt/src/rt_runtime.cpp \

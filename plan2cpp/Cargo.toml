@@ -9,6 +9,7 @@ publish = false
 [dependencies]
 contract = { path = "../exact/contract/cli" }
 exact-kernel = { path = "../exact/kernel" }
+exact-motion = { path = "../exact/motion" }
 exact-plan = { path = "../exact/plan" }
 exact-runner = { path = "../exact/runner" }
 # The versions Exact itself locks, for its text and image hosts.

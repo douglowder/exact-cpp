@@ -58,7 +58,7 @@ In a clone made without `--recursive`, run `git submodule update --init --recurs
 | `rt/` | The core: values, layout, paint, timers, the transport that plays a `sequence`, the agent; the `Board` interface and its defaults. An Arduino library (`library.properties`) |
 | `rt-mac/` | The Mac boards: `Board` (a software RGB565 surface in bands, the M5GFX FreeSans data, a pseudo-terminal link) and `HeadlessBoard` (link and clock only); a manual clock; a CoreAudio speaker |
 | `mac/` | The Mac programs for each app, `-mac` and `-headless`; and `ExactMac` (`container.mm`), one window that runs any app's bundle from its App menu |
-| `rt-test/` | `route_check` (the C++ route port against Exact's route corpus), `ext_check` (extension binding), `data_check` (`data-*` props, on the test app in `marks/`) and `lookup_check` (resources with arguments and placeholders, on the test app in `lookup/`) |
+| `rt-test/` | `route_check` (the C++ route port against Exact's route corpus), `ext_check` (extension binding), `data_check` (`data-*` props, on the test app in `marks/`), `lookup_check` (resources with arguments and placeholders, on the test app in `lookup/`) and `anim_check` (CSS animations, on the test app in `anim/`, against Exact's motion crate) |
 | `level-data/`, `level-tests/` | The level app on Exact's runner (the IMU attitude filter; keys, touch, hysteresis, leak): the reference behavior |
 | `badge-ref/` | Runs a script of the badge app on Exact's runner: the reference for routes |
 | `sound-ref/` | Runs a script of an app with sounds on Exact's runner: the reference for the voices |
@@ -120,6 +120,18 @@ cargo run -p sound-ref -- apps/metronome/app.contract apps/metronome/steps.json 
 `contract verify apps/level/app.contract` checks the runner against the Lean semantics. Build
 the CLI with `cargo build --release -p contract --bin contract --manifest-path exact/Cargo.toml`;
 it needs Lean (`elan default leanprover/lean4:v4.34.1`).
+
+## Animations
+
+CSS animations (`@keyframes` and `animation`) animate opacity, `color`, `background-color`, the
+border colors and `translate`; a translate moves the node and its subtree as drawn, and where
+it takes presses. plan2cpp parses each string literal of the plan that reads as an `animation`
+value, with Exact's motion crate, into tables, so the board parses no CSS. A node's `animation`
+value is looked up by its text: a value made at run time from other text is logged once and
+plays nothing. plan2cpp refuses, by name, an animation of any other property. The board samples
+each animation in closed form, as Exact's motion crate does: `anim_check` compares the two at
+fixed times (`rt-test/anim/reference.h`, which `PLAN2CPP_BLESS=1 cargo test -p plan2cpp --test
+anim` writes).
 
 ## Host extensions (prototype)
 

@@ -141,7 +141,7 @@ enum class S : uint8_t {
   BorderColorTop, BorderColorRight, BorderColorBottom, BorderColorLeft, FontSize, FontWeight,
   TextAlign, TextColor, BorderStyleTop, BorderStyleRight, BorderStyleBottom, BorderStyleLeft,
   Appearance, MarginTop, MarginRight, MarginBottom, MarginLeft, RowGap, ColumnGap, Opacity,
-  LineHeight, FontFamily, ObjectFit, OverflowX, OverflowY, WhiteSpace, TextOverflow,
+  LineHeight, FontFamily, ObjectFit, OverflowX, OverflowY, WhiteSpace, TextOverflow, Animation,
 };
 
 // A literal binding value, constant-initialized in the generated tables.
@@ -311,6 +311,55 @@ struct Sequence {
   CodeFn bpm;
 };
 
+// CSS animations (Exact LLP 1055 D5), parsed by plan2cpp from the plan's
+// `@keyframes` rules and its string literals that read as an `animation`.
+
+// A timing function. kind 0: linear; 1: cubic-bezier(a, b, c, d); 2: steps(a,
+// b) with b 0 jump-start, 1 jump-end, 2 jump-none, 3 jump-both; 3: linear()
+// through `stop_count` (input, output) pairs of `App::ease_stops` from pair
+// `stop_start`.
+struct Ease {
+  uint8_t kind;
+  double a, b, c, d;
+  uint16_t stop_start, stop_count;
+};
+
+// The properties the board animates.
+enum class AP : uint8_t {
+  Translate, Opacity, Color, BackgroundColor, BorderTopColor, BorderRightColor, BorderBottomColor,
+  BorderLeftColor,
+};
+
+// One property's value in one keyframe: at `offset` (0–1), with the
+// keyframe's own easing (an index of `App::eases`, or -1 for the
+// animation's). A translate is x px, y px, x %, y %; a color premultiplied
+// sRGB red, green, blue, alpha (0–1); opacity its first component.
+struct KeyValue {
+  double offset;
+  int16_t ease;
+  AP prop;
+  double v[4];
+};
+
+// One animation: its name, timing (ms; `iterations` may be INFINITY),
+// `direction` (0 normal, 1 reverse, 2 alternate, 3 alternate-reverse),
+// `fill` (0 none, 1 forwards, 2 backwards, 3 both), easing, play state, and
+// its keyframes' values, in offset order, from `value_start`.
+struct Animation {
+  const char* name;
+  double duration_ms, delay_ms, iterations;
+  uint8_t direction, fill;
+  uint16_t ease;
+  bool paused;
+  uint16_t value_start, value_count;
+};
+
+// An `animation` value by its text: `count` animations from `start`.
+struct AnimationValue {
+  const char* text;
+  uint16_t start, count;
+};
+
 struct App {
   const CodeFn* slots;
   const char* const* slot_names;
@@ -369,6 +418,13 @@ struct App {
   uint16_t sound_count;
   const Sequence* sequences;
   uint16_t sequence_count;
+  // CSS animations: the `animation` values the app can show (rt_animation.h).
+  const double* ease_stops;
+  const Ease* eases;
+  const KeyValue* key_values;
+  const Animation* animations;
+  const AnimationValue* animation_values;
+  uint16_t animation_value_count;
 };
 
 struct Rect {
@@ -644,6 +700,7 @@ class Runtime {
   // The transport reads the gate and `play` in the root scope after each commit, and
   // journals what it drops.
   friend class Transport;
+  friend class View;
   struct Write {
     uint64_t slot;
     Scope* scope;
