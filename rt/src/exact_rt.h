@@ -12,6 +12,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include <cmath>  // INFINITY: an infinite `Animation::iterations`
 #include <memory>
 #include <string>
 #include <utility>
