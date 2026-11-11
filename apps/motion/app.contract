@@ -1,0 +1,111 @@
+// A demo of CSS animations on the M5Stack Stopwatch (468 x 466 round screen): three scenes
+// of keyframes the board samples each frame, with no action running per frame. BtnA/left is
+// ArrowLeft (the scene before), BtnB/right ArrowRight (the next), both briefly Enter (pause
+// or play every animation where it is). A scene rises in each time it shows; the dots at the
+// bottom name it, and a tap on one shows it.
+
+// A scene's entrance.
+keyframes enter
+  from opacity=0 translate="0px 24px"
+  to opacity=1 translate="0px 0px"
+
+// Easing: one dot each way along its track.
+keyframes slide
+  from translate="0px 0px"
+  to translate="228px 0px"
+
+// Color: the disc's hue around the wheel, and its ring the other way.
+keyframes hue
+  from background-color="#ff453a"
+  25% background-color="#ff9f0a"
+  50% background-color="#30d158"
+  75% background-color="#0a84ff"
+  to background-color="#ff453a"
+
+keyframes ring
+  from border-top-color="#0a84ff" border-right-color="#0a84ff" border-bottom-color="#0a84ff" border-left-color="#0a84ff"
+  50% border-top-color="#ff9f0a" border-right-color="#ff9f0a" border-bottom-color="#ff9f0a" border-left-color="#ff9f0a"
+  to border-top-color="#0a84ff" border-right-color="#0a84ff" border-bottom-color="#0a84ff" border-left-color="#0a84ff"
+
+// Pulse: a word that breathes, and dots that light in turn.
+keyframes breathe
+  from opacity=0.25 color="#64d2ff"
+  to opacity=1 color="#ffffff"
+
+keyframes blink
+  from opacity=0.15
+  50% opacity=1
+  to opacity=0.15
+
+style Label
+  position="absolute" left=0 width=468 text-align="center" color="ink.primary"
+
+style Name
+  position="absolute" left=56 width=100 font-size=14 color="ink.caption"
+
+style Track
+  position="absolute" left=164 width=252 height=4 border-radius=2 background-color="surface.track"
+
+style Dot
+  position="absolute" left=160 width=28 height=28 border-radius=14
+
+style Pip
+  position="absolute" top=402 width=16 height=16 border-radius=8
+
+component Motion
+  state scene = 0
+  state paused = false
+
+  action show(n: number)
+    scene = n
+  action before
+    scene = scene == 0 ? 2 : scene - 1
+  action next
+    scene = scene == 2 ? 0 : scene + 1
+  action pause
+    paused = not paused
+  action onKey(k: string)
+    if k == "ArrowLeft"
+      before()
+      preventDefault()
+    if k == "ArrowRight"
+      next()
+      preventDefault()
+    if k == "Enter"
+      pause()
+      preventDefault()
+
+  view
+    column autofocus=true key=onKey testId="motion" position="relative" width=468 height=466 background-color="surface.screen"
+      column position="absolute" left=2 top=1 width=464 height=464 border-radius=232 background-color="surface.dial"
+      if scene == 0
+        column testId="easing" position="absolute" left=0 top=0 width=468 height=466 animation="enter 450ms ease-out"
+          text "Easing" class=Label top=64 font-size=30 font-weight=700
+          text "linear" class=Name top=150
+          column class=Track top=162
+          column class=Dot top=150 background-color="#ff453a" testId="dot-linear" animation=(paused ? "slide 1.6s linear infinite alternate paused" : "slide 1.6s linear infinite alternate")
+          text "ease-in-out" class=Name top=206
+          column class=Track top=218
+          column class=Dot top=206 background-color="#ff9f0a" testId="dot-ease" animation=(paused ? "slide 1.6s ease-in-out infinite alternate paused" : "slide 1.6s ease-in-out infinite alternate")
+          text "overshoot" class=Name top=262
+          column class=Track top=274
+          column class=Dot top=262 background-color="#30d158" testId="dot-back" animation=(paused ? "slide 1.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite alternate paused" : "slide 1.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite alternate")
+          text "steps(6)" class=Name top=318
+          column class=Track top=330
+          column class=Dot top=318 background-color="#0a84ff" testId="dot-steps" animation=(paused ? "slide 1.6s steps(6) infinite alternate paused" : "slide 1.6s steps(6) infinite alternate")
+      if scene == 1
+        column testId="color" position="absolute" left=0 top=0 width=468 height=466 animation="enter 450ms ease-out"
+          text "Color" class=Label top=64 font-size=30 font-weight=700
+          column testId="ring" position="absolute" left=114 top=118 width=240 height=240 box-sizing="border-box" border-radius=120 border-width=6 border-style="solid" border-color="#0a84ff" animation=(paused ? "ring 3s ease-in-out infinite paused" : "ring 3s ease-in-out infinite")
+          column testId="disc" position="absolute" left=144 top=148 width=180 height=180 border-radius=90 background-color="#ff453a" animation=(paused ? "hue 6s linear infinite paused" : "hue 6s linear infinite")
+      if scene == 2
+        column testId="pulse" position="absolute" left=0 top=0 width=468 height=466 animation="enter 450ms ease-out"
+          text "Pulse" class=Label top=64 font-size=30 font-weight=700
+          text "Exact" class=Label top=170 font-size=64 font-weight=700 testId="word" animation=(paused ? "breathe 1.4s ease-in-out infinite alternate paused" : "breathe 1.4s ease-in-out infinite alternate")
+          column position="absolute" left=180 top=290 width=24 height=24 border-radius=12 background-color="#ffffff" testId="blink-1" animation=(paused ? "blink 1.2s ease-in-out infinite paused" : "blink 1.2s ease-in-out infinite")
+          column position="absolute" left=222 top=290 width=24 height=24 border-radius=12 background-color="#ffffff" testId="blink-2" animation=(paused ? "blink 1.2s ease-in-out 200ms infinite backwards paused" : "blink 1.2s ease-in-out 200ms infinite backwards")
+          column position="absolute" left=264 top=290 width=24 height=24 border-radius=12 background-color="#ffffff" testId="blink-3" animation=(paused ? "blink 1.2s ease-in-out 400ms infinite backwards paused" : "blink 1.2s ease-in-out 400ms infinite backwards")
+      button appearance="none" press=show(0) aria-label="Easing" testId="pip-0" class=Pip left=202 background-color=(scene == 0 ? "dot.on" : "dot.off")
+      button appearance="none" press=show(1) aria-label="Color" testId="pip-1" class=Pip left=226 background-color=(scene == 1 ? "dot.on" : "dot.off")
+      button appearance="none" press=show(2) aria-label="Pulse" testId="pip-2" class=Pip left=250 background-color=(scene == 2 ? "dot.on" : "dot.off")
+      text (paused ? "Paused   Both play" : "A / B scene   Both pause") class=Label top=368 font-size=16 color=(paused ? "status.paused" : "ink.hint") testId="hint"
