@@ -143,7 +143,10 @@ bool Runtime::boot(const std::string& launch) {
   Ctx c{this, nullptr, false, &view_->root_scope()};
   started_us_ = board_.micros();
   resources_.assign(app_.resource_count, V());
-  for (uint16_t i = 0; i < app_.resource_count; ++i) resources_[i] = answer(i);
+  asked_.assign(app_.resource_count, {});
+  for (uint16_t i = 0; i < app_.resource_count; ++i) {
+    if (app_.resources[i].arg_count == 0) resources_[i] = answer(i);
+  }
   slots_.assign(app_.slot_count, V());
   derives_.assign(app_.derive_count, V());
   derive_valid_.assign(app_.derive_count, false);
@@ -160,6 +163,8 @@ bool Runtime::boot(const std::string& launch) {
     if (i == app_.router_slot || (app_.slot_owners && app_.slot_owners[i] >= 0)) continue;
     slots_[i] = app_.slots[i](c);
   }
+  // Resources with arguments ask once the slots their arguments read hold their values.
+  reask();
   timer_due_.assign(app_.timer_count, 0);
   for (uint16_t i = 0; i < app_.timer_count; ++i) timer_due_[i] = now_ms + app_.timers[i].interval_ms;
   if (!view_->begin()) return false;
@@ -196,12 +201,52 @@ V Runtime::ask(const char* source, const V* args, int argc) {
 // extension.
 V Runtime::answer(uint16_t i) {
   const Resource& r = app_.resources[i];
-  if (std::strcmp(r.source, "exactTime") != 0) return ask(r.source, nullptr, 0);
+  if (std::strcmp(r.source, "exactTime") != 0) {
+    asked_[i] = resource_args(i);
+    return ask(r.source, asked_[i].data(), static_cast<int>(asked_[i].size()));
+  }
   int64_t epoch = 0;
   int offset = 0;
   if (!board_.wall_clock(epoch, offset)) epoch = 0;
   const double at_zero = epoch ? std::round((static_cast<double>(epoch) - elapsed_ms()) / 1000) * 1000 : 0;
   return record(app_, r.ty, {{"epochAtZero", V::num(at_zero)}, {"utcOffset", V::num(offset)}});
+}
+
+std::vector<V> Runtime::resource_args(uint16_t i) {
+  const Resource& r = app_.resources[i];
+  Ctx c{this, nullptr, false, &view_->root_scope()};
+  std::vector<V> args;
+  args.reserve(r.arg_count);
+  for (uint16_t k = 0; k < r.arg_count; ++k) args.push_back(app_.args[r.arg_start + k](c));
+  return args;
+}
+
+static bool same_args(const std::vector<V>& a, const std::vector<V>& b) {
+  if (a.size() != b.size()) return false;
+  for (size_t k = 0; k < a.size(); ++k) {
+    if (!equal(a[k], b[k])) return false;
+  }
+  return true;
+}
+
+// Asks each resource whose arguments changed since it last asked. A new
+// answer can change another resource's arguments (`station(selectedId,
+// location)` reads `location`), so it passes again until nothing changes,
+// at most once per resource and once more.
+void Runtime::reask() {
+  for (uint16_t pass = 0; pass <= app_.resource_count; ++pass) {
+    bool asked = false;
+    for (uint16_t i = 0; i < app_.resource_count; ++i) {
+      if (app_.resources[i].arg_count == 0 || same_args(resource_args(i), asked_[i])) continue;
+      asked = true;
+      V next = answer(i);
+      if (equal(next, resources_[i])) continue;
+      resources_[i] = next;
+      derive_valid_.assign(app_.derive_count, false);
+    }
+    if (!asked) return;
+  }
+  log("resource arguments did not settle");
 }
 
 void Runtime::send(uint16_t m, const char* source, const V* args, int argc) {
@@ -236,6 +281,7 @@ void Runtime::command(const char* name, const V* args, int argc) {
 
 void Runtime::settle() {
   derive_valid_.assign(app_.derive_count, false);
+  reask();
   view_->update();
   refocus();
   ++stats.commits;

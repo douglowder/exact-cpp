@@ -164,9 +164,15 @@ fn check_plan(plan: &Plan) -> Result<(), String> {
         }
     }
     for r in &plan.resources {
-        if r.args.len > 0 || r.placeholder.is_some() {
+        if r.placeholder.is_some() || r.placeholder_value.len > 0 {
             return Err(format!(
-                "resource {} takes arguments; not in the C++ target",
+                "resource {} declares a placeholder (`else`); not in the C++ target",
+                plan.str(r.name)
+            ));
+        }
+        if r.each.len > 0 {
+            return Err(format!(
+                "resource {} asks once for each item of a list (`for`); not in the C++ target",
                 plan.str(r.name)
             ));
         }
@@ -647,10 +653,12 @@ fn tables(
         .iter()
         .map(|r| {
             format!(
-                "{{{}, {}, {}}}",
+                "{{{}, {}, {}, {}, {}}}",
                 cpp_string(plan.str(r.name)),
                 cpp_string(plan.str(r.source)),
-                r.ty.0
+                r.ty.0,
+                r.args.start,
+                r.args.len
             )
         })
         .collect();
@@ -676,7 +684,7 @@ fn tables(
         s,
         "const rt::Resource kResources[] = {{{}}};",
         if resources.is_empty() {
-            "{\"\", \"\", 0}".into()
+            "{\"\", \"\", 0, 0, 0}".into()
         } else {
             resources.join(", ")
         }
