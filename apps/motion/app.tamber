@@ -1,0 +1,14 @@
+// The motion demo's colors (Exact LLP 1121): the board has one scheme, so each token is one
+// color by design (`scheme=fixed`). Keyframes name their colors themselves.
+tamber motion
+
+theme
+  surface.screen = #000000  scheme=fixed
+  surface.dial = #0c0c10  scheme=fixed
+  surface.track = #1c1c24  scheme=fixed
+  ink.primary = #ffffff  scheme=fixed
+  ink.caption = #a7a7b0  scheme=fixed
+  ink.hint = #8a8a94  scheme=fixed
+  dot.on = #ffffff  scheme=fixed
+  dot.off = #3a3a46  scheme=fixed
+  status.paused = #ff9f0a  scheme=fixed
