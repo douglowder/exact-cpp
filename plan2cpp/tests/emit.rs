@@ -318,6 +318,22 @@ fn fixed_design_tokens_become_the_boards_token_table() {
     assert!(cpp.contains(r#"V::str("ink.off")"#), "{cpp}");
 }
 
+/// C++ has no empty array, so every table of an app with nothing in it
+/// holds a placeholder row.
+#[test]
+fn an_app_with_no_types_writes_no_empty_array() {
+    let cpp = plan2cpp::emit(
+        &plan("component A\n  view\n    text \"x\"\n"),
+        std::path::Path::new("a.contract"),
+    )
+    .unwrap_or_else(|e| panic!("{e}"));
+    assert!(!cpp.contains("[] = {};"), "{cpp}");
+    assert!(
+        cpp.contains("const rt::Type kTypes[] = {{rt::Type::K::Other, -1, 0, 0}};"),
+        "{cpp}"
+    );
+}
+
 #[test]
 fn an_app_without_a_design_has_an_empty_token_table() {
     let cpp = plan2cpp::emit(
