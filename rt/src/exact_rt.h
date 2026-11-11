@@ -210,12 +210,17 @@ struct Timer {
 
 // A resource asks `source` with its arguments, `arg_count` code functions
 // from `App::args` at `arg_start`, and asks again when their values change.
+// While the source has not answered it shows its placeholder row's answer
+// (`else source(args)`), else `fallback` (`else empty(…)`, or its type's
+// zero); a placeholder row has neither, and shows none.
 struct Resource {
   const char* name;
   const char* source;
   uint16_t ty;
   uint16_t arg_start;
   uint16_t arg_count;
+  int16_t placeholder;  // a resource index, or -1
+  CodeFn fallback;      // or nullptr
 };
 
 // The app's fonts, rasterized by plan2cpp (4-bit coverage, ASCII and
@@ -662,6 +667,7 @@ class Runtime {
   std::string nodes_json();
   std::string extensions_json();
   V ask(const char* source, const V* args, int argc);
+  bool ask(const char* source, const V* args, int argc, V& out);
   V router_value(const route::Router& r) const;
   bool router_of(const V& v, route::Router& out) const;
   route::Entry entry_of_value(const V& v, bool* ok) const;

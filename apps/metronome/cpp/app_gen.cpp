@@ -541,6 +541,7 @@ const rt::Node kNodes[] = {
 };
 const rt::Handler kHandlers[] = {{rt::E::Key, 4, 0, 0}, {rt::E::Press, 1, 0, 0}, {rt::E::Press, 0, 0, 0}, {rt::E::Press, 2, 0, 0}, {rt::E::Press, 3, 0, 0}};
 const rt::CodeFn kArgs[] = {nullptr};
+const rt::Resource kResources[] = {{"", "", 0, 0, 0, -1, nullptr}};
 const rt::Type kTypes[] = {{rt::Type::K::Other, -1, 0, 0}, {rt::Type::K::Other, -1, 0, 0}, {rt::Type::K::Record, -1, 0, 9}, {rt::Type::K::List, 2, 0, 0}, {rt::Type::K::Record, -1, 9, 5}, {rt::Type::K::Other, -1, 0, 0}};
 const rt::Field kFields[] = {{"beat", 0}, {"src", 1}, {"gain", 0}, {"group", 1}, {"note", 0}, {"velocity", 0}, {"channel", 0}, {"duration", 0}, {"haptic", 1}, {"beats", 0}, {"loops", 0}, {"offset", 0}, {"output", 1}, {"steps", 3}};
 const rt::Glyph kGlyphs[] = {
@@ -582,7 +583,6 @@ const rt::Sound kSounds[] = {{"assets/click-high.wav", kSound0, 662, 22050}, {"a
 const rt::Sequence kSequences[] = {{"click", sequence_gate_0, sequence_tracks_0, sequence_bpm_0}};
 const rt::Region kRegions[] = {{rt::R::When, -1, -1, 0, nullptr, nullptr, 0, 0}};
 const rt::Timer kTimers[] = {{0, 0, false}};
-const rt::Resource kResources[] = {{"", "", 0, 0, 0}};
 const uint16_t kSlotTypes[] = {5, 0, 5};
 const uint16_t kDeriveTypes[] = {0};
 const int16_t kSlotOwners[] = {-1, -1, -1};

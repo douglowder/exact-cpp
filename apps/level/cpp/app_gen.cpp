@@ -296,6 +296,8 @@ static V region_0(Ctx& c) {
   return sp > 0 ? st[sp - 1] : V();
 }
 
+static V fallback_0(Ctx&) { return V::record({V::num(0.0), V::num(0.0)}); }
+
 static V binding_20(Ctx& c) {
   (void)c;
   V st[1]; int sp = 0;
@@ -1165,6 +1167,7 @@ const rt::Node kNodes[] = {
 };
 const rt::Handler kHandlers[] = {{rt::E::Key, 4, 0, 0}, {rt::E::Press, 1, 0, 0}, {rt::E::Press, 3, 0, 0}};
 const rt::CodeFn kArgs[] = {nullptr};
+const rt::Resource kResources[] = {{"tilt", "attitude", 1, 0, 0, -1, fallback_0}};
 const rt::Type kTypes[] = {{rt::Type::K::Other, -1, 0, 0}, {rt::Type::K::Record, -1, 0, 2}, {rt::Type::K::Other, -1, 0, 0}, {rt::Type::K::Other, -1, 0, 0}};
 const rt::Field kFields[] = {{"pitch", 0}, {"roll", 0}};
 const rt::Glyph kGlyphs[] = {
@@ -1204,7 +1207,6 @@ const rt::Sound kSounds[] = {{nullptr, nullptr, 0, 0}};
 const rt::Sequence kSequences[] = {{nullptr, nullptr, nullptr, nullptr}};
 const rt::Region kRegions[] = {{rt::R::When, 0, -1, 5, region_0, nullptr, 0, 2}};
 const rt::Timer kTimers[] = {{50, 0, false}};
-const rt::Resource kResources[] = {{"tilt", "attitude", 1, 0, 0}};
 const uint16_t kSlotTypes[] = {2, 2, 3, 0, 0, 3, 0};
 const uint16_t kDeriveTypes[] = {0, 0};
 const int16_t kSlotOwners[] = {-1, -1, -1, -1, -1, -1, -1};

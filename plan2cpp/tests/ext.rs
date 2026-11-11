@@ -379,8 +379,8 @@ fn the_marks_apps_words_bind_to_its_extension_and_reach_the_runtime() {
     );
 }
 
-/// The lookup app's resources bind to its extension with their arguments, and
-/// its committed tables are what plan2cpp makes now.
+/// The lookup app's resources bind to its extension with their arguments and
+/// placeholders, and its committed tables are what plan2cpp makes now.
 #[test]
 fn the_lookup_apps_resources_with_arguments_bind_to_its_extension() {
     let source = repo().join("rt-test/lookup/app.contract");
@@ -390,10 +390,17 @@ fn the_lookup_apps_resources_with_arguments_bind_to_its_extension() {
     let sources: Vec<&str> = uses.iter().map(|u| u.source.as_str()).collect();
     assert_eq!(sources, ["lookup"]);
     let cpp = plan2cpp::emit(&plan, &source).unwrap_or_else(|e| panic!("{e}"));
-    assert!(
-        cpp.contains(r#"{{"entry", "lookup", 2, 0, 2}, {"after", "lookup", 2, 2, 2}}"#),
-        "each resource row carries its arguments' range in kArgs"
-    );
+    for needle in [
+        // Each row: its arguments' range in kArgs, its placeholder row, its fallback.
+        r#"{"entry", "lookup", 2, 0, 2, -1, fallback_0}"#,
+        r#"{"held", "lookup", 2, 4, 2, 5, nullptr}"#,
+        r#"{"held#else", "lookup", 2, 10, 2, -1, nullptr}"#,
+        // A declared `else empty(…)` value, and the type's zero.
+        r#"static V fallback_3(Ctx&) { return V::record({V::str("preset"), V::num(0.0)}); }"#,
+        r#"static V fallback_4(Ctx&) { return V::record({V::str(""), V::num(0.0)}); }"#,
+    ] {
+        assert!(cpp.contains(needle), "missing {needle}");
+    }
     let committed = std::fs::read_to_string(repo().join("rt-test/lookup/app_gen.cpp"))
         .unwrap_or_else(|e| panic!("{e}"));
     let made = cpp.replace(&source.display().to_string(), "rt-test/lookup/app.contract");

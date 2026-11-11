@@ -6,6 +6,7 @@ mod code;
 pub mod dump;
 pub mod emit;
 pub mod ext;
+mod resources;
 mod sound;
 mod theme;
 

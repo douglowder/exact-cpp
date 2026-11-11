@@ -21,6 +21,14 @@ static V slot_1(Ctx& c) {
   return sp > 0 ? st[sp - 1] : V();
 }
 
+static V slot_2(Ctx& c) {
+  (void)c;
+  V st[1]; int sp = 0;
+  st[sp++] = V::str("quiet");
+  return sp > 0 ? st[sp - 1] : V();
+  return sp > 0 ? st[sp - 1] : V();
+}
+
 static V derive_0(Ctx& c) {
   (void)c;
   V st[2]; int sp = 0;
@@ -47,6 +55,15 @@ static V action_1(Ctx& c) {
   V st[1]; int sp = 0;
   st[sp++] = V::str("b");
   c.write(1, st[--sp]);
+  return sp > 0 ? st[sp - 1] : V();
+  return sp > 0 ? st[sp - 1] : V();
+}
+
+static V action_2(Ctx& c) {
+  (void)c;
+  V st[1]; int sp = 0;
+  st[sp++] = V::str("spoken");
+  c.write(2, st[--sp]);
   return sp > 0 ? st[sp - 1] : V();
   return sp > 0 ? st[sp - 1] : V();
 }
@@ -84,6 +101,78 @@ static V arg_3(Ctx& c) {
   return sp > 0 ? st[sp - 1] : V();
 }
 
+static V arg_4(Ctx& c) {
+  (void)c;
+  V st[1]; int sp = 0;
+  st[sp++] = c.slot(0);
+  return sp > 0 ? st[sp - 1] : V();
+  return sp > 0 ? st[sp - 1] : V();
+}
+
+static V arg_5(Ctx& c) {
+  (void)c;
+  V st[1]; int sp = 0;
+  st[sp++] = c.slot(2);
+  return sp > 0 ? st[sp - 1] : V();
+  return sp > 0 ? st[sp - 1] : V();
+}
+
+static V arg_6(Ctx& c) {
+  (void)c;
+  V st[1]; int sp = 0;
+  st[sp++] = c.slot(0);
+  return sp > 0 ? st[sp - 1] : V();
+  return sp > 0 ? st[sp - 1] : V();
+}
+
+static V arg_7(Ctx& c) {
+  (void)c;
+  V st[1]; int sp = 0;
+  st[sp++] = c.slot(2);
+  return sp > 0 ? st[sp - 1] : V();
+  return sp > 0 ? st[sp - 1] : V();
+}
+
+static V arg_8(Ctx& c) {
+  (void)c;
+  V st[1]; int sp = 0;
+  st[sp++] = c.slot(0);
+  return sp > 0 ? st[sp - 1] : V();
+  return sp > 0 ? st[sp - 1] : V();
+}
+
+static V arg_9(Ctx& c) {
+  (void)c;
+  V st[1]; int sp = 0;
+  st[sp++] = c.slot(2);
+  return sp > 0 ? st[sp - 1] : V();
+  return sp > 0 ? st[sp - 1] : V();
+}
+
+static V arg_10(Ctx& c) {
+  (void)c;
+  V st[1]; int sp = 0;
+  st[sp++] = V::num(0.0);
+  return sp > 0 ? st[sp - 1] : V();
+  return sp > 0 ? st[sp - 1] : V();
+}
+
+static V arg_11(Ctx& c) {
+  (void)c;
+  V st[1]; int sp = 0;
+  st[sp++] = V::str("held");
+  return sp > 0 ? st[sp - 1] : V();
+  return sp > 0 ? st[sp - 1] : V();
+}
+
+static V fallback_0(Ctx&) { return V::record({V::str(""), V::num(0.0)}); }
+
+static V fallback_1(Ctx&) { return V::record({V::str(""), V::num(0.0)}); }
+
+static V fallback_3(Ctx&) { return V::record({V::str("preset"), V::num(0.0)}); }
+
+static V fallback_4(Ctx&) { return V::record({V::str(""), V::num(0.0)}); }
+
 static V binding_2(Ctx& c) {
   (void)c;
   V st[1]; int sp = 0;
@@ -102,9 +191,36 @@ static V binding_4(Ctx& c) {
   return sp > 0 ? st[sp - 1] : V();
 }
 
-const rt::CodeFn kSlots[] = {slot_0, slot_1};
+static V binding_16(Ctx& c) {
+  (void)c;
+  V st[1]; int sp = 0;
+  st[sp++] = c.resource(2);
+  st[sp - 1] = st[sp - 1].field(0);
+  return sp > 0 ? st[sp - 1] : V();
+  return sp > 0 ? st[sp - 1] : V();
+}
+
+static V binding_18(Ctx& c) {
+  (void)c;
+  V st[1]; int sp = 0;
+  st[sp++] = c.resource(3);
+  st[sp - 1] = st[sp - 1].field(0);
+  return sp > 0 ? st[sp - 1] : V();
+  return sp > 0 ? st[sp - 1] : V();
+}
+
+static V binding_20(Ctx& c) {
+  (void)c;
+  V st[1]; int sp = 0;
+  st[sp++] = c.resource(4);
+  st[sp - 1] = st[sp - 1].field(0);
+  return sp > 0 ? st[sp - 1] : V();
+  return sp > 0 ? st[sp - 1] : V();
+}
+
+const rt::CodeFn kSlots[] = {slot_0, slot_1, slot_2};
 const rt::CodeFn kDerives[] = {derive_0};
-const rt::CodeFn kActions[] = {action_0, action_1};
+const rt::CodeFn kActions[] = {action_0, action_1, action_2};
 const rt::Binding kBindings[] = {
   {rt::Target{false, static_cast<uint8_t>(rt::S::Display)}, nullptr, rt::Lit::str("flex")},
   {rt::Target{false, static_cast<uint8_t>(rt::S::FlexDirection)}, nullptr, rt::Lit::str("column")},
@@ -121,7 +237,18 @@ const rt::Binding kBindings[] = {
   {rt::Target{true, static_cast<uint8_t>(rt::P::Role)}, nullptr, rt::Lit::str("button")},
   {rt::Target{false, static_cast<uint8_t>(rt::S::Appearance)}, nullptr, rt::Lit::str("none")},
   {rt::Target{true, static_cast<uint8_t>(rt::P::TestId)}, nullptr, rt::Lit::str("rename")},
-  {rt::Target{true, static_cast<uint8_t>(rt::P::Text)}, nullptr, rt::Lit::str("rename")}
+  {rt::Target{true, static_cast<uint8_t>(rt::P::Text)}, nullptr, rt::Lit::str("rename")},
+  {rt::Target{true, static_cast<uint8_t>(rt::P::Text)}, binding_16, rt::Lit::none()},
+  {rt::Target{true, static_cast<uint8_t>(rt::P::TestId)}, nullptr, rt::Lit::str("held")},
+  {rt::Target{true, static_cast<uint8_t>(rt::P::Text)}, binding_18, rt::Lit::none()},
+  {rt::Target{true, static_cast<uint8_t>(rt::P::TestId)}, nullptr, rt::Lit::str("preset")},
+  {rt::Target{true, static_cast<uint8_t>(rt::P::Text)}, binding_20, rt::Lit::none()},
+  {rt::Target{true, static_cast<uint8_t>(rt::P::TestId)}, nullptr, rt::Lit::str("plain")},
+  {rt::Target{false, static_cast<uint8_t>(rt::S::TextAlign)}, nullptr, rt::Lit::str("center")},
+  {rt::Target{true, static_cast<uint8_t>(rt::P::Role)}, nullptr, rt::Lit::str("button")},
+  {rt::Target{false, static_cast<uint8_t>(rt::S::Appearance)}, nullptr, rt::Lit::str("none")},
+  {rt::Target{true, static_cast<uint8_t>(rt::P::TestId)}, nullptr, rt::Lit::str("speak")},
+  {rt::Target{true, static_cast<uint8_t>(rt::P::Text)}, nullptr, rt::Lit::str("speak")}
 };
 const rt::Node kNodes[] = {
   {rt::T::View, -1, -1, 0, 0, 2, 0, 0},
@@ -130,10 +257,16 @@ const rt::Node kNodes[] = {
   {rt::T::Pressable, 0, -1, 2, 6, 4, 0, 1},
   {rt::T::Text, 3, -1, 0, 10, 1, 1, 0},
   {rt::T::Pressable, 0, -1, 3, 11, 4, 1, 1},
-  {rt::T::Text, 5, -1, 0, 15, 1, 2, 0}
+  {rt::T::Text, 5, -1, 0, 15, 1, 2, 0},
+  {rt::T::Text, 0, -1, 4, 16, 2, 2, 0},
+  {rt::T::Text, 0, -1, 5, 18, 2, 2, 0},
+  {rt::T::Text, 0, -1, 6, 20, 2, 2, 0},
+  {rt::T::Pressable, 0, -1, 7, 22, 4, 2, 1},
+  {rt::T::Text, 10, -1, 0, 26, 1, 3, 0}
 };
-const rt::Handler kHandlers[] = {{rt::E::Press, 0, 4, 0}, {rt::E::Press, 1, 4, 0}};
-const rt::CodeFn kArgs[] = {arg_0, arg_1, arg_2, arg_3};
+const rt::Handler kHandlers[] = {{rt::E::Press, 0, 12, 0}, {rt::E::Press, 1, 12, 0}, {rt::E::Press, 2, 12, 0}};
+const rt::CodeFn kArgs[] = {arg_0, arg_1, arg_2, arg_3, arg_4, arg_5, arg_6, arg_7, arg_8, arg_9, arg_10, arg_11};
+const rt::Resource kResources[] = {{"entry", "lookup", 2, 0, 2, -1, fallback_0}, {"after", "lookup", 2, 2, 2, -1, fallback_1}, {"held", "lookup", 2, 4, 2, 5, nullptr}, {"preset", "lookup", 2, 6, 2, -1, fallback_3}, {"plain", "lookup", 2, 8, 2, -1, fallback_4}, {"held#else", "lookup", 2, 10, 2, -1, nullptr}};
 const rt::Type kTypes[] = {{rt::Type::K::Other, -1, 0, 0}, {rt::Type::K::Other, -1, 0, 0}, {rt::Type::K::Record, -1, 0, 2}};
 const rt::Field kFields[] = {{"label", 0}, {"next", 1}};
 const rt::Glyph kGlyphs[] = {
@@ -173,16 +306,15 @@ const rt::Sound kSounds[] = {{nullptr, nullptr, 0, 0}};
 const rt::Sequence kSequences[] = {{nullptr, nullptr, nullptr, nullptr}};
 const rt::Region kRegions[] = {{rt::R::When, -1, -1, 0, nullptr, nullptr, 0, 0}};
 const rt::Timer kTimers[] = {{0, 0, false}};
-const rt::Resource kResources[] = {{"entry", "lookup", 2, 0, 2}, {"after", "lookup", 2, 2, 2}};
-const uint16_t kSlotTypes[] = {1, 0};
+const uint16_t kSlotTypes[] = {1, 0, 0};
 const uint16_t kDeriveTypes[] = {0};
-const int16_t kSlotOwners[] = {-1, -1};
+const int16_t kSlotOwners[] = {-1, -1, -1};
 const uint16_t kMutationSlots[] = {0};
-const uint8_t kActionParams[] = {0, 0};
+const uint8_t kActionParams[] = {0, 0, 0};
 const rt::RouteRow kRoutes[] = {{"", "", -1, false, false}};
-const char* const kSlotNames[] = {"id", "suffix"};
+const char* const kSlotNames[] = {"id", "suffix", "voice"};
 const char* const kDeriveNames[] = {"word"};
-const char* const kActionNames[] = {"step", "rename"};
+const char* const kActionNames[] = {"step", "rename", "speak"};
 const char* const kCommands[] = {nullptr};
-extern const rt::App kApp = {kSlots, kSlotNames, 2, kDerives, kDeriveNames, 1, kResources, 2, kActions, kActionNames, 2, kBindings, kNodes, 7, kHandlers, kRegions, 0, kTimers, 0, true, true, kCommands, 0, kTypes, kFields, kSlotTypes, kDeriveTypes, kSlotOwners, kActionParams, kArgs, kRoutes, 0, -1, kGlyphs, kGlyphBits, kKerns, kFontFiles, kFaces, kFaceCount, kStackFamily, kStackCount, kImages, kImageCount, kMutationSlots, 0, kExtensions, 1, kExtensionSources, 1, kTokens, 0, kSounds, 0, kSequences, 0};
+extern const rt::App kApp = {kSlots, kSlotNames, 3, kDerives, kDeriveNames, 1, kResources, 6, kActions, kActionNames, 3, kBindings, kNodes, 12, kHandlers, kRegions, 0, kTimers, 0, true, true, kCommands, 0, kTypes, kFields, kSlotTypes, kDeriveTypes, kSlotOwners, kActionParams, kArgs, kRoutes, 0, -1, kGlyphs, kGlyphBits, kKerns, kFontFiles, kFaces, kFaceCount, kStackFamily, kStackCount, kImages, kImageCount, kMutationSlots, 0, kExtensions, 1, kExtensionSources, 1, kTokens, 0, kSounds, 0, kSequences, 0};
 }  // namespace app

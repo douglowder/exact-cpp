@@ -1,8 +1,8 @@
 // Checks how the runtime binds host extensions, on the level app's generated
 // tables (apps/level/cpp/app_gen.cpp), which list `attitude` version 1: an
 // extension binds by name and version, a different file (digest) is reported
-// stale, an unbound one is reported missing and its source answers none, and
-// its ops reach it only when bound. Prints each failure; exit 0 when all pass.
+// stale, an unbound one is reported missing and its resource shows its type's
+// zero, as one with no answer does, and its ops reach it only when bound. Prints each failure; exit 0 when all pass.
 #include <cstdio>
 #include <string>
 #include <vector>
@@ -91,18 +91,19 @@ void check(const char* name, Fake* fake, bool bound, bool stale, const std::stri
 
 int main() {
   const std::string level = "{\"pitch\":12,\"roll\":-3}";
+  const std::string zero = "{\"pitch\":0,\"roll\":0}";
   Fake same;
   check("same file", &same, true, false, level);
   Fake other_version;
   other_version.version_ = 2;
-  check("other version", &other_version, false, false, "null");
+  check("other version", &other_version, false, false, zero);
   Fake other_file;
   other_file.digest_ = std::string(64, '0');
   check("other file", &other_file, true, true, level);
   Fake silent;
   silent.answers_ = false;
-  check("no answer", &silent, true, false, "null");
-  check("no extension", nullptr, false, false, "null");
+  check("no answer", &silent, true, false, zero);
+  check("no extension", nullptr, false, false, zero);
   std::printf("ext_check: %s\n", failures ? "failures" : "all checks pass");
   return failures ? 1 : 0;
 }

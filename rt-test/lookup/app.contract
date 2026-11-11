@@ -1,5 +1,7 @@
 // The app lookup_check runs: resources whose arguments read state, a derive
-// and another resource's answer, so each asks again when they change.
+// and another resource's answer, so each asks again when they change; and,
+// while `voice` is "quiet" and the source gives no answer, what a resource
+// shows: its placeholder row's answer, its declared value, or its type's zero.
 shape Entry
   label: string
   next: number
@@ -10,10 +12,16 @@ component Lookup
   derive word = "w" + suffix
   resource entry = lookup(id, word) as shape Entry
   resource after = lookup(entry.next, "after") as shape Entry
+  state voice = "quiet"
+  resource held = lookup(id, voice) as shape Entry else lookup(0, "held")
+  resource preset = lookup(id, voice) as shape Entry else empty(label="preset", next=0)
+  resource plain = lookup(id, voice) as shape Entry
   action step
     id = id + 1
   action rename
     suffix = "b"
+  action speak
+    voice = "spoken"
   view
     column
       text entry.label testId="entry"
@@ -22,3 +30,8 @@ component Lookup
         text "step"
       button press=rename appearance="none" testId="rename"
         text "rename"
+      text held.label testId="held"
+      text preset.label testId="preset"
+      text plain.label testId="plain"
+      button press=speak appearance="none" testId="speak"
+        text "speak"
