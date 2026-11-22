@@ -1,0 +1,15 @@
+// The knob demo's colours (Exact LLP 1121), one scheme.
+tamber knob
+
+theme
+  surface.screen = #000000  scheme=fixed
+  surface.dial = #0d1117  scheme=fixed
+  surface.track = #1f2630  scheme=fixed
+  surface.button = #1c2128  scheme=fixed
+  border.button = #3a4350  scheme=fixed
+  level.cool = #58a6ff  scheme=fixed
+  level.warm = #f2cc60  scheme=fixed
+  level.hot = #ff7b72  scheme=fixed
+  ink.primary = #ffffff  scheme=fixed
+  ink.caption = #9da7b3  scheme=fixed
+  ink.hint = #8b949e  scheme=fixed

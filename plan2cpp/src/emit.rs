@@ -134,14 +134,107 @@ fn literal(plan: &Plan, body: Code) -> Option<String> {
 /// Writes the code functions and returns their names, in table order.
 struct Out {
     functions: String,
+    /// With `PLAN2CPP_VM` set: each body's `rt_vm` bytecode table and row.
+    vm: Option<(String, Vec<String>)>,
 }
 
 impl Out {
+    fn new() -> Self {
+        Self {
+            functions: String::new(),
+            vm: std::env::var_os("PLAN2CPP_VM").map(|_| (String::new(), Vec::new())),
+        }
+    }
+
+    /// With `PLAN2CPP_VM` set, appends the `rt_vm` tables and includes `rt_vm.h`.
+    fn finish(&self, s: &mut String) {
+        if let Some((vm_code, rows)) = &self.vm {
+            vm_tables(vm_code, rows, s);
+            *s = s.replacen(
+                "#include \"exact_rt.h\"\n",
+                "#include \"exact_rt.h\"\n#include \"rt_vm.h\"\n",
+                1,
+            );
+        }
+    }
+
     fn body(&mut self, plan: &Plan, body: Code, name: &str) -> Result<String, String> {
         self.functions.push_str(&function(plan, body, name)?);
         self.functions.push('\n');
+        if let Some((tables, rows)) = &mut self.vm {
+            let (table, row) = crate::code::bytecode(plan, body, name)?;
+            tables.push_str(&table);
+            rows.push(row);
+        }
         Ok(name.to_string())
     }
+}
+
+/// The `rt_vm` tables (`poc/watcher-stream`): every body's bytecode, the
+/// body rows, and the length of each table `kApp` points at, so the app can be
+/// written out as a plan blob and run by the interpreter on a board.
+fn vm_tables(tables: &str, rows: &[String], s: &mut String) {
+    s.push_str(tables);
+    let _ = writeln!(
+        s,
+        "extern const rt_vm::Body kVmBodies[] = {{\n  {}\n}};",
+        if rows.is_empty() {
+            "{nullptr, nullptr, 0, 0, 0}".to_string()
+        } else {
+            rows.join(",\n  ")
+        }
+    );
+    let _ = writeln!(s, "extern const uint16_t kVmBodyCount = {};", rows.len());
+    let names = [
+        "kSlots",
+        "kSlotNames",
+        "kDerives",
+        "kDeriveNames",
+        "kResources",
+        "kActions",
+        "kActionNames",
+        "kBindings",
+        "kNodes",
+        "kHandlers",
+        "kRegions",
+        "kTimers",
+        "kCommands",
+        "kTypes",
+        "kFields",
+        "kSlotTypes",
+        "kDeriveTypes",
+        "kSlotOwners",
+        "kActionParams",
+        "kArgs",
+        "kRoutes",
+        "kGlyphs",
+        "kGlyphBits",
+        "kKerns",
+        "kFontFiles",
+        "kFaces",
+        "kStackFamily",
+        "kImages",
+        "kMutationSlots",
+        "kExtensions",
+        "kExtensionSources",
+        "kTokens",
+        "kSounds",
+        "kSequences",
+        "kEaseStops",
+        "kEases",
+        "kKeyValues",
+        "kAnimations",
+        "kAnimationValues",
+    ];
+    let sizes: Vec<String> = names
+        .iter()
+        .map(|n| format!("sizeof({n}) / sizeof({n}[0])"))
+        .collect();
+    let _ = writeln!(
+        s,
+        "extern const rt_vm::Sizes kVmSizes = {{\n  {}\n}};",
+        sizes.join(",\n  ")
+    );
 }
 
 /// The items of a C++ array; `nullptr` for none, as C++ has no empty array.
@@ -298,9 +391,7 @@ pub fn emit(plan: &Plan, source: &Path) -> Result<String, String> {
     let extensions = ext::roster(source)?;
     let uses = ext::check(plan, &extensions)?;
     ext::props(source, &extensions)?;
-    let mut out = Out {
-        functions: String::new(),
-    };
+    let mut out = Out::new();
     let slots = plan
         .slots
         .iter()
@@ -384,6 +475,7 @@ pub fn emit(plan: &Plan, source: &Path) -> Result<String, String> {
         animations,
     };
     tables(plan, &regions, &needs(plan)?, &counts, &mut s);
+    out.finish(&mut s);
     s.push_str("}  // namespace app\n");
     Ok(s)
 }
