@@ -431,3 +431,125 @@ pub fn function(plan: &Plan, body: Code, name: &str) -> Result<String, String> {
     out.push_str("  return sp > 0 ? st[sp - 1] : V();\n}\n");
     Ok(out)
 }
+
+/// The `rt_vm` opcode for each admitted instruction (`poc/watcher-stream/vm/rt_vm.h`):
+/// the same semantics as `statement`, as data.
+fn vm_op(op: Opcode) -> Result<u8, String> {
+    use Opcode as O;
+    Ok(match op {
+        O::Number => 1,
+        O::Bool => 2,
+        O::Str => 3,
+        O::None | O::Unit => 4,
+        O::LoadSlot => 5,
+        O::LoadDerive => 6,
+        O::LoadResource => 7,
+        O::LoadParam => 8,
+        O::LoadLocal => 9,
+        O::LoadItem => 10,
+        O::Field => 11,
+        O::Record => 12,
+        O::List => 13,
+        O::Not => 14,
+        O::Neg => 15,
+        O::Some => 16,
+        O::Add => 17,
+        O::Sub => 18,
+        O::Mul => 19,
+        O::Div => 20,
+        O::Rem => 21,
+        O::Eq => 22,
+        O::Ne => 23,
+        O::Lt => 24,
+        O::Le => 25,
+        O::Gt => 26,
+        O::Ge => 27,
+        O::Concat => 28,
+        O::Jump => 29,
+        O::JumpIfFalse => 30,
+        O::StoreSlot => 31,
+        O::Pop => 32,
+        O::BindLocal => 33,
+        O::DropLocal => 34,
+        O::Call => 35,
+        O::Command => 36,
+        O::Send => 37,
+        O::NativeProps => 38,
+        O::Return => 39,
+        other => return Err(format!("the opcode {other:?} is not in the C++ target")),
+    })
+}
+
+/// `body` as an `rt_vm::Ins` table named `kBC_<name>` and its `rt_vm::Body`
+/// row (`{fn, code, count, max_stack, max_locals}`): the plan's own
+/// instructions with jump targets as instruction indexes, record sizes and
+/// stdlib calls resolved, and strings inline.
+///
+/// # Errors
+/// A refusal naming the first unsupported or malformed instruction.
+pub fn bytecode(plan: &Plan, body: Code, name: &str) -> Result<(String, String), String> {
+    let code = decode(plan, body)?;
+    let (max_stack, max_locals) = depths(plan, &code)?;
+    let index: BTreeMap<u64, usize> = code
+        .iter()
+        .enumerate()
+        .map(|(k, i)| (i.pc as u64, k))
+        .collect();
+    let mut rows = Vec::new();
+    for ins in &code {
+        let op = vm_op(ins.op).map_err(|e| format!("{name}: {e}"))?;
+        let (mut first, mut second, third) = (ins.args[0], ins.args[1], ins.args[2]);
+        let mut text_literal = "nullptr".to_string();
+        let mut number_literal = "0.0".to_string();
+        match ins.op {
+            Opcode::Number => number_literal = number(ins.number)?,
+            Opcode::Str => text_literal = cpp_string(text(plan, first)?),
+            Opcode::Record => second = record_fields(plan, first)? as u64,
+            Opcode::Jump | Opcode::JumpIfFalse => {
+                first = *index
+                    .get(&first)
+                    .ok_or_else(|| format!("{name}: no instruction at {first}"))?
+                    as u64;
+            }
+            Opcode::Call => {
+                let (arity, call) = stdlib(first)?;
+                first = match call {
+                    Call::Pure("rt::to_fixed") => 1,
+                    Call::Pure("rt::max") => 2,
+                    Call::Pure("rt::min") => 3,
+                    Call::Pure("rt::floor") => 4,
+                    Call::Pure("rt::ceil") => 5,
+                    Call::Pure("rt::round") => 6,
+                    Call::Pure("rt::to_string") => 7,
+                    Call::Pure(other) => return Err(format!("{name}: no vm call for {other}")),
+                    Call::Now => 50,
+                    Call::Route(route) => 100 + u64::from(route),
+                };
+                second = arity as u64;
+            }
+            Opcode::Command => {
+                text_literal = cpp_string(text(plan, first)?);
+                first = 0;
+            }
+            Opcode::Send => {
+                text_literal = cpp_string(text(plan, second)?);
+                second = 0;
+            }
+            _ => {}
+        }
+        rows.push(format!(
+            "{{{op}, {first}u, {second}u, {third}u, {number_literal}, {text_literal}}}"
+        ));
+    }
+    let table = format!(
+        "static const rt_vm::Ins kBC_{name}[] = {{\n  {}\n}};\n",
+        rows.join(",\n  ")
+    );
+    let row = format!(
+        "{{{name}, kBC_{name}, {}, {}, {}}}",
+        code.len(),
+        max_stack.max(1),
+        max_locals
+    );
+    Ok((table, row))
+}
