@@ -46,7 +46,7 @@ In a clone made without `--recursive`, run `git submodule update --init --recurs
 | Path | What it is |
 | --- | --- |
 | `exact/` | Exact ([expo/exact](https://github.com/expo/exact)), as a submodule (the compiler, plan, runner and kernel) |
-| `apps/<app>/app.contract` | The app's Exact source (`level`, `badge`, `metronome`, `motion`) |
+| `apps/<app>/app.contract` | The app's Exact source (`level`, `badge`, `metronome`, `motion`, `knob`) |
 | `apps/<app>/cpp/` | The app's C++: the generated `app_gen.cpp` and extension headers, and its glue |
 | `apps/{level,badge}/extensions.json` | The host extensions the app uses, by name and version |
 | `apps/<app>/app.tamber` | The app's colours as design tokens (Exact LLP 1121), `scheme=fixed` |
@@ -54,11 +54,15 @@ In a clone made without `--recursive`, run `git submodule update --init --recurs
 | `apps/badge/` | The init() badge's pages and modals as routes; `assets/` (fonts, SIL OFL 1.1, and marks; `README.md` has their sources); `fixture/`, a made-up badge the Mac boards and `badge-ref` answer from; `steps.json`, its parity script |
 | `apps/metronome/` | A minimal metronome from Exact's `apps/metronome`: a tempo, Start and Stop, an accented beat 1; one `sequence` plays two clicks (`assets/`, made by `tools/make_clicks.py`) |
 | `apps/motion/` | A demo of CSS animations in three scenes: easing (four timing functions), color (a disc and a ring), and pulse (opacity and staggered delays); A and B change scene, both pause |
+| `apps/knob/` | A knob demo written for a 412 × 412 round screen: turning steps a level, a click snaps to the next ten, a hold zeroes it |
 | `extensions/` | Host extension files (prototype): `attitude.json` (level), `init-badge.json` (badge) |
 | `plan2cpp/` | Compiles a plan to C++ with the app's fonts, PNG images, design tokens and sounds; refuses the rest by name; checks the app's sources against its extensions and writes each extension's C++ base class |
 | `rt/` | The core: values, layout, paint, timers, the transport that plays a `sequence`, the agent; the `Board` interface and its defaults. An Arduino library (`library.properties`) |
 | `rt-mac/` | The Mac boards: `Board` (a software RGB565 surface in bands, the M5GFX FreeSans data, a pseudo-terminal link) and `HeadlessBoard` (link and clock only); a manual clock; a CoreAudio speaker |
 | `mac/` | The Mac programs for each app, `-mac` and `-headless`; and `ExactMac` (`container.mm`), one window that runs any app's bundle from its App menu |
+| `rt-vm/` | Runs a plan that arrives at run time: `rt_vm` interprets the bytecode `plan2cpp` writes with `PLAN2CPP_VM` set, and `plan_blob` writes and reads an app as one byte string. An Arduino library; a board that only shows a host's pixels needs none of it |
+| `stream-proto/` | The packet protocol between a host and a board that shows its screen, as one header shared by both. An Arduino library |
+| `stream/` | `exact-stream`, the Mac host that runs an app and streams it to such a board, as pixels or as a plan; `vm_check` (compiled against interpreted, frame for frame) and `vm_bench` (their time and a plan's memory) |
 | `rt-test/` | `route_check` (the C++ route port against Exact's route corpus), `ext_check` (extension binding), `data_check` (`data-*` props, on the test app in `marks/`), `lookup_check` (resources with arguments and placeholders, on the test app in `lookup/`) and `anim_check` (CSS animations, on the test app in `anim/`, against Exact's motion crate) |
 | `level-data/`, `level-tests/` | The level app on Exact's runner (the IMU attitude filter; keys, touch, hysteresis, leak): the reference behavior |
 | `badge-ref/` | Runs a script of the badge app on Exact's runner: the reference for routes |
