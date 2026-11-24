@@ -12,7 +12,9 @@ namespace app {
 extern const rt::App kApp;
 // The program name for messages and the PTY line, e.g. "level".
 extern const char* const kName;
-// The app's extensions on the Mac.
+// The app's extensions on the Mac, one set for one rt::Host. An extension
+// holds state for the runtime it senses, so call this once per runtime and do
+// not share a set between two (vm_check runs two in one process).
 std::vector<rt::Extension*> extensions();
 
 }  // namespace app

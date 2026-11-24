@@ -1,0 +1,53 @@
+// A knob demo written for the SenseCAP Watcher's 412 x 412 round screen, run on a Mac and
+// streamed to the Watcher (poc/watcher-stream). The knob turns the level (ArrowLeft and
+// ArrowRight), a click (Enter) snaps it up to the next ten, a hold (Escape) zeroes it, and
+// taps on - and + step it. Nothing here runs on the Watcher.
+
+style Label
+  position="absolute" left=0 width=412 text-align="center" color="ink.primary"
+
+style Control
+  position="absolute" top=296 width=80 height=56 box-sizing="border-box" border-radius=28 border-width=1 border-style="solid" border-color="border.button" background-color="surface.button" display="flex" align-items="center" justify-content="center"
+
+component Knob
+  state level = 50
+  state turns = 0
+
+  action down
+    level = max(0, level - 1)
+    turns = turns + 1
+  action up
+    level = min(100, level + 1)
+    turns = turns + 1
+  action snap
+    level = level >= 100 ? 0 : (floor(level / 10) + 1) * 10
+  action zero
+    level = 0
+  action onKey(k: string)
+    if k == "ArrowLeft"
+      down()
+      preventDefault()
+    if k == "ArrowRight"
+      up()
+      preventDefault()
+    if k == "Enter"
+      snap()
+      preventDefault()
+    if k == "Escape"
+      zero()
+      preventDefault()
+
+  view
+    column autofocus=true key=onKey testId="knob" position="relative" width=412 height=412 background-color="surface.screen"
+      column position="absolute" left=0 top=0 width=412 height=412 border-radius=206 background-color="surface.dial"
+      text "Exact, streamed" class=Label top=64 font-size=18 color="ink.caption"
+      text `${level}` class=Label top=104 font-size=72 font-weight=700 testId="level" color=(level >= 80 ? "level.hot" : (level >= 40 ? "level.warm" : "level.cool"))
+      text "level" class=Label top=170 font-size=18 color="ink.caption"
+      column position="absolute" left=56 top=226 width=300 height=14 border-radius=7 background-color="surface.track"
+      column testId="bar" position="absolute" left=56 top=226 width=(level * 3) height=14 border-radius=7 background-color=(level >= 80 ? "level.hot" : (level >= 40 ? "level.warm" : "level.cool"))
+      text `${turns} turns` class=Label top=254 font-size=18 color="ink.caption" testId="turns"
+      button appearance="none" press=down aria-label="Down" testId="down" class=Control left=96
+        text "-" font-size=36 color="ink.primary"
+      button appearance="none" press=up aria-label="Up" testId="up" class=Control left=236
+        text "+" font-size=36 color="ink.primary"
+      text "Turn   Click snap   Hold zero" class=Label top=362 font-size=14 color="ink.hint"

@@ -4,6 +4,7 @@
 // and the saved settings and battery in data.json. Its `panel` op reports the
 // brightness the app last set.
 #include <fstream>
+#include <memory>
 #include <iterator>
 #include <sstream>
 
@@ -21,30 +22,34 @@ std::string slurp(const std::string& path) {
   return std::string(std::istreambuf_iterator<char>(in), std::istreambuf_iterator<char>());
 }
 
-badge::Data& data() {
-  static badge::Data d = [] {
-    badge::Data out;
-    const std::string dir = BADGE_FIXTURE;
-    const std::string record = slurp(dir + "/profile.bin");
-    badge::Profile profile;
-    std::string error;
-    if (badge::read_profile(reinterpret_cast<const uint8_t*>(record.data()), record.size(), profile, error)) {
-      out.set_profile(profile);
-    }
-    const std::string json = slurp(dir + "/data.json");
-    badge::Saved saved;
-    saved.brightness = static_cast<int>(rt::number_field(json, "brightness"));
-    saved.orientation = rt::string_field(json, "orientation");
-    saved.unlocked = json.find("\"unlocked\": true") != std::string::npos;
-    out.set_saved(saved);
-    out.set_battery(static_cast<int>(rt::number_field(json, "battery")));
-    return out;
-  }();
-  return d;
+std::unique_ptr<badge::Data> read_fixture() {
+  auto out = std::make_unique<badge::Data>();
+  const std::string dir = BADGE_FIXTURE;
+  const std::string record = slurp(dir + "/profile.bin");
+  badge::Profile profile;
+  std::string error;
+  if (badge::read_profile(reinterpret_cast<const uint8_t*>(record.data()), record.size(), profile, error)) {
+    out->set_profile(profile);
+  }
+  const std::string json = slurp(dir + "/data.json");
+  badge::Saved saved;
+  saved.brightness = static_cast<int>(rt::number_field(json, "brightness"));
+  saved.orientation = rt::string_field(json, "orientation");
+  saved.unlocked = json.find("\"unlocked\": true") != std::string::npos;
+  out->set_saved(saved);
+  out->set_battery(static_cast<int>(rt::number_field(json, "battery")));
+  return out;
 }
 
 }  // namespace
 
-std::vector<rt::Extension*> extensions() { return {&data()}; }
+std::vector<rt::Extension*> extensions() {
+  // One Data per runtime: it publishes the profile photo to the first runtime
+  // that senses it and remembers that it has (badge_data.cpp, `published_`),
+  // so two runtimes in one process must not share one.
+  static std::vector<std::unique_ptr<badge::Data>> owned;
+  owned.push_back(read_fixture());
+  return {owned.back().get()};
+}
 
 }  // namespace app
