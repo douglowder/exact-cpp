@@ -78,11 +78,17 @@ bool Line::open(const std::string& path, int baud, std::string& error) {
     error = std::string("cannot set up the line: ") + std::strerror(errno);
     return false;
   }
+  // DTR and RTS stay low. A board reached through a USB-UART bridge does not
+  // mind them, but on an ESP32-S3's own USB-Serial/JTAG they reset the chip or
+  // select download mode, and the board is then gone until it is power-cycled.
+  int lines = TIOCM_DTR | TIOCM_RTS;
+  ioctl(fd_, TIOCMBIC, &lines);
   speed_t speed = static_cast<speed_t>(baud);
   if (ioctl(fd_, IOSSIOSPEED, &speed) != 0) {
     // A pseudo-terminal (tools/fake_watcher.py) has no speed.
     std::fprintf(stderr, "exact-stream: cannot set %d baud on %s: %s\n", baud, path.c_str(), std::strerror(errno));
   }
+  ioctl(fd_, TIOCMBIC, &lines);  // IOSSIOSPEED can raise them again
   tcflush(fd_, TCIOFLUSH);
   thread_ = std::thread([this] { writer(); });
   return true;
